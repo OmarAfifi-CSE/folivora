@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments & Secrets
+.env
+.venv
+env/
+venv/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Test & Coverage caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local private docs & evaluation caches
+docs/
+internal_docs/
+week3_slow_and_steady_cache.json

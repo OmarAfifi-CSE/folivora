@@ -181,7 +181,7 @@ class TabPFNQuantileEngine:
                 p50 = round(float(np.clip(_sanitize_num(p50_arr[idx], 50.0), p10, 99.0)), 1)
                 p90 = round(float(np.clip(_sanitize_num(p90_arr[idx], 70.0), p50, 99.5)), 1)
 
-                clean_words = int(tab.get("word_count", 1000) if str(tab.get("word_count")).isdigit() else 1000)
+                clean_words = int(_sanitize_num(tab.get("word_count", 1000), 1000.0))
                 clean_codes = int(_sanitize_num(tab.get("code_block_count", 0), 0.0))
                 clean_age = round(_sanitize_num(tab.get("age_days", 5.0), 5.0), 1)
                 clean_intent = round(_sanitize_num(tab.get("intent_match_score", 0.5), 0.5), 3)

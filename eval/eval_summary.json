@@ -1,0 +1,49 @@
+{
+  "v1": {
+    "total_cases": 60,
+    "passed_first_try": 32,
+    "passed_first_try_pct": 53.3,
+    "total_printed_gemma": 53,
+    "total_printed_gemma_pct": 88.3,
+    "template_fallback": 7,
+    "rejection_breakdown": {
+      "contains_banned_phrase_or_markdown": 20,
+      "missing_required_fact": 35,
+      "unverified_or_rounded_number": 34
+    }
+  },
+  "v2": {
+    "total_cases": 60,
+    "passed_first_try": 45,
+    "passed_first_try_pct": 75.0,
+    "total_printed_gemma": 59,
+    "total_printed_gemma_pct": 98.3,
+    "template_fallback": 1,
+    "rejection_breakdown": {
+      "missing_required_fact": 16,
+      "unverified_or_rounded_number": 16
+    }
+  },
+  "v3": {
+    "total_cases": 60,
+    "passed_first_try": 50,
+    "passed_first_try_pct": 83.3,
+    "total_printed_gemma": 58,
+    "total_printed_gemma_pct": 96.7,
+    "template_fallback": 2,
+    "rejection_breakdown": {
+      "unverified_or_rounded_number": 12
+    }
+  },
+  "v4": {
+    "total_cases": 60,
+    "passed_first_try": 55,
+    "passed_first_try_pct": 91.7,
+    "total_printed_gemma": 59,
+    "total_printed_gemma_pct": 98.3,
+    "template_fallback": 1,
+    "rejection_breakdown": {
+      "unverified_or_rounded_number": 6
+    }
+  }
+}

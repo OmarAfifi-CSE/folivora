@@ -466,7 +466,7 @@ def _load_hof_catalog() -> None:
         return
     try:
         raw = json.loads(HOF_CATALOG_PATH.read_text(encoding="utf-8"))
-        exhibits = (raw.get("exhibits") or [])
+        exhibits = [_sanitize_catalog_tab(ex) for ex in (raw.get("exhibits") or [])]
         _HOF_EXHIBITS = exhibits
         for ex in exhibits:
             u = (ex.get("url") or "").rstrip("/")

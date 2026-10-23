@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Folivora — Open-Weight Tab Sieve",
+  "version": "1.0.0",
+  "description": "Summarizes every open tab in your browser window with section-anchored takeaways and a spoken overview.",
+  "permissions": ["tabs", "storage"],
+  "host_permissions": ["http://localhost:8000/*", "https://*.onrender.com/*", "https://*.tech/*"],
+  "action": {
+    "default_title": "Folivora — Summarize & Triage My Tabs",
+    "default_popup": "popup.html"
+  }
+}

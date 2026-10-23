@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="fvBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071712"/>
+      <stop offset="100%" stop-color="#0F2922"/>
+    </linearGradient>
+    <linearGradient id="fvEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="55%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="fvLeaf" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <!-- Botanical Obsidian Squircle -->
+  <rect width="64" height="64" rx="16" fill="url(#fvBg)"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#1E4638" stroke-width="1.5"/>
+  <!-- Back Hoarded Browser Tabs (Faded) -->
+  <rect x="17" y="9" width="32" height="20" rx="5.5" fill="#13332A" opacity="0.65"/>
+  <rect x="13" y="13" width="38" height="22" rx="6.5" fill="#1B4337"/>
+  <circle cx="19" cy="17.5" r="1.4" fill="#6EE7B7" opacity="0.55"/>
+  <circle cx="23.5" cy="17.5" r="1.4" fill="#6EE7B7" opacity="0.35"/>
+  <!-- Front Folio Summary Card -->
+  <rect x="9" y="19" width="46" height="35" rx="8.5" fill="#FAF9F5"/>
+  <!-- Emerald Folio Header Strip -->
+  <path d="M9 27.5C9 22.8056 12.8056 19 17.5 19H46.5C51.1944 19 55 22.8056 55 27.5V28.5H9V27.5Z" fill="url(#fvEmerald)"/>
+  <circle cx="15.5" cy="23.8" r="1.7" fill="#ECFDF5"/>
+  <circle cx="20.8" cy="23.8" r="1.7" fill="#A7F3D0"/>
+  <rect x="26" y="22.4" width="16" height="2.8" rx="1.4" fill="#D1FAE5" opacity="0.75"/>
+  <!-- Section-Anchored Typography Bars -->
+  <rect x="15" y="34" width="19" height="3.2" rx="1.6" fill="#0F172A"/>
+  <rect x="15" y="40" width="14" height="3.0" rx="1.5" fill="#64748B"/>
+  <rect x="15" y="46" width="16.5" height="3.0" rx="1.5" fill="#94A3B8"/>
+  <!-- Folivora Leaf + Verified Check Emblem -->
+  <path d="M49.5 32.5C41.5 32.5 37 37.2 37 44.5C37 47.4 39.1 49.5 42 49.5C49.3 49.5 54 45 54 37C54 34.1 52.2 32.5 49.5 32.5Z" fill="url(#fvLeaf)"/>
+  <path d="M40.8 41.8L43.6 44.6L49.4 38.4" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

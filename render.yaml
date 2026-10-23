@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: folivora
+    runtime: docker
+    region: frankfurt
+    plan: standard
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: RATE_LIMIT_ENABLED
+        value: "1"
+      - key: OMP_NUM_THREADS
+        value: "2"
+      - key: MKL_NUM_THREADS
+        value: "2"
+      - key: OPENBLAS_NUM_THREADS
+        value: "2"
+      - key: GEMMA_TIMEOUT_S
+        value: "8.0"
+      - key: SUMMARY_POLISH_ENABLED
+        value: "1"
+      - key: SUMMARY_POLISH_PROVIDER
+        value: auto
+      - key: SUMMARY_GEMINI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: SUMMARY_POLISH_LIMIT
+        value: "8"
+      - key: SUMMARY_POLISH_CONCURRENCY
+        value: "3"
+      - key: SUMMARY_POLISH_TIMEOUT_S
+        value: "13.0"
+      - key: SUMMARY_POLISH_BATCH_BUDGET_S
+        value: "20.0"
+      - key: SUMMARY_PROMPT_VERSION
+        value: tab-summary-v2
+      - key: SUMMARY_CACHE_TTL_S
+        value: "3600"
+      - key: SUMMARY_JOB_TTL_S
+        value: "900"
+      - key: SUMMARY_JOB_MAX
+        value: "24"
+      - key: SENTRY_DSN
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: TABPFN_TOKEN
+        sync: false
+      - key: BROWSERBASE_API_KEY
+        sync: false
+      - key: BROWSERBASE_PROJECT_ID
+        sync: false

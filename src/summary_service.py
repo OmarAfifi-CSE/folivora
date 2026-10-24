@@ -895,7 +895,7 @@ def _clean_voice_tokens(text: str) -> str:
 
 
 def _fit_word_range(text: str, low: int, high: int, pad_clause: str) -> str:
-    cleaned = _normalize_ws(text)
+    cleaned = _clean_voice_tokens(text)
     words = cleaned.split()
     if 20 <= len(words) < low and pad_clause:
         pad_words = _normalize_ws(pad_clause).split()

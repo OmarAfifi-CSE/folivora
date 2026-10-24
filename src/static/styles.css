@@ -1659,53 +1659,55 @@ button:disabled {
 }
 
 @media (max-width: 680px) {
-  .topbar-inner { padding: 12px 16px; gap: 10px; }
-  .topbar-actions { margin-left: auto; gap: 6px; }
+  .topbar-inner { padding: 10px 14px; gap: 8px; }
+  .topbar-actions { margin-left: auto; gap: 6px; flex-shrink: 0; }
   .brand-logo-mark { width: 30px; height: 30px; }
-  .brand-name { font-size: 1.2rem; }
-  .brand-tag { display: none; }
-  .container { padding: 22px 16px 48px; }
-  .intake-card { padding: 22px 18px; border-radius: 20px; }
-  .intake-headline { font-size: 1.85rem; }
-  .intake-sub { font-size: 0.92rem; }
+  .brand-name { font-size: 1.18rem; }
+  .brand-tag, .github-label, .ext-label { display: none; }
+  .topbar-actions .btn-outline-sm { padding: 6px 10px; font-size: 0.75rem; }
+  .container { padding: 18px 14px 44px; }
+  .intake-card { padding: 20px 16px; border-radius: 20px; }
+  .intake-headline { font-size: 1.8rem; }
+  .intake-sub { font-size: 0.9rem; }
   .browser-top { padding: 10px 14px; gap: 8px; }
   .browser-window-title { font-size: 0.78rem; gap: 6px; }
-  .browser-top-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .browser-top-actions { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+  .browser-top-actions .btn-change-tabs { flex: 1 1 auto; justify-content: center; }
   .visual-tab-strip { padding: 7px 12px 3px; }
-  .mini-browser-tab { max-width: 178px; }
+  .mini-browser-tab { max-width: 170px; }
   .live-filter-bar { padding: 12px 14px; }
   .live-filter-input-wrap { grid-template-columns: minmax(0, 1fr); padding: 8px 10px 8px 12px; }
-  .live-filter-actions { justify-content: flex-end; flex-wrap: wrap; }
-  .payoff-bar { padding: 20px 16px; gap: 16px; }
-  .summary-buttons > button { flex: 1 1 150px; justify-content: center; }
+  .live-filter-actions { display: flex; width: 100%; gap: 6px; }
+  .live-filter-actions > button { flex: 1 1 auto; justify-content: center; }
+  .payoff-bar { padding: 18px 16px; gap: 16px; }
+  .payoff-left, .payoff-counters { min-width: 0; max-width: 100%; }
+  .summary-sentence { font-size: 1.04rem; overflow-wrap: anywhere; }
+  .summary-buttons > button { flex: 1 1 135px; justify-content: center; }
   .payoff-counters { gap: 6px; }
-  .counter-box { padding: 11px; }
-  .counter-num { font-size: 1.18rem; }
-  .counter-label { font-size: 0.68rem; }
-  .col-keep, .col-close { padding: 18px 16px; border-radius: 20px; }
+  .counter-box { padding: 10px; min-width: 0; }
+  .counter-num { font-size: 1.14rem; }
+  .counter-label { font-size: 0.67rem; }
+  .col-keep, .col-close { padding: 16px 14px; border-radius: 20px; }
   .col-title-row { min-width: 0; }
-  .col-title { font-size: 1.14rem; }
+  .col-title { font-size: 1.12rem; }
   .col-sub { font-size: 0.78rem; }
-  .kept-card { padding: 18px 16px; }
+  .kept-card { padding: 16px 14px; }
   .kept-card-top { flex-wrap: wrap; gap: 10px; }
   .kept-title-group { flex: 1 1 100%; }
   .score-box, .radial-score-wrap { margin-left: auto; }
   .readtime-pill { white-space: normal; text-align: center; }
-  .section-block { padding: 14px; }
+  .section-block { padding: 13px; }
   .card-tabs-bar { display: flex; width: 100%; border-radius: 12px; }
   .card-tab-btn { flex: 1 1 auto; justify-content: center; white-space: normal; text-align: left; border-radius: 9px; }
   .app-toast { bottom: max(12px, env(safe-area-inset-bottom)); }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 480px) {
   .closed-top { flex-direction: column; align-items: flex-start; }
-  .github-label { display: none; }
-  .topbar-actions .btn-outline-sm { padding: 0 11px; }
-  .intake-sub { font-size: 0.86rem; }
-  .summary-buttons > button { flex-basis: 100%; }
+  .intake-sub { font-size: 0.85rem; }
   .payoff-counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .payoff-counters .counter-box.highlight-green { grid-column: 1 / -1; }
-  .mini-browser-tab { max-width: 150px; }
+  .mini-browser-tab { max-width: 145px; }
 }
 
 @media (max-width: 700px), (pointer: coarse) {

@@ -1467,10 +1467,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const extUrls = params.get("urls");
   const extIntent = params.get("intent");
+  const extPreset = params.get("preset");
+  const extMode = params.get("mode");
+  if (extMode && ["paste", "demo", "extension"].includes(extMode)) {
+    switchIntakeMode(extMode);
+  }
   if (extIntent && $("input-intent")) {
     $("input-intent").value = extIntent;
   }
-  if (extUrls && urlsBox) {
+  if (extPreset) {
+    state.presetKey = extPreset;
+    runTriage({ forcePreset: extPreset, overrideIntent: extIntent !== null ? extIntent : null });
+  } else if (extUrls && urlsBox) {
     urlsBox.value = extUrls;
     updateDetectedUrlCounter();
     runTriage();

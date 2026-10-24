@@ -64,7 +64,7 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 
 - **Calibrated `P10 / P50 / P90` Quantile Triage:** **Prior Labs TabPFN** ([`src/tabpfn_engine.py`](src/tabpfn_engine.py)) predicts full utility quantiles across 7 DOM features. A tab is only closed when even its optimistic **`P90` upper bound** falls below threshold (**81.1% empirical coverage** on 720 unseen tabs).
 - **Strict Digit & Citation Gates:** [`check_output()`](src/gemma_service.py) verifies every numeric literal in Gemma's spoken brief character-for-character, while [`validate_tab_summary()`](src/summary_service.py) enforces `E#`/`C#` evidence IDs, exact `6–15`-word source anchors, and a `<90%` verbatim-overlap ceiling.
-- **Dual-Lane Progressive Rendering:** `/triage` renders sanitized deterministic cards in **`<150 ms`**. In the background, `/digest` upgrades the Executive Overview with **Gemma 4** (`~2.5s`, **`Gemma Verified`**) and `/polish-tabs` upgrades the top 8 cards in place with **Gemini 3.1 Flash Lite** (`~10s` batch, **`GEMINI GROUNDED`**) plus a targeted bullet-repair pass.
+- **Dual-Lane Progressive Rendering:** `/triage` renders sanitized deterministic cards in **`<150 ms`**. In the background, `/digest` upgrades the Reading Digest overview with **Gemma 4** (`~2.5s`) and `/polish-tabs` upgrades the top 8 cards in place with **Gemini 3.1 Flash Lite** (`~10s` batch) and a multi-lane Open-Weight **Gemma 4 26B + Gemma 3 12B** load balancer plus a targeted bullet-repair pass.
 - **Zero-Retention Voice & Private Job Isolation:** **ElevenLabs Scribe v2** deletes remote voice transcripts immediately after transcription (`DELETE /v1/speech-to-text/transcripts/{id}`), and `/polish-tabs` strips raw `full_text` and `all_paragraphs` before serialization.
 
 </td>
@@ -73,12 +73,90 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 
 ---
 
+## 🖼️ Live Interface Tour (Botanical Reading Room — Zero Mockups)
+
+<div align="center">
+  <img src="docs/media/demo-flow.gif" width="100%" alt="Folivora Live Reading Digest Workflow" />
+  <p><sub><em>Live workflow on <a href="https://folivora.tech">folivora.tech</a>: paste open links or launch a sample window, get an instant reading digest, and filter by any everyday or technical topic.</em></sub></p>
+</div>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%" align="center">01 · The Reading Desk (Calm Intake)</th>
+      <th width="50%" align="center">02 · Sample Windows &amp; 65 DEV Article Library</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td width="50%" align="center">
+        <img src="docs/media/01-reading-desk-home.png" width="100%" alt="Folivora Reading Desk Home" />
+        <sub><em>Paste open links, import bookmarks, or pick a topic chip (Travel, Health &amp; Sleep, Food &amp; Recipes, Shopping, Web Dev, AI &amp; Tech).</em></sub>
+      </td>
+      <td width="50%" align="center">
+        <img src="docs/media/02-sample-windows.png" width="100%" alt="Folivora Sample Windows" />
+        <sub><em>One-click sample windows: 14 Everyday &amp; Travel Tabs, the 65 DEV Article Library (600+ min read), and 10 Deep Research Tabs.</em></sub>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="50%" align="center">03 · Summarize All Open Tabs (No Filter)</th>
+      <th width="50%" align="center">04 · Topic Focus &amp; Set-Aside Triage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td width="50%" align="center">
+        <img src="docs/media/03-everyday-digest-all.png" width="100%" alt="Folivora Summarize All Mode" />
+        <sub><em>Mode A (Unrated): Summarizes every open tab into a 25-second overview + section-anchored takeaways with zero clutter.</em></sub>
+      </td>
+      <td width="50%" align="center">
+        <img src="docs/media/04-topic-focus-travel.png" width="100%" alt="Folivora Topic Focus Mode" />
+        <sub><em>Mode B (Topic Focus): Ranks matching pages under <b>Worth Your Time</b> with a radial match ring and moves unrelated pages to <b>Set Aside</b>.</em></sub>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<details>
+<summary><b>🏛️ 65 DEV Article Library &amp; Mobile Responsive Views — Click to Expand</b></summary>
+<br/>
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="68%" align="center">05 · 65 DEV Article Library Filtered by "Web Development"</th>
+      <th width="32%" align="center">06 · Mobile Digest View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr valign="top">
+      <td width="68%" align="center">
+        <img src="docs/media/05-dev-library-webdev.png" width="100%" alt="Folivora 65 DEV Article Library Filtered by Web Development" />
+        <sub><em>Partitions 65 community articles in &lt;150ms: keeps 22 matching Web Development articles and sets aside 43 unrelated tabs (478.9 min saved).</em></sub>
+      </td>
+      <td width="32%" align="center">
+        <img src="docs/media/06-mobile-digest.png" width="100%" alt="Folivora Mobile Responsive View" />
+        <sub><em>Zero horizontal overflow down to mobile viewports with 44px+ touch targets.</em></sub>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</details>
+
+---
+
 ## 🏛️ Core Architectural Pillars
 
 1. **Code Owns the Numbers; Models Write the Words ([`src/gemma_service.py`](src/gemma_service.py), [`src/summary_service.py`](src/summary_service.py)):**
    Neither Gemma nor Gemini is ever trusted to compute totals or invent numbers. Python computes `total_tabs`, `kept_count`, `closed_count`, `minutes_saved`, and per-tab `allowed_numbers`. Every generated draft must pass deterministic regex and token-overlap gates before reaching the DOM.
 2. **Instant Deterministic Fast Lane + Non-Blocking AI Upgrade ([`src/app.py`](src/app.py), [`src/static/app.js`](src/static/app.js)):**
-   Every tab card renders immediately with emoji-stripped, section-anchored deterministic takeaways. Progressive endpoints (`/digest` and `/polish-tabs`) upgrade the prose in place while preserving the user's active **`🎯 Focused on "<Topic>"`** or **`📖 Complete Tab Summary`** tab and keyboard focus.
+   Every tab card renders immediately with emoji-stripped, section-anchored deterministic takeaways. Progressive endpoints (`/digest` and `/polish-tabs`) upgrade the prose in place while preserving the user's active **`Focused on "<Topic>"`** or **`Full Summary`** tab and keyboard focus.
 3. **Self-Healing Citation & Bullet Repair ([`src/summary_service.py`](src/summary_service.py)):**
    Before validating an AI card draft, `_repair_draft_citations()` maps each takeaway to its highest-overlap `E#`/`C#` evidence block and extracts an exact `8`-word contiguous substring anchor. If a single bullet fails word-count (`30–45` words), first-person, or verbatim-copy rules, `_repair_bullets()` rewrites only the offending bullet at `temperature=0.1` instead of discarding the entire card.
 4. **Cloud Chromium Inspection Without Container Bloat ([`src/browserbase_service.py`](src/browserbase_service.py)):**
@@ -95,7 +173,7 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 │                              1. INGESTION & INTENT EXTRACTION                                │
 │                                                                                              │
 │  [10s Voice Note] ──▶ ElevenLabs Scribe v2 STT ──▶DELETE /transcripts/{id} (Immediate Wipe) │
-│  [Tab URLs / 65-Tab DEV Hall of Fame] ──▶ Browserbase Cloud Chromium (CDP WebSocket / HTTP) │
+│  [Tab URLs / 65-Tab DEV Hall of Fame] ──▶ Browserbase Cloud Chromium (CDP WebSocket / HTTP)  │
 │                                           └─▶ Extracts: word_count, code_blocks, tables,     │
 │                                               headings, link_density, clean section points   │
 └──────────────────────────────────────────────┬───────────────────────────────────────────────┘
@@ -115,11 +193,11 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 ┌─────────────────────────────────────────────┐ ┌──────────────────────────────────────────────┐
 │   3A. EXECUTIVE DIGEST LANE (POST /digest)  │ │  3B. CARD POLISH LANE (POST /polish-tabs)    │
 │                                             │ │                                              │
-│  Google Gemma 4 (MINIMAL thinking, ~2.5s)   │ │  Gemini 3.1 Flash Lite (3 concurrent, ~10s) │
-│  └─▶ check_output() Digit & Length Gate     │ │  ├─▶ _repair_draft_citations() (E#/C# + 8w)  │
-│      ├─▶ Pass: Badge ➔ "Gemma Verified"     │ │  ├─▶ validate_tab_summary() (v3 Contract)    │
-│      ├─▶ Fail: 1 Named-Token Retry          │ │  ├─▶ _repair_bullets() Targeted Rewrite      │
-│      └─▶ Fallback: Badge ➔ "Deterministic"  │ │  └─▶ Badge ➔ "GEMINI GROUNDED" in place      │
+│  Google Gemma 4 (MINIMAL thinking, ~2.5s)   │ │  Gemini 3.1 Flash Lite (3 concurrent, ~10s)  │
+│  └─▶ check_output() Digit & Length Gate     │ │  ├─▶ _repair_draft_citations() (E#/C# + 8w) │
+│      ├─▶ Pass: Badge ➔ "Gemma Verified"    │ │  ├─▶ validate_tab_summary() (v3 Contract)   │
+│      ├─▶ Fail: 1 Named-Token Retry          │ │  ├─▶ _repair_bullets() Targeted Rewrite     │
+│      └─▶ Fallback: Badge ➔ "Deterministic" │ │  └─▶ Badge ➔ "GEMINI GROUNDED" in place    │
 └──────────────────────┬──────────────────────┘ └──────────────────────┬───────────────────────┘
                        └───────────────────────┬───────────────────────┘
                                                ▼
@@ -174,18 +252,19 @@ Using **TabPFN's calibrated 90th-percentile upper bound (`P90 < 45.0`)** cuts th
 
 ---
 
-## 🏛️ Real-World Stress Test: The 65-Article DEV Hall of Fame (`600+` Min Read)
+## 🏛️ Real-World Stress Test: The 65 DEV Article Library (`600+` Min Read)
 
-Folivora ships with a built-in explorer for all **65 community-selected articles** from the [DEV Hall of Fame](https://dev.to/georgekobaidze/promise-delivered-welcome-to-the-dev-hall-of-fame-65-authors-65-masterpieces-15fa) ([`data/dev_hall_of_fame_catalog.json`](data/dev_hall_of_fame_catalog.json)). Filtering the 65-tab pile by any engineering topic partitions the collection in under a second and unlocks two segmented tabs per surviving card (**`🎯 Focused on "<Topic>"`** and **`📖 Complete Tab Summary`**):
+Folivora ships with a built-in explorer for all **65 community-selected articles** from the [DEV Hall of Fame](https://dev.to/georgekobaidze/promise-delivered-welcome-to-the-dev-hall-of-fame-65-authors-65-masterpieces-15fa) ([`data/dev_hall_of_fame_catalog.json`](data/dev_hall_of_fame_catalog.json)). Filtering the 65-tab library by any topic partitions the collection in under a second and unlocks two segmented tabs per matching card (**`Focused on "<Topic>"`** and **`Full Summary`**):
 
-| Filter Query on All 65 Hall of Fame Tabs | Matching Tabs Kept | Unrelated Tabs Closed | Full-Article Reading Time Saved | Top-Ranked Hall of Fame Masterpiece (`P50` Match) |
+| Filter Query on All 65 DEV Articles | Matching Tabs Kept | Unrelated Tabs Set Aside | Full-Article Reading Time Saved | Top-Ranked Article (`P50` Match) |
 |---|---:|---:|---:|---|
 | **`"Flutter"`** | **1 / 65** | 64 | **712.7 min (~11.9 hrs)** | *Creating Adaptive Flutter Screens and Widgets* (`94.2%`) |
 | **`"Gemini"`** | **3 / 65** | 62 | **691.8 min (~11.5 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) |
+| **`"Mobile Development"`** | **5 / 65** | 60 | **668.4 min (~11.1 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *Creating Adaptive Flutter Screens* (`94.2%`) |
 | **`"Security"`** | **8 / 65** | 57 | **635.1 min (~10.6 hrs)** | *The one you reported is gone. This one is still up.* (`93.7%`) |
 | **`"Databases & SQL"`** | **11 / 65** | 54 | **621.9 min (~10.4 hrs)** | *SQL Common Table Expressions and Window functions* (`96.0%`) |
 | **`"Debugging"`** | **12 / 65** | 53 | **595.5 min (~9.9 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *We Planted 180 Bugs* (`92.5%`) |
-| **`"Web & Frontend"`** | **19 / 65** | 46 | **484.0 min (~8.1 hrs)** | *is-kit Reached 50 Stars* (`94.7%`) & *WebGPU Live Demo* (`93.7%`) |
+| **`"Web Development"`** | **22 / 65** | 43 | **478.9 min (~8.0 hrs)** | *is-kit Reached 50 Stars* (`95.1%`) & *WebGPU Live Demo* (`93.7%`) |
 | **`"AI Agents"`** | **32 / 65** | 33 | **367.9 min (~6.1 hrs)** | *Pair Programming With Three AI Tools* (`95.6%`) |
 
 ---

@@ -1453,8 +1453,18 @@ def _build_interest_specific_section(
             if tk:
                 tailored_points.append(_ensure_point_has_anchor(tk, default_topic_label))
 
-    # Build a natural Topic Synthesis line that never dumps raw section headings.
-    section_names = [pt.split(" — ", 1)[0].strip() for pt in tailored_points if " — " in pt]
+    # Build a natural Topic Synthesis line that never dumps raw or duplicate section headings.
+    section_names: list[str] = []
+    seen_sec_low: set[str] = set()
+    generic_anchor_low = f"{default_topic_label} insight".lower()
+    for pt in tailored_points:
+        if " — " not in pt:
+            continue
+        sec = pt.split(" — ", 1)[0].strip()
+        sec_low = sec.lower()
+        if sec_low and sec_low != generic_anchor_low and sec_low not in seen_sec_low:
+            seen_sec_low.add(sec_low)
+            section_names.append(sec)
     pretty_focus = ", ".join(
         TAG_PRETTY_MAP.get(t.lower(), t.title() if len(t) > 3 else t.upper())
         for t in matched_tokens[:2]

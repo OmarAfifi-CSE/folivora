@@ -91,6 +91,9 @@ TOPIC_ECOSYSTEM_SYNONYMS: dict[str, list[str]] = {
 SECTION_CONTEXT_ENRICHMENT: dict[str, list[str]] = {
     "flutter": ["flutter", "dart", "widget", "widgets", "valuekey", "valuekeys", "bloc", "cubit", "orbital radar", "layoutbuilder", "dynamicscaffold", "uint8list", "ffi"],
     "dart": ["dart", "flutter", "widget", "widgets", "valuekey", "valuekeys", "bloc", "cubit", "uint8list", "ffi"],
+    "mobile": ["mobile", "android", "ios", "flutter", "dart", "widget", "widgets", "valuekey", "valuekeys", "bloc", "cubit", "adb", "apk", "orbital radar", "layoutbuilder", "dynamicscaffold", "uint8list", "ffi"],
+    "web": ["webdev", "frontend", "javascript", "typescript", "react", "html", "css", "dom", "a11y", "accessibility", "webgpu", "webassembly", "view transitions"],
+    "frontend": ["frontend", "javascript", "typescript", "react", "html", "css", "dom", "a11y", "accessibility", "webgpu", "webassembly", "view transitions"],
     "ai": ["ai", "llm", "gemma", "gemini", "qwen", "tinker", "prompt", "agent", "rag", "model", "token", "copilot"],
     "gemini": ["gemini", "adb", "canvas", "bytecode", "apk", "decompile", "logcat"],
 }
@@ -321,10 +324,18 @@ def extract_focus_tokens(user_intent: str | None) -> list[str]:
         return []
     cleaned = INTENT_FRAMING_REGEX.sub(" ", user_intent.lower())
     raw_tokens = re.findall(r"[\w+#.-]+", cleaned)
+    allow_web_token = bool(
+        re.search(r"\bweb\s+(?:dev|development|developer|frontend|design|app|apps|ui|performance|accessibility)\b", cleaned)
+        or cleaned.strip() in {"web", "web & frontend", "web and frontend"}
+    )
 
     filtered: list[str] = []
     for tok in raw_tokens:
         t = tok.strip(".-_").lower()
+        if t == "web" and allow_web_token:
+            if t not in filtered:
+                filtered.append(t)
+            continue
         if not t or t in CONVERSATIONAL_STOP_WORDS:
             continue
         if len(t) < 3 and t not in ALLOWED_TWO_LETTER_TOKENS:

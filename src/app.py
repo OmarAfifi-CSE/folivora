@@ -288,7 +288,7 @@ def health_check():
 
     return {
         "status": "healthy",
-        "service": "folivora-core",
+        "service": "folivora",
         "version": "1.0.0",
         "ml_engine": ml_state,
         "engine_label": tabpfn_engine.engine_name,
@@ -665,6 +665,13 @@ def download_chrome_extension(request: Request):
     if not ext_dir.exists():
         raise HTTPException(status_code=404, detail="Chrome extension directory not found")
     origin = str(request.base_url).rstrip("/")
+    parsed_origin = urlparse(origin)
+    if (
+        parsed_origin.hostname
+        and parsed_origin.hostname not in {"localhost", "127.0.0.1"}
+        and parsed_origin.scheme == "http"
+    ):
+        origin = "https://" + origin[len("http://") :]
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
         for file_path in sorted(ext_dir.rglob("*")):

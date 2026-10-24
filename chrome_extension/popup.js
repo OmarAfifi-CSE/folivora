@@ -13,6 +13,7 @@ async function scanCurrentWindowTabs() {
       t.url &&
       (t.url.startsWith("http://") || t.url.startsWith("https://")) &&
       !t.url.includes("localhost:8000") &&
+      !t.url.includes("folivora.tech") &&
       !t.url.includes("folivora.onrender.com")
   );
   const badge = document.getElementById("tab-count-badge");

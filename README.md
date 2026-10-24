@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="https://folivora.onrender.com">
+<a href="https://folivora.tech">
   <img src="src/static/favicon.svg" width="104" height="104" alt="Folivora Emblem" />
 </a>
 
@@ -28,10 +28,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-475569?style=flat-square)](LICENSE)
 
 <!-- Tier 3: Actionable CTAs -->
-[![Live Web App](https://img.shields.io/badge/Launch_Live_App-folivora.onrender.com-059669?style=for-the-badge&labelColor=0A0A1A)](https://folivora.onrender.com)
+[![Live Web App](https://img.shields.io/badge/Launch_Live_App-folivora.tech-059669?style=for-the-badge&labelColor=0A0A1A)](https://folivora.tech)
 [![Evaluation Report](https://img.shields.io/badge/Digest_Eval-eval%2FEVAL.md-15803D?style=for-the-badge&labelColor=0A0A1A)](eval/EVAL.md)
 [![Hand Audit](https://img.shields.io/badge/Hand_Audit-eval%2FREVIEW.md-D97706?style=for-the-badge&labelColor=0A0A1A)](eval/REVIEW.md)
-[![OpenAPI Docs](https://img.shields.io/badge/OpenAPI_Spec-%2Fdocs-2563EB?style=for-the-badge&labelColor=0A0A1A)](https://folivora.onrender.com/docs)
+[![OpenAPI Docs](https://img.shields.io/badge/OpenAPI_Spec-%2Fdocs-2563EB?style=for-the-badge&labelColor=0A0A1A)](https://folivora.tech/docs)
 
 <br />
 
@@ -246,7 +246,7 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 | **🌐 Browserbase** | Cloud Chromium session creation (`POST /v1/sessions`), raw CDP WebSocket DOM inspection (`<=16` tabs), `REQUEST_RELEASE` cleanup | [`src/browserbase_service.py`](src/browserbase_service.py) | `test_custom_live_urls_use_cdp_and_release_session` + live `debuggerFullscreenUrl` in UI |
 | **🎙️ ElevenLabs** | Bidirectional voice: **Scribe v2 STT** (`transcribe_and_forget()` with immediate remote `DELETE`) + **Flash v2.5 TTS** (`Charlie`) | [`src/audio_service.py`](src/audio_service.py) | `test_scribe_transcribe_and_immediate_privacy_delete` & `test_live_elevenlabs_flash_tts_returns_mp3_bytes` |
 | **🔭 Sentry Agent Tracing** | OpenTelemetry `gen_ai.request` & `summary.*` spans with token/latency tracking and `(?<!put_)token(?!s)` secret scrubber | [`src/telemetry.py`](src/telemetry.py) | `test_redacts_secrets_while_preserving_input_and_output_tokens` + `T8_sentry_span_secret_canary` |
-| **☁️ Render** | Declarative [`render.yaml`](render.yaml) Blueprint + [`Dockerfile`](Dockerfile) with pre-baked TabPFN weights, `/health`, and `OMP_NUM_THREADS=2` | [`render.yaml`](render.yaml), [`Dockerfile`](Dockerfile) | Live at [`folivora.onrender.com/health`](https://folivora.onrender.com/health) |
+| **☁️ Render** | Declarative [`render.yaml`](render.yaml) Blueprint + [`Dockerfile`](Dockerfile) with pre-baked TabPFN weights, `/health`, and `OMP_NUM_THREADS=2` | [`render.yaml`](render.yaml), [`Dockerfile`](Dockerfile) | Live at [`folivora.tech/health`](https://folivora.tech/health) |
 
 ---
 
@@ -304,6 +304,6 @@ python run_local.py
 <div align="center">
 
 **Built for the Hacktoberfest Open-Source AI Challenge · MIT Licensed**  
-[Live Application](https://folivora.onrender.com) · [OpenAPI Docs](https://folivora.onrender.com/docs) · [Gemma Eval (`59/60`)](eval/EVAL.md) · [Hand Audit](eval/REVIEW.md) · [Summary Quality Harness](eval/summary_quality.py) · [Red-Team Suite](eval/redteam_eval.py)
+[Live Application](https://folivora.tech) · [OpenAPI Docs](https://folivora.tech/docs) · [Gemma Eval (`59/60`)](eval/EVAL.md) · [Hand Audit](eval/REVIEW.md) · [Summary Quality Harness](eval/summary_quality.py) · [Red-Team Suite](eval/redteam_eval.py)
 
 </div>

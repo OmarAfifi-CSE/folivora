@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folivora — Pitch Deck (.tech No Excuses Fund)</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/pitch.css?v=20261024">
+</head>
+<body class="mode-single">
+
+  <header class="deck-topbar">
+    <a href="/" class="brand-cluster">
+      <img src="/static/favicon.svg" alt="Folivora Logo">
+      <span class="brand-title">Folivora</span>
+      <span class="brand-pill">folivora.tech · Pitch Deck</span>
+    </a>
+    <div class="deck-controls">
+      <button id="btn-prev-slide" class="btn-ctrl" title="Previous Slide (←)">← Prev</button>
+      <span id="slide-counter" class="slide-counter">1 / 10</span>
+      <button id="btn-next-slide" class="btn-ctrl" title="Next Slide (→)">Next →</button>
+      <button id="btn-toggle-mode" class="btn-ctrl">📜 Scroll All 10 Slides</button>
+      <a href="/pitch.pdf" class="btn-ctrl" download="Folivora-Pitch-Deck.pdf">⬇️ PDF</a>
+      <button id="btn-print-deck" class="btn-ctrl">🖨️ Print</button>
+      <a href="/" class="btn-ctrl btn-ctrl-primary">🚀 Try Live Build</a>
+    </div>
+  </header>
+
+  <div class="deck-progress-track">
+    <div id="deck-progress-fill" class="deck-progress-fill"></div>
+  </div>
+
+  <main class="deck-stage">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide active" data-slide="1">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">🦥 Folivora · The .tech $1M No Excuses Fund Submission</span>
+          <span class="slide-num-badge">SLIDE 01 / 10</span>
+        </div>
+        <h1 class="slide-title">
+          Keep the <span class="accent">5 engineering snippets</span> you need.<br>
+          Close the <span class="accent">37 hoarded tabs</span> you will never read.
+        </h1>
+        <p class="slide-subtitle">
+          <strong>Folivora</strong> (Latin: <em>folium + vorare</em>, "the page devourer") is an open-weight AI browser workspace and Chrome extension that inspects your open tabs in Browserbase Cloud Chromium, predicts calibrated P10/P50/P90 utility quantiles with Prior Labs TabPFN, extracts section-anchored takeaways behind deterministic verification gates with Google Gemma, and speaks a 20-second executive briefing via ElevenLabs.
+        </p>
+
+        <div class="grid-4">
+          <div class="card card-emerald">
+            <div class="metric-label">False-Close Safety</div>
+            <div class="metric-big">0.36%</div>
+            <p>TabPFN P90 guardrail across 3,600 developer tabs (720 unseen test rows).</p>
+          </div>
+          <div class="card card-cyan">
+            <div class="metric-label">Fast-Lane Triage</div>
+            <div class="metric-big cyan">&lt;150ms</div>
+            <p>Instant deterministic cards upgraded in place by Gemma 4 &amp; Gemini Flash Lite.</p>
+          </div>
+          <div class="card card-emerald">
+            <div class="metric-label">Fact-Gate Pass Rate</div>
+            <div class="metric-big">98.3%</div>
+            <p>59/60 verified spoken digests behind programmatic digit &amp; anchor validation.</p>
+          </div>
+          <div class="card card-amber">
+            <div class="metric-label">Adversarial Red Team</div>
+            <div class="metric-big amber">0.0% ASR</div>
+            <p>24/24 prompt-injection &amp; secret-canary attacks blocked across 8 threat families.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Founder: Omar Afifi (@OmarAfifi-CSE) · Bootstrapped Solo Builder</span>
+        <span>Live Product: <a href="https://folivora.tech">https://folivora.tech</a> · GitHub: <a href="https://github.com/OmarAfifi-CSE/folivora" target="_blank" rel="noopener">OmarAfifi-CSE/folivora</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: WHO'S BEHIND IT (BUILDER TRACK RECORD) -->
+    <section class="slide" data-slide="2">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">02 · Founder &amp; Engineering Pedigree</span>
+          <span class="slide-num-badge">SLIDE 02 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Built solo by a systems engineer who ships <span class="accent">bare-metal, open-source tools</span> to production.
+        </h2>
+        <p class="slide-subtitle">
+          <strong>Omar Afifi</strong> is a full-stack systems and AI engineer who built Folivora out of firsthand frustration after watching 40+ documentation and debugging tabs drain system RAM and focus while building production open-source software:
+        </p>
+
+        <div class="grid-3">
+          <div class="card card-emerald">
+            <h3>📦 Shrinkeo (Microsoft Store)</h3>
+            <p>Open-source, GPU-accelerated Windows media compression studio published on the official <strong>Microsoft Store</strong>.</p>
+            <ul class="clean-list">
+              <li>Hardware-accelerated NVENC, AMD AMF &amp; Intel QSV encoding</li>
+              <li>Exact MB/KB target sizing via 2-Pass VBR optimization</li>
+              <li>100% offline privacy, EXIF scrubber, and 44 localized languages</li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag emerald">Microsoft Store Live</span>
+              <span class="tag">GPL v3 Open Source</span>
+            </div>
+          </div>
+
+          <div class="card card-cyan">
+            <h3>⚡ Daphq (Raw TCP Engine)</h3>
+            <p>Open-source, bare-metal cross-platform file transfer engine for Windows &amp; Android that bypasses HTTP overhead entirely.</p>
+            <ul class="clean-list">
+              <li>Raw TCP sockets with <code>SocketOption.tcpNoDelay</code> &amp; UDP watchdog discovery</li>
+              <li>Zero-copy <code>Uint8List.sublistView</code> boundary slicing (0 OOM crashes)</li>
+              <li>Saturates <strong>~93% of physical Wi-Fi bandwidth at 90+ MB/s</strong></li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag cyan">90+ MB/s Verified</span>
+              <span class="tag">MIT Open Source</span>
+            </div>
+          </div>
+
+          <div class="card card-amber">
+            <h3>🔊 just_audio_windows_plus</h3>
+            <p>Production-grade native C++20 / WinRT desktop audio engine published on <strong>pub.dev</strong> for the Flutter ecosystem.</p>
+            <ul class="clean-list">
+              <li>Eliminated access-violation crashes (<code>0xC0000005</code>) &amp; COM race conditions</li>
+              <li>Dedicated Win32 <code>HWND_MESSAGE</code> thread marshalling</li>
+              <li>Backed by <strong>174 automated C++ &amp; Dart verification tests</strong></li>
+            </ul>
+            <div class="tag-row">
+              <span class="tag">C++20 / WinRT</span>
+              <span class="tag">174 Automated Tests</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Solo Founder · No Co-Founders · 100% Bootstrapped</span>
+        <span>GitHub Portfolio: <a href="https://github.com/OmarAfifi-CSE" target="_blank" rel="noopener">github.com/OmarAfifi-CSE</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: THE PROBLEM -->
+    <section class="slide" data-slide="3">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">03 · The Problem</span>
+          <span class="slide-num-badge">SLIDE 03 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Browser tabs have become an anxious <span class="accent">external memory bank</span> for 1B+ knowledge workers.
+        </h2>
+        <p class="slide-subtitle">
+          Engineers and researchers don't keep 42 browser tabs open for three weeks to read 5,000-word essays. We keep them open because <strong>5 of those tabs contain a 3-line CLI flag, SQL snippet, or benchmark number</strong> we are afraid to lose.
+        </p>
+
+        <div class="grid-2">
+          <div class="card card-rose">
+            <h3>❌ Why Current Solutions Fail</h3>
+            <ul class="clean-list">
+              <li><strong>Bookmark &amp; Tab Managers (OneTab, Pocket):</strong> Turn clutter in the tab bar into a static graveyard of links you still never read.</li>
+              <li><strong>Single-Tab AI Chatbars (Copilot, ChatGPT Sidebars):</strong> Summarize one tab at a time, strip out CLI flags/code blocks, and cannot triage 40 tabs simultaneously.</li>
+              <li><strong>Unverified LLM Wrappers:</strong> Hallucinate version numbers, invent flags, and provide zero calibrated confidence on whether a tab is safe to close.</li>
+              <li><strong>Cognitive &amp; RAM Tax:</strong> 40+ active Chromium renderers consume 4–8 GB of RAM and fragment deep engineering focus.</li>
+            </ul>
+          </div>
+
+          <div class="card card-emerald">
+            <h3>✅ What Knowledge Workers Actually Need</h3>
+            <ul class="clean-list">
+              <li><strong>Calibrated Triage with Uncertainty Bounds:</strong> A statistical guarantee (`P10 / P50 / P90`) that closing a tab won't throw away critical reference material.</li>
+              <li><strong>Section-Anchored Extraction:</strong> Exact `Section Heading — Fact` takeaways plus preserved copyable code blocks (`pre/code`).</li>
+              <li><strong>Zero-Prompt &amp; Topic-Focused Modes:</strong> Summarize every open tab immediately, or filter by voice/text intent (e.g., <em>"Postgres HNSW"</em>) and hibernate unrelated tabs in one click.</li>
+              <li><strong>Eyes-Free Executive Briefing:</strong> A 20-second spoken audio summary verified digit-by-digit against ground truth.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>The Browser Overload Crisis</span>
+        <span>Live Product: <a href="https://folivora.tech">https://folivora.tech</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: THE SOLUTION & ARCHITECTURE -->
+    <section class="slide" data-slide="4">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">04 · The Solution &amp; Dual-Lane Architecture</span>
+          <span class="slide-num-badge">SLIDE 04 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Meet <span class="accent">Folivora</span>: Sub-150ms deterministic triage + grounded open-weight AI polish.
+        </h2>
+        <p class="slide-subtitle">
+          Folivora decouples instant structural triage from background LLM synthesis—rendering interactive dossiers in under 150ms while upgrading prose asynchronously behind strict mathematical verification gates.
+        </p>
+
+        <div class="pipeline-flow">
+          <div class="pipe-step">
+            <div class="step-idx">STAGE 01 · CAPTURE</div>
+            <h4>🌐 Browserbase CDP + Extension</h4>
+            <p>Captures open window URLs via Manifest V3 Chrome Extension or opens live pages in Browserbase Cloud Chromium over raw CDP WebSockets.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="step-idx">STAGE 02 · SIEVE</div>
+            <h4>📊 Prior Labs TabPFN v2</h4>
+            <p>Scores 7 structural &amp; intent features on CPU to predict calibrated <code>P10 / P50 / P90</code> quantiles. Enforces <code>P90 &lt; 45</code> safety gate.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="step-idx">STAGE 03 · FAST LANE</div>
+            <h4>⚡ &lt;150ms Instant Dossier</h4>
+            <p>Immediately renders sanitized section-anchored takeaways, copyable code blocks, reading time saved, and keep/close verdicts.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="step-idx">STAGE 04 · GROUNDED AI</div>
+            <h4>💎 Gemma 4 + Gemini Flash Lite</h4>
+            <p>Upgrades executive brief (<code>check_output()</code> digit gate) &amp; polishes top 8 tab cards against bounded <code>E#/C#</code> evidence packs.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="step-idx">STAGE 05 · VOICE &amp; TRACE</div>
+            <h4>🎙️ ElevenLabs + Sentry</h4>
+            <p>Scribe v2 voice intent input (with immediate remote delete), Flash v2.5 spoken briefing, and scrubbed Sentry OpenTelemetry spans.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-emerald">
+            <h3>📖 Mode A: Summarize All Open Tabs (Default)</h3>
+            <p>Click <strong>Summarize All</strong> with no prompt needed. Every valid tab is kept (`rated=False`) and distilled into a 30-second card with an overview, `Heading — Takeaway` bullets, and copyable code snippets.</p>
+          </div>
+          <div class="card card-cyan">
+            <h3>🎯 Mode B: Topic Focus &amp; 1-Click Tab Cleanup</h3>
+            <p>Type or speak a topic (e.g., <em>"Flutter"</em>, <em>"Postgres Docker"</em>, or <em>"Japan travel"</em>). Folivora ranks matching tabs, surfaces a dedicated <code>🎯 Focused on "&lt;Topic&gt;"</code> tab on each card, and lets you hibernate or close unrelated tabs with full undo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Dual-Lane Progressive Architecture</span>
+        <span>OpenAPI Spec: <a href="https://folivora.tech/docs">https://folivora.tech/docs</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: PRODUCT DEMO WALKTHROUGH -->
+    <section class="slide" data-slide="5">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">05 · Live Product Demo (`https://folivora.tech`)</span>
+          <span class="slide-num-badge">SLIDE 05 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Three ways to experience <span class="accent">Folivora</span> live right now.
+        </h2>
+        <p class="slide-subtitle">
+          Every feature is live and testable in the browser at <strong><a href="https://folivora.tech" style="color:#34D399">folivora.tech</a></strong> with zero login walls.
+        </p>
+
+        <div class="grid-3">
+          <div class="card card-emerald">
+            <div class="metric-label">Demo Path 01</div>
+            <h3>🏆 65-Tab DEV Hall of Fame Pile</h3>
+            <p>Triage all 65 featured DEV Community articles (600+ minutes of reading) in under 150ms. Filter by any topic (e.g., <code>Gemini</code>, <code>Rust</code>, <code>Docker</code>, <code>Flutter</code>) and watch TabPFN isolate the exact matching articles and jump straight to the matching H2/H3 section.</p>
+            <div class="tag-row">
+              <span class="tag emerald">65 Real Articles</span>
+              <span class="tag">&lt;150ms Triage</span>
+            </div>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="metric-label">Demo Path 02</div>
+            <h3>🔗 Paste Any Live URLs + Cloud CDP</h3>
+            <p>Paste up to 65 live URLs from your own browser—or toggle <strong>Live Browserbase Cloud Chromium</strong> to inspect live DOMs over raw CDP WebSockets with an embedded live session replay link and automatic session release.</p>
+            <div class="tag-row">
+              <span class="tag cyan">Browserbase CDP</span>
+              <span class="tag">SSRF Protected</span>
+            </div>
+          </div>
+
+          <div class="card card-amber">
+            <div class="metric-label">Demo Path 03</div>
+            <h3>🧩 One-Click Chrome Extension</h3>
+            <p>Download <code>/download-extension.zip</code> directly from the navbar (pre-configured to <code>https://folivora.tech</code>). Scan your current browser window, hibernate unrelated tabs to <strong>0 MB RAM</strong> via <code>chrome.tabs.discard()</code>, or close them with a 1-click Undo snapshot.</p>
+            <div class="tag-row">
+              <span class="tag">Manifest V3</span>
+              <span class="tag">1-Click Undo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Interactive Workspace + Chrome Extension</span>
+        <span>Download Extension: <a href="/download-extension.zip">folivora.tech/download-extension.zip</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: EMPIRICAL BENCHMARKS & VERIFICATION -->
+    <section class="slide" data-slide="6">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">06 · Empirical Proof &amp; Benchmarks</span>
+          <span class="slide-num-badge">SLIDE 06 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Engineered with <span class="accent">measurable ML rigor</span>—not prompt-and-pray.
+        </h2>
+        <p class="slide-subtitle">
+          Why use Prior Labs' TabPFN v2 quantile distribution instead of a standard point-estimate classifier? Because in tab triage, <strong>falsely closing one critical reference tab is 10x worse than keeping an extra tab open</strong>.
+        </p>
+
+        <table class="pitch-table">
+          <thead>
+            <tr>
+              <th>Model / Decision Policy (720 Unseen Test Tabs)</th>
+              <th>RMSE ↓</th>
+              <th>Spearman ρ ↑</th>
+              <th>False-Close Rate ↓</th>
+              <th>Recall on Must-Keep ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight-row">
+              <td>🏆 Prior Labs TabPFN v2 (P50 + P90 &lt; 45 Guardrail — Shipped)</td>
+              <td>6.83</td>
+              <td>0.9557</td>
+              <td>0.36% (1 / 276)</td>
+              <td>99.64%</td>
+            </tr>
+            <tr>
+              <td>TabPFN Point-Only Policy (P50 &lt; 42, ignoring P90 uncertainty)</td>
+              <td>6.83</td>
+              <td>0.9557</td>
+              <td>1.81% (5x riskier)</td>
+              <td>98.19%</td>
+            </tr>
+            <tr>
+              <td>HistGradientBoostingRegressor (3-Model Quantile Ensemble)</td>
+              <td>7.26</td>
+              <td>0.9498</td>
+              <td>1.09%</td>
+              <td>98.91%</td>
+            </tr>
+            <tr>
+              <td>RandomForestRegressor (100 Trees)</td>
+              <td>7.45</td>
+              <td>0.9469</td>
+              <td>2.17%</td>
+              <td>97.83%</td>
+            </tr>
+            <tr>
+              <td>Heuristic Word-Count + Age Rule</td>
+              <td>28.86</td>
+              <td>0.4517</td>
+              <td>19.20%</td>
+              <td>80.80%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="grid-3" style="margin-top: 18px;">
+          <div class="card">
+            <h3>🛡️ 59/60 (98.3%) Digest Gate</h3>
+            <p><code>check_output()</code> parses every number in Gemma's prose and rejects any rounded, invented, or swapped digit with a 1-retry correction loop.</p>
+          </div>
+          <div class="card">
+            <h3>📏 11/11 Golden Summary Gates</h3>
+            <p><code>tab-summary-validation-v3</code> enforces exact section anchors, grounded numbers/units, zero first-person voice, and anti-verbatim synthesis.</p>
+          </div>
+          <div class="card">
+            <h3>🔒 0.0% Red-Team ASR (24/24)</h3>
+            <p>Blocks indirect prompt injections inside malicious web pages, fake evidence tags, and secret canary exfiltration attempts.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Reproducible via `python benchmarks/ablate.py` &amp; `python eval/redteam_eval.py --gate`</span>
+        <span>83 / 83 Automated Unit &amp; Integration Tests Passing</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: DEFENSIBLE TECHNICAL MOAT & PRIVACY -->
+    <section class="slide" data-slide="7">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">07 · Defensible Technical Moat &amp; Security</span>
+          <span class="slide-num-badge">SLIDE 07 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Built for <span class="accent">enterprise-grade privacy</span> and zero-trust web ingestion.
+        </h2>
+        <p class="slide-subtitle">
+          Every external web page inspected by an AI browser agent is untrusted input. Folivora treats web DOMs as adversarial by default and isolates user sessions from end to end.
+        </p>
+
+        <div class="grid-2">
+          <div class="card card-emerald">
+            <h3>🔐 Multi-Layer Privacy &amp; Isolation</h3>
+            <ul class="clean-list">
+              <li><strong>Private Ephemeral Job Store:</strong> Custom user URLs are isolated in a per-job TTL/LRU store (<code>15m</code> expiry) and never written to shared caches or serialized back in raw API responses.</li>
+              <li><strong>Transcribe-and-Forget Voice Privacy:</strong> Voice intents sent to ElevenLabs Scribe v2 trigger an immediate remote <code>DELETE /v1/speech-to-text/transcripts/{id}</code> in a <code>finally</code> block.</li>
+              <li><strong>SSRF &amp; Network Hardening:</strong> Blocks RFC1918 private IPs, loopback, link-local metadata endpoints, and credentialed URLs on every redirect hop.</li>
+            </ul>
+          </div>
+
+          <div class="card card-cyan">
+            <h3>🔭 Observability &amp; Cost Efficiency</h3>
+            <ul class="clean-list">
+              <li><strong>Sentry OpenTelemetry GenAI Tracing:</strong> Tracks latency, token throughput, and estimated cost across <code>browserbase.inspect_tabs</code>, <code>tabpfn.predict_quantiles</code>, and <code>gemma.digest</code> spans.</li>
+              <li><strong>Regex Secret Scrubber:</strong> Redacts <code>api_key</code>, <code>tabpfn_token</code>, and <code>signingKey</code> while preserving <code>gen_ai.usage.input_tokens</code> and <code>output_tokens</code>.</li>
+              <li><strong>Sub-Cent Unit Economics:</strong> Pre-baked CPU TabPFN weights ($0 API cost per triage) + bounded evidence packs keep full 8-tab AI polish under $0.002 per batch.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Zero-Trust Browser Ingestion · Sentry OpenTelemetry</span>
+        <span>Live Health Telemetry: <a href="https://folivora.tech/health">https://folivora.tech/health</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: MARKET OPPORTUNITY -->
+    <section class="slide" data-slide="8">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">08 · Market Opportunity</span>
+          <span class="slide-num-badge">SLIDE 08 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          If this works, <span class="accent">how big could it get?</span>
+        </h2>
+        <p class="slide-subtitle">
+          The web browser is the primary operating system for over <strong>1 billion desktop knowledge workers</strong>—yet tab management hasn't fundamentally evolved since tabbed browsing was invented in 1998.
+        </p>
+
+        <div class="grid-3">
+          <div class="card card-emerald">
+            <div class="metric-label">Beachhead (SOM)</div>
+            <div class="metric-big">30M+</div>
+            <h3>Software &amp; AI Engineers</h3>
+            <p>Developers and technical researchers who juggle 40+ GitHub issues, StackOverflow threads, cloud docs, and arXiv papers daily and value deterministic accuracy and preserved code snippets.</p>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="metric-label">Expansion (SAM)</div>
+            <div class="metric-big cyan">250M+</div>
+            <h3>Technical Knowledge Workers</h3>
+            <p>Product managers, security analysts, financial researchers, and graduate students conducting multi-source synthesis across dozens of browser tabs every day.</p>
+          </div>
+
+          <div class="card card-amber">
+            <div class="metric-label">Global Vision (TAM)</div>
+            <div class="metric-big amber">1B+</div>
+            <h3>Desktop Browser Users</h3>
+            <p>Becoming the intelligent memory, triage, and voice-briefing layer across Chrome, Brave, Edge, Arc, and enterprise browser environments worldwide.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>From Developer Wedge to Universal Browser Intelligence Layer</span>
+        <span>Domain: <a href="https://folivora.tech">folivora.tech</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: TRACTION, STAGE & BUSINESS MODEL -->
+    <section class="slide" data-slide="9">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">09 · Current Stage, Traction &amp; Business Model</span>
+          <span class="slide-num-badge">SLIDE 09 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Day-Zero live build with a clear <span class="accent">Open-Core SaaS</span> monetization engine.
+        </h2>
+        <p class="slide-subtitle">
+          Folivora is 100% bootstrapped ($0 external funding, pre-revenue, launched October 2026) with a complete working web workspace and Chrome extension live on <strong>folivora.tech</strong>.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="metric-label">Tier 01 · Community</div>
+            <h3>🌱 Open-Source / Free</h3>
+            <div class="metric-big" style="font-size:28px;margin:8px 0;">$0 / mo</div>
+            <ul class="clean-list">
+              <li>Unlimited local deterministic tab triage (&lt;150ms)</li>
+              <li>Chrome Extension tab hibernation &amp; 1-click undo</li>
+              <li>Self-hosted Docker &amp; local Ollama support</li>
+            </ul>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="metric-label">Tier 02 · Individual Pro</div>
+            <h3>⚡ Folivora Pro</h3>
+            <div class="metric-big" style="font-size:28px;margin:8px 0;">$12 / mo</div>
+            <ul class="clean-list">
+              <li>Cloud Browserbase CDP rendering for JS-heavy SPAs</li>
+              <li>Unlimited Gemma 4 &amp; Gemini grounded card polish</li>
+              <li>ElevenLabs voice briefings &amp; searchable tab archive</li>
+            </ul>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="metric-label">Tier 03 · Engineering Teams</div>
+            <h3>🏢 Folivora Teams</h3>
+            <div class="metric-big cyan" style="font-size:28px;margin:8px 0;">$29 / seat</div>
+            <ul class="clean-list">
+              <li>Shared incident &amp; research tab dossiers for teams</li>
+              <li>1-click export to Notion, Linear, Slack &amp; GitHub PRs</li>
+              <li>SSO, audit logs &amp; dedicated private cloud deployment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Stage: Live Working Build · Pre-Revenue · Bootstrapped</span>
+        <span>Try It Live: <a href="https://folivora.tech">https://folivora.tech</a></span>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: ROADMAP & GRANT IMPACT -->
+    <section class="slide" data-slide="10">
+      <div>
+        <div class="slide-header">
+          <span class="slide-kicker">10 · Roadmap &amp; The .tech No Excuses Grant Impact</span>
+          <span class="slide-num-badge">SLIDE 10 / 10</span>
+        </div>
+        <h2 class="slide-title">
+          Turning <span class="accent">folivora.tech</span> into the definitive AI browser workspace.
+        </h2>
+        <p class="slide-subtitle">
+          How equity-free backing from the <strong>.tech No Excuses Fund</strong> accelerates Folivora over the next 6 months:
+        </p>
+
+        <div class="grid-3">
+          <div class="card card-emerald">
+            <div class="metric-label">Milestone 01 · Q1 2027</div>
+            <h3>🧩 Chrome Web Store &amp; Recall</h3>
+            <ul class="clean-list">
+              <li>Public launch on Chrome Web Store, Firefox Add-ons &amp; Edge Store</li>
+              <li>Persistent local-first vector recall over every closed tab ("Never fear closing a tab again")</li>
+              <li>Automated daily end-of-day spoken tab cleanup digest</li>
+            </ul>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="metric-label">Milestone 02 · Q2 2027</div>
+            <h3>💻 IDE &amp; Workflow Bridge</h3>
+            <ul class="clean-list">
+              <li>VS Code, Cursor &amp; JetBrains MCP integration—inject kept tab snippets directly into coding agents</li>
+              <li>Collaborative team research dossiers on <code>folivora.tech</code></li>
+              <li>Fine-tuned personalization on individual user keep/close feedback</li>
+            </ul>
+          </div>
+
+          <div class="card card-amber">
+            <div class="metric-label">Why Back Folivora Now</div>
+            <h3>🚀 High-Velocity Execution</h3>
+            <ul class="clean-list">
+              <li>Working, benchmarked product live today on <code>folivora.tech</code></li>
+              <li>Proven solo founder with shipped Microsoft Store &amp; open-source systems</li>
+              <li>Grant directly funds Browserbase/GPU scale, Chrome Store growth, and Pro tier launch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Thank You · Judges &amp; Panel of The .tech $1M No Excuses Fund</span>
+        <span>Launch Live App: <a href="https://folivora.tech">https://folivora.tech</a></span>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/static/pitch.js?v=20261024"></script>
+</body>
+</html>

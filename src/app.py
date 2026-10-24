@@ -704,6 +704,27 @@ def serve_favicon():
     raise HTTPException(status_code=404, detail="Favicon not found")
 
 
+@app.get("/pitch")
+@app.get("/pitch/")
+def serve_pitch_deck():
+    pitch_path = STATIC_DIR / "pitch.html"
+    if pitch_path.exists():
+        return FileResponse(str(pitch_path), headers={"Cache-Control": "no-store"})
+    raise HTTPException(status_code=404, detail="Pitch deck not found")
+
+
+@app.get("/pitch.pdf")
+def serve_pitch_pdf():
+    pdf_path = STATIC_DIR / "folivora-pitch-deck.pdf"
+    if pdf_path.exists():
+        return FileResponse(
+            str(pdf_path),
+            media_type="application/pdf",
+            headers={"Content-Disposition": 'inline; filename="Folivora-Pitch-Deck.pdf"'},
+        )
+    raise HTTPException(status_code=404, detail="Pitch deck PDF not found")
+
+
 @app.get("/")
 def serve_index():
     idx = STATIC_DIR / "index.html"

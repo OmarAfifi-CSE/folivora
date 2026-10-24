@@ -193,6 +193,12 @@ class TestAppAPI(unittest.TestCase):
         ext = self.client.get("/download-extension.zip")
         self.assertEqual(ext.status_code, 200)
         self.assertEqual(ext.headers.get("content-type"), "application/zip")
+        pitch = self.client.get("/pitch")
+        self.assertEqual(pitch.status_code, 200)
+        self.assertIn("Folivora", pitch.text)
+        pitch_pdf = self.client.get("/pitch.pdf")
+        self.assertEqual(pitch_pdf.status_code, 200)
+        self.assertEqual(pitch_pdf.headers.get("content-type"), "application/pdf")
 
     def test_synthesize_audio_rejects_empty_and_overlong_text(self):
         r_empty = self.client.post("/synthesize-audio", json={"text": "   "})

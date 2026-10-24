@@ -1,41 +1,61 @@
 <div align="center">
 
-<a href="https://folivora.tech">
-  <img src="src/static/favicon.svg" width="104" height="104" alt="Folivora Emblem" />
+<a href="https://folivora.tech" target="_blank">
+  <img src="src/static/favicon.svg" width="108" height="108" alt="Folivora Emblem" style="border-radius: 24px; box-shadow: 0 12px 32px rgba(31, 94, 67, 0.22);" />
 </a>
 
 # 🦥 Folivora
 
-### *The Open-Weight Tab Sieve & Page Devourer — Keep the 5 snippets you need. Close the 37 browser tabs you will never read.*
+<a href="https://folivora.tech">
+  <img src="https://readme-typing-svg.demolab.com?font=Plus+Jakarta+Sans&weight=700&size=20&duration=3000&pause=1000&color=1F5E43&center=true&vCenter=true&width=680&lines=Turn+40+Open+Browser+Tabs+Into+a+Calm+30-Second+Reading+Digest;Prior+Labs+TabPFN+v2+Calibrated+Quantile+Triage+(0.36%25+False-Close);Open-Weight+Google+Gemma+4+%26+Gemini+Grounded+Summaries+(0.0%25+ASR);Browserbase+Cloud+Chromium+CDP+%2B+1-Click+Chrome+Extension;ElevenLabs+Zero-Retention+Voice+I%2FO+%2B+Sentry+OpenTelemetry+Tracing" alt="Folivora Value Proposition" />
+</a>
 
-***Folivora** (Latin: both the biological suborder for tree sloths and `folium + vorare`, literally **"the page/folio devourer"**) is an open-source, evidence-first browser tab triage and section-anchored summarization engine powered by **Browserbase Cloud Chromium (CDP)**, **Prior Labs TabPFN** calibrated quantiles, **Multi-Lane Open-Weight Google Gemma 4 & Gemma 3** behind deterministic digit and citation gates, **ElevenLabs Scribe v2 & Flash v2.5**, and **Sentry OpenTelemetry Agent Tracing**.*
+<p align="center">
+  <!-- Tier 1: Stack & Engine -->
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11+" />
+  <img src="https://img.shields.io/badge/FastAPI-Dual--Lane_Gateway-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/Prior_Labs-TabPFN_v2_(P10%2FP50%2FP90)-0284C7?style=flat-square" alt="Prior Labs TabPFN" />
+  <img src="https://img.shields.io/badge/Open_Weights-Google_Gemma_4_26B_%2B_Gemma_3_12B-1A73E8?style=flat-square&logo=google&logoColor=white" alt="Google Gemma 4 & 3" />
+  <img src="https://img.shields.io/badge/Browserbase-Cloud_Chromium_CDP-F97316?style=flat-square" alt="Browserbase CDP" />
+  <img src="https://img.shields.io/badge/ElevenLabs-Scribe_v2_%2B_Flash_v2.5-111827?style=flat-square" alt="ElevenLabs Voice" />
+  <img src="https://img.shields.io/badge/Sentry-GenAI_OpenTelemetry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry OpenTelemetry" />
+</p>
 
-<!-- Tier 1: Stack & Engine -->
-![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-Dual--Lane_Gateway-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Prior Labs TabPFN](https://img.shields.io/badge/Prior_Labs-TabPFN_v2_(P10%2FP50%2FP90)-0284C7?style=flat-square)
-![Google Gemma 4 & 3](https://img.shields.io/badge/Open_Weights-Google_Gemma_4_26B_%2B_Gemma_3_12B-1A73E8?style=flat-square&logo=google&logoColor=white)
-![Browserbase CDP](https://img.shields.io/badge/Browserbase-Cloud_Chromium_CDP-F97316?style=flat-square)
-![ElevenLabs Voice](https://img.shields.io/badge/ElevenLabs-Scribe_v2_%2B_Flash_v2.5-111827?style=flat-square)
-![Sentry OpenTelemetry](https://img.shields.io/badge/Sentry-GenAI_OpenTelemetry-362D59?style=flat-square&logo=sentry&logoColor=white)
+<p align="center">
+  <!-- Tier 2: Verification & Empirical Proof -->
+  <a href="tests/"><img src="https://img.shields.io/badge/Tests-83%2F83_Passing-16A34A?style=flat-square" alt="Tests 83/83 Passing" /></a>
+  <a href="eval/EVAL.md"><img src="https://img.shields.io/badge/Gemma_Digest_Eval-59%2F60_(98.3%25)-15803D?style=flat-square" alt="Digest Eval 59/60" /></a>
+  <a href="eval/summary_quality.py"><img src="https://img.shields.io/badge/Summary_Golden_Gates-11%2F11_Passing_(20_Cases)-0D9488?style=flat-square" alt="Golden Summary Gates" /></a>
+  <a href="eval/redteam_eval.py"><img src="https://img.shields.io/badge/Red_Team_ASR-0.0%25_(24%2F24_Blocked)-DC2626?style=flat-square" alt="Red Team 0.0% ASR" /></a>
+  <a href="benchmarks/ablate.py"><img src="https://img.shields.io/badge/TabPFN_False--Close-0.36%25_(P90_Guardrail)-0369A1?style=flat-square" alt="TabPFN False Close 0.36%" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-475569?style=flat-square" alt="MIT License" /></a>
+</p>
 
-<!-- Tier 2: Verification & Empirical Proof -->
-[![Tests](https://img.shields.io/badge/Tests-83%2F83_Passing-16A34A?style=flat-square)](tests/)
-[![Digest Eval](https://img.shields.io/badge/Gemma_Digest_Eval-59%2F60_(98.3%25)-15803D?style=flat-square)](eval/EVAL.md)
-[![Golden Summary Harness](https://img.shields.io/badge/Summary_Golden_Gates-11%2F11_Passing_(20_Cases)-0D9488?style=flat-square)](eval/summary_quality.py)
-[![Adversarial Red Team](https://img.shields.io/badge/Red_Team_ASR-0.0%25_(24%2F24_Blocked)-DC2626?style=flat-square)](eval/redteam_eval.py)
-[![TabPFN False-Close](https://img.shields.io/badge/TabPFN_False--Close-0.36%25_(P90_Guardrail)-0369A1?style=flat-square)](benchmarks/ablate.py)
-[![License: MIT](https://img.shields.io/badge/License-MIT-475569?style=flat-square)](LICENSE)
+<p align="center">
+  <!-- Tier 3: Actionable CTAs -->
+  <a href="https://folivora.tech" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_Launch_Live_App-folivora.tech-1F5E43?style=for-the-badge&labelColor=0A0A1A" alt="Launch Live App" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://folivora.tech/download-extension.zip">
+    <img src="https://img.shields.io/badge/🧩_Chrome_Extension-.zip_Download-0F766E?style=for-the-badge&labelColor=0A0A1A" alt="Download Chrome Extension" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="eval/EVAL.md">
+    <img src="https://img.shields.io/badge/📊_Gemma_Eval-eval%2FEVAL.md-15803D?style=for-the-badge&labelColor=0A0A1A" alt="Evaluation Report" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://folivora.tech/docs" target="_blank">
+    <img src="https://img.shields.io/badge/📡_OpenAPI_Spec-%2Fdocs-2563EB?style=for-the-badge&labelColor=0A0A1A" alt="OpenAPI Docs" />
+  </a>
+</p>
 
-<!-- Tier 3: Actionable CTAs -->
-[![Live Web App](https://img.shields.io/badge/Launch_Live_App-folivora.tech-059669?style=for-the-badge&labelColor=0A0A1A)](https://folivora.tech)
-[![Evaluation Report](https://img.shields.io/badge/Digest_Eval-eval%2FEVAL.md-15803D?style=for-the-badge&labelColor=0A0A1A)](eval/EVAL.md)
-[![Hand Audit](https://img.shields.io/badge/Hand_Audit-eval%2FREVIEW.md-D97706?style=for-the-badge&labelColor=0A0A1A)](eval/REVIEW.md)
-[![OpenAPI Docs](https://img.shields.io/badge/OpenAPI_Spec-%2Fdocs-2563EB?style=for-the-badge&labelColor=0A0A1A)](https://folivora.tech/docs)
+### *"Code owns the numbers. TabPFN predicts the utility distribution. Gemma and Gemini write the prose behind strict evidence gates. Sentry traces every token."*
 
-<br />
-
-> *"Code owns the numbers. TabPFN predicts the utility distribution. Gemma and Gemini write the prose behind strict evidence gates. Sentry traces every token."*
+<p>
+  <b>Folivora</b> (Latin: both the biological suborder for tree sloths and <code>folium + vorare</code>, literally <b>"the page/folio devourer"</b>) is an open-source, evidence-first browser tab triage and section-anchored reading digest engine.<br/>
+  <i>Designed as a calm editorial reading room for everyone—from travelers and shoppers to software engineers—powered under the hood by Browserbase Cloud Chromium (CDP), Prior Labs TabPFN calibrated quantiles, Multi-Lane Open-Weight Google Gemma 4 &amp; Gemma 3, ElevenLabs Scribe v2 &amp; Flash v2.5, and Sentry OpenTelemetry Agent Tracing.</i>
+</p>
 
 </div>
 
@@ -43,7 +63,7 @@
 
 ## ⚡ The Problem vs. The Folivora Antidote
 
-Developers don't keep 40 browser tabs open for three weeks to read 5,000-word essays. We keep them open because **five of those tabs contain a 3-line CLI command, SQL query, or config flag** we were too lazy to copy into our notes—and closing the window feels like throwing away work.
+People don't keep 40 browser tabs open for three weeks to read 5,000-word articles from top to bottom. We keep them open because **five of those tabs contain a specific itinerary detail, benchmark comparison, recipe step, or 3-line CLI command** we were too busy to extract—and closing the window feels like throwing away work.
 
 <table>
 <tr>
@@ -62,7 +82,7 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 
 ### ✅ How Folivora Solves It
 
-- **Calibrated `P10 / P50 / P90` Quantile Triage:** **Prior Labs TabPFN** ([`src/tabpfn_engine.py`](src/tabpfn_engine.py)) predicts full utility quantiles across 7 DOM features. A tab is only closed when even its optimistic **`P90` upper bound** falls below threshold (**81.1% empirical coverage** on 720 unseen tabs).
+- **Calibrated `P10 / P50 / P90` Quantile Triage:** **Prior Labs TabPFN** ([`src/tabpfn_engine.py`](src/tabpfn_engine.py)) predicts full utility quantiles across 7 DOM features. A tab is only set aside when even its optimistic **`P90` upper bound** falls below threshold (**81.1% empirical coverage** on 720 unseen tabs, **0.36% False-Close Rate**).
 - **Strict Digit & Citation Gates:** [`check_output()`](src/gemma_service.py) verifies every numeric literal in Gemma's spoken brief character-for-character, while [`validate_tab_summary()`](src/summary_service.py) enforces `E#`/`C#` evidence IDs, exact `6–15`-word source anchors, and a `<90%` verbatim-overlap ceiling.
 - **Dual-Lane Progressive Rendering:** `/triage` renders sanitized deterministic cards in **`<150 ms`**. In the background, `/digest` upgrades the Reading Digest overview with **Gemma 4** (`~2.5s`) and `/polish-tabs` upgrades the top 8 cards in place with **Gemini 3.1 Flash Lite** (`~10s` batch) and a multi-lane Open-Weight **Gemma 4 26B + Gemma 3 12B** load balancer plus a targeted bullet-repair pass.
 - **Zero-Retention Voice & Private Job Isolation:** **ElevenLabs Scribe v2** deletes remote voice transcripts immediately after transcription (`DELETE /v1/speech-to-text/transcripts/{id}`), and `/polish-tabs` strips raw `full_text` and `all_paragraphs` before serialization.
@@ -70,6 +90,15 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 </td>
 </tr>
 </table>
+
+### 💡 The Experience Matrix: One Workspace for Every Kind of Reader
+
+| Story | The Experience | What You Control & What Happens Under the Hood |
+| :--- | :--- | :--- |
+| **Summarize Everything at Once (Mode A)** | Paste your open links or click **Summarize My Open Tabs** with zero prompt needed. Get a clean 25-second overview and section-anchored takeaways for every tab. | **Zero-Prompt Mode (`rated=False`):** Every readable tab is kept, summarized by section (`Heading — Insight`), and read aloud in 15 seconds via **ElevenLabs Charlie**. |
+| **Everyday Life & Travel Triage (Mode B)** | Planning a trip, comparing laptops, or prepping meals across 15 open tabs? Pick a topic chip like **Travel**, **Health & Sleep**, **Food & Recipes**, or **Shopping**. | **Semantic Topic Expansion:** Matches domain concepts (e.g., `"Japan Travel"` ➔ *Tokyo, Kyoto, Shinkansen, Suica*), ranks cards under **Worth Your Time**, and moves unrelated pages to **Set Aside**. |
+| **Deep Engineering & 65 DEV Articles** | Load the built-in **65 DEV Article Library** (`600+` min read) or your own docs window and filter by **Web Dev**, **Databases**, **Security**, or **AI & Tech**. | **Segmented Card Tabs:** Toggle any card between **`Focused on "<Topic>"`** (targeted section synthesis + mention count) and **`Full Summary`** (complete article digest). |
+| **1-Click Window Cleanup & Sleep** | Install the Manifest V3 Chrome Extension (`/download-extension.zip`) to scan your live browser window without copy-pasting URLs. | **Zero-RAM Tab Hibernation:** Put unrelated tabs to sleep via `chrome.tabs.discard()` (`0 MB` RAM while keeping them in your tab bar) or close them with a **1-Click Undo snapshot**. |
 
 ---
 
@@ -151,6 +180,56 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
 
 ---
 
+## 🔄 System Architecture & Dual-Lane Dataflow
+
+<div align="center">
+  <img src="docs/media/architecture-dataflow.svg" width="100%" alt="Folivora Dual-Lane Progressive Architecture & Verification Pipeline" />
+</div>
+
+<details>
+<summary><b>📐 Interactive Mermaid Architecture Graph — Click to Expand</b></summary>
+<br/>
+
+```mermaid
+flowchart TB
+    classDef ingest fill:#F0F7F3,stroke:#1F5E43,stroke-width:1.5px,color:#14211B;
+    classDef fastlane fill:#1F5E43,stroke:#164631,stroke-width:2px,color:#FFFFFF;
+    classDef gemmalane fill:#0F766E,stroke:#115E59,stroke-width:1.8px,color:#FFFFFF;
+    classDef polishlane fill:#B86B14,stroke:#92400E,stroke-width:1.8px,color:#FFFFFF;
+    classDef payoff fill:#14211B,stroke:#2C825D,stroke-width:1.5px,color:#FFFFFF;
+
+    subgraph S1 ["STAGE 01 · INGESTION & INTENT EXTRACTION"]
+        V["🎙️ 10s Spoken Topic Note<br/>ElevenLabs Scribe v2 STT<br/>+ Immediate DELETE /transcripts/{id}"]:::ingest
+        B["🌐 Open Tab URLs / 65 DEV Library<br/>Browserbase Cloud Chromium CDP<br/>Extracts 7 DOM Signals + E#/C# Evidence Pack"]:::ingest
+    end
+
+    subgraph S2 ["STAGE 02 · INSTANT FAST LANE (POST /triage — <150ms First Paint)"]
+        T["📊 Prior Labs TabPFN v2 Quantile Engine (CPU)<br/>Predicts Calibrated P10 / P50 / P90 Utility Quantiles<br/>Asymmetric Safety Guardrail: P90 < 45.0 ➔ Set Aside (0.36% False-Close)"]:::fastlane
+        K["✅ Worth Your Time Cards<br/>Segmented Tabs: Focused on Topic + Full Summary<br/>Private TTL/LRU job_id (raw full_text stays server-side)"]:::ingest
+    end
+
+    subgraph S3 ["STAGE 03 · NON-BLOCKING GROUNDED AI UPGRADE LANES"]
+        D["💎 Stage 3A · POST /digest (~2.5s)<br/>Google Gemma 4 (thinkingLevel: MINIMAL)<br/>check_output() Digit Allowlist + 1 Named-Token Retry<br/>59/60 (98.3%) Verified Pass Rate"]:::gemmalane
+        P["✨ Stage 3B · POST /polish-tabs (~10s batch)<br/>Gemini 3.1 Flash Lite + Multi-Lane Gemma Pool<br/>1. _repair_draft_citations() (E#/C# + 8w anchor)<br/>2. validate_tab_summary() v3 (0.0% Red-Team ASR)<br/>3. _repair_bullets() targeted rewrite"]:::polishlane
+    end
+
+    subgraph S4 ["STAGE 04 · ACTIONABLE PAYOFF & FORENSIC OBSERVABILITY"]
+        O["🔊 ElevenLabs Flash v2.5 (Charlie 15s Audio) · 📑 Print / Markdown / Bookmarks / 0-RAM Sleep<br/>🔭 Sentry OpenTelemetry gen_ai.request Spans + (?&lt;!put_)token(?!s) Secret Scrubber"]:::payoff
+    end
+
+    V --> T
+    B --> T
+    T --> K
+    K -. "Async POST /digest" .-> D
+    K -. "Async POST /polish-tabs" .-> P
+    D --> O
+    P --> O
+```
+
+</details>
+
+---
+
 ## 🏛️ Core Architectural Pillars
 
 1. **Code Owns the Numbers; Models Write the Words ([`src/gemma_service.py`](src/gemma_service.py), [`src/summary_service.py`](src/summary_service.py)):**
@@ -163,52 +242,6 @@ Developers don't keep 40 browser tabs open for three weeks to read 5,000-word es
    Rather than bundling a 400 MB local Chromium binary alongside PyTorch, Folivora opens an ephemeral **Browserbase** session over raw CDP WebSockets (`Target.createTarget`, `Page.navigate`, `Runtime.evaluate`), inspects up to 16 live DOMs, falls back per link over capped HTTP on failure, and always fires `REQUEST_RELEASE` in a `finally` block.
 5. **Forensic GenAI Observability With Secret-Safe Scrubbing ([`src/telemetry.py`](src/telemetry.py)):**
    Every model call, evidence pack build, validation check, and batch polish runs inside an OpenTelemetry span (`gen_ai.request`, `summary.build_evidence_pack`, `gemma.summarize_tab`, `summary.validate_tab`, `summary.polish_batch`). A negative-lookbehind/lookahead scrubber (`(?<!put_)token(?!s)`) redacts credentials while preserving `gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens`.
-
----
-
-## 🔄 System Architecture & Dual-Lane Dataflow
-
-```plaintext
-┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│                              1. INGESTION & INTENT EXTRACTION                                │
-│                                                                                              │
-│  [10s Voice Note] ──▶ ElevenLabs Scribe v2 STT ──▶DELETE /transcripts/{id} (Immediate Wipe) │
-│  [Tab URLs / 65-Tab DEV Hall of Fame] ──▶ Browserbase Cloud Chromium (CDP WebSocket / HTTP)  │
-│                                           └─▶ Extracts: word_count, code_blocks, tables,     │
-│                                               headings, link_density, clean section points   │
-└──────────────────────────────────────────────┬───────────────────────────────────────────────┘
-                                               ▼
-┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│                        2. FAST LANE (<150ms): QUANTILE TRIAGE & CARDS                        │
-│                                                                                              │
-│  7 DOM Features + Intent Match ──▶ Prior Labs TabPFN v2 (CPU, 4 estimators)                  │
-│                                    ├─▶ P90 >= Threshold: KEEP on Interactive Dossier         │
-│                                    └─▶ P90 <  Threshold: CLOSE (Safe Graveyard)              │
-│                                                                                              │
-│  Returns immediately from POST /triage:                                                      │
-│  • Sanitized deterministic cards (2 segmented tabs per card: Topic Lens + Complete Summary)  │
-│  • Private TTL/LRU job_id + up to 8 polish_targets (raw full_text stays server-side only)    │
-└──────────────────────┬───────────────────────────────────────────────┬───────────────────────┘
-                       ▼                                               ▼
-┌─────────────────────────────────────────────┐ ┌──────────────────────────────────────────────┐
-│   3A. EXECUTIVE DIGEST LANE (POST /digest)  │ │  3B. CARD POLISH LANE (POST /polish-tabs)    │
-│                                             │ │                                              │
-│  Google Gemma 4 (MINIMAL thinking, ~2.5s)   │ │  Gemini 3.1 Flash Lite (3 concurrent, ~10s)  │
-│  └─▶ check_output() Digit & Length Gate     │ │  ├─▶ _repair_draft_citations() (E#/C# + 8w) │
-│      ├─▶ Pass: Badge ➔ "Gemma Verified"    │ │  ├─▶ validate_tab_summary() (v3 Contract)   │
-│      ├─▶ Fail: 1 Named-Token Retry          │ │  ├─▶ _repair_bullets() Targeted Rewrite     │
-│      └─▶ Fallback: Badge ➔ "Deterministic" │ │  └─▶ Badge ➔ "GEMINI GROUNDED" in place    │
-└──────────────────────┬──────────────────────┘ └──────────────────────┬───────────────────────┘
-                       └───────────────────────┬───────────────────────┘
-                                               ▼
-┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│                             4. ACTIONABLE PAYOFF & OBSERVABILITY                             │
-│                                                                                              │
-│  • ElevenLabs Flash v2.5 (Charlie Voice) reads the 15-second verified Executive Overview     │
-│  • One-click Printable Dossier (@media print) + Markdown Export (.md)                        │
-│  • Sentry OpenTelemetry spans record token usage, latency, and validation codes              │
-└──────────────────────────────────────────────────────────────────────────────────────────────┘
-```
 
 ---
 
@@ -226,7 +259,7 @@ Reproducible via [`python benchmarks/ablate.py`](benchmarks/ablate.py) on **720 
 | TabPFN Ablation (without `age_days`) | 7.03 | 8.92 | 0.942 | 78.9% | 91.0% |
 
 ### Why `code_block_count` Decides Which Tabs Rot
-Removing `code_block_count` increased TabPFN's RMSE by **+54.4%** (`6.78 → 10.47`). Grouping all 3,600 tabs by page archetype reveals the underlying developer habit:
+Removing `code_block_count` increased TabPFN's RMSE by **+54.4%** (`6.78 → 10.47`). Grouping all 3,600 tabs by page archetype reveals the underlying habit:
 
 | Page Archetype (`n = 3,600`) | Avg Word Count | Avg Code Blocks | Avg Utility Score | Safe to Close After 7 Days |
 |---|---:|---:|---:|---:|
@@ -237,7 +270,7 @@ Removing `code_block_count` increased TabPFN's RMSE by **+54.4%** (`6.78 → 10.
 
 **91.3% of long prose essays (`>2,400` words, `0` code blocks) are dead weight after 7 days**, whereas **99.6% of code-reference tabs remain useful**.
 
-### Why Closing Tabs Requires a `P90` Quantile Guardrail (`0.36%` False-Close Rate vs. `8.33%` Point Triage)
+### Why Setting Tabs Aside Requires a `P90` Quantile Guardrail (`0.36%` False-Close Rate vs. `8.33%` Point Triage)
 Closing a browser tab is an asymmetric decision: keeping an extra borderline tab costs 30 seconds of skimming, whereas closing a reference tab you genuinely needed loses work. In [`benchmarks/ablate.py`](benchmarks/ablate.py) (`decision_safety_analysis`), we evaluated five triage policies across the **720 held-out unseen tabs** (`276` genuinely useful tabs with `utility >= 45.0`, `444` low-utility tabs):
 
 | Triage Decision Policy (on 720 Unseen Tabs) | Useful Reference Tabs Wrongly Closed ↓ | **False-Close Rate ↓** | Dead Tabs Cleared ↑ | Total Utility Conserved ↑ |
@@ -315,17 +348,26 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 
 ---
 
-## 🧭 Core Capabilities & Verification Summary
+## 🔬 Concrete Live Explorations (Step-by-Step Verification)
 
-| Capability | How Folivora Implements It | Primary Source Modules | Reproducible Verification & Metric |
-|---|---|---|---|
-| **🦥 Dual-Lane Reading Digest** | Turns a 65-tab reading backlog (`600+` min) into an instant `<150ms` digest + `~2.5s` Gemma brief + `~10s` grounded card polish | [`src/app.py`](src/app.py), [`src/summary_service.py`](src/summary_service.py) | `python run_local.py --test` (**83/83 tests passing**) |
-| **📊 Prior Labs TabPFN** | `TabPFNRegressor` (`ModelVersion.V2`, CPU quantiles `P10/P50/P90`) with `P90 < 45` safety guardrail | [`src/tabpfn_engine.py`](src/tabpfn_engine.py), [`benchmarks/ablate.py`](benchmarks/ablate.py) | `python benchmarks/ablate.py` (**0.36% False-Close Rate**, **81.1% band calibration**) |
-| **💎 Google Gemma** | Open-weight Gemma 3/4 (`gemma-4-26b-a4b-it` with `thinkingLevel: MINIMAL` / Ollama `gemma3:4b`) behind `check_output()` | [`src/gemma_service.py`](src/gemma_service.py), [`eval/run_eval.py`](eval/run_eval.py) | `python eval/run_eval.py` (**59/60 [98.3%] verified**); `python eval/redteam_eval.py --gate` (**0.0% ASR**) |
-| **🌐 Browserbase** | Cloud Chromium session creation (`POST /v1/sessions`), raw CDP WebSocket DOM inspection (`<=16` tabs), `REQUEST_RELEASE` cleanup | [`src/browserbase_service.py`](src/browserbase_service.py) | `test_custom_live_urls_use_cdp_and_release_session` + live `debuggerFullscreenUrl` in UI |
-| **🎙️ ElevenLabs** | Bidirectional voice: **Scribe v2 STT** (`transcribe_and_forget()` with immediate remote `DELETE`) + **Flash v2.5 TTS** (`Charlie`) | [`src/audio_service.py`](src/audio_service.py) | `test_scribe_transcribe_and_immediate_privacy_delete` & `test_live_elevenlabs_flash_tts_returns_mp3_bytes` |
-| **🔭 Sentry Agent Tracing** | OpenTelemetry `gen_ai.request` & `summary.*` spans with token/latency tracking and `(?<!put_)token(?!s)` secret scrubber | [`src/telemetry.py`](src/telemetry.py) | `test_redacts_secrets_while_preserving_input_and_output_tokens` + `T8_sentry_span_secret_canary` |
-| **☁️ Render** | Declarative [`render.yaml`](render.yaml) Blueprint + [`Dockerfile`](Dockerfile) with pre-baked TabPFN weights, `/health`, and `OMP_NUM_THREADS=2` | [`render.yaml`](render.yaml), [`Dockerfile`](Dockerfile) | Live at [`folivora.tech/health`](https://folivora.tech/health) |
+### Exploration 1: Everyday Life — Filtering a 14-Tab Mixed Window by `"Japan Travel"`
+- **Input:** Launch the **14 Everyday & Travel Tabs** sample window (`postgres_docker_pile`) and click the **`Travel`** chip (`user_intent = "Japan Travel"`).
+- **Result (`<150ms` Fast Lane + `~2.5s` Gemma Brief):**
+  - **Worth Your Time (`1` tab kept):** *10-Day Japan Itinerary: Tokyo, Kyoto & Shinkansen Rail Pass Guide* (`95% match`, `35` mentions across `Route & Hotel Split`, `Shinkansen vs. JR Pass Math`, and `Transit & Timing Logistics`).
+  - **Set Aside (`13` tabs):** Meal prep, sleep science, laptop reviews, and tech tabs are moved to the **Set Aside** column, saving **`139.6 minutes`** (`30,676 words`) of full-page reading.
+- **Verification:** Covered by `test_triage_everyday_life_interest_japan_travel` in [`tests/test_app_api.py`](tests/test_app_api.py).
+
+### Exploration 2: Developer Backlog — Filtering the 65 DEV Article Library by `"Web Development"`
+- **Input:** Launch the **65 DEV Article Library** (`dev_hall_of_fame_pile`) and click **`Web Dev`** (`user_intent = "Web Development"`).
+- **Result:**
+  - **Worth Your Time (`22 / 65` articles kept):** Led by *is-kit Reached 50 Stars* (`95% match`), *Coding Without Pressure* (`94%`), and *Fixing your site's metadata* (`94%`).
+  - **Set Aside (`43 / 65` articles):** Saves **`478.9 minutes (~8.0 hours)`** (`105,367 words`) of reading while keeping peekable summaries for all 43 set-aside articles.
+- **Verification:** Covered by `test_dev_hall_of_fame_65_masterpieces_and_section_anchored_synthesis` in [`tests/test_browserbase_and_audio.py`](tests/test_browserbase_and_audio.py).
+
+### Exploration 3: Zero-Prompt Summarize All Mode (`user_intent = ""`)
+- **Input:** Paste any custom URLs (or launch a sample window) with **Summarize All** selected.
+- **Result:** `rated = False`. Zero percentage badges are fabricated; all readable tabs are summarized into structured `Heading — Key Insight` bullets, saving **`144.8 minutes`** across the 14-tab window.
+- **Verification:** Covered by `test_unrated_summarize_all_mode_keeps_all_valid_tabs` in [`tests/test_tabpfn_engine.py`](tests/test_tabpfn_engine.py).
 
 ---
 
@@ -333,16 +375,16 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 
 | Layer | Technology / Module | Architectural Role |
 |---|---|---|
-| **API Gateway** | [`src/app.py`](src/app.py) (`FastAPI`) | Dual-lane REST endpoints (`/triage`, `/polish-tabs`, `/digest`, `/transcribe-voice`, `/synthesize-audio`, `/benchmarks`, `/health`), `Cache-Control: no-store`, and per-IP sliding-window rate limits (`20 req/min` on `/polish-tabs`). |
+| **API Gateway** | [`src/app.py`](src/app.py) (`FastAPI`) | Dual-lane REST endpoints (`/triage`, `/polish-tabs`, `/digest`, `/transcribe-voice`, `/synthesize-audio`, `/download-extension.zip`, `/benchmarks`, `/health`), `Cache-Control: no-store`, and per-IP sliding-window rate limits (`20 req/min` on `/polish-tabs`). |
 | **Evidence & Card Polish** | [`src/summary_service.py`](src/summary_service.py) | Builds bounded `E#`/`C#` evidence packs, enforces `tab-summary-validation-v3` (word counts, anchors, numbers/units, anti-verbatim copy), runs `_repair_draft_citations()` and `_repair_bullets()`. |
 | **Private Job & Cache Store** | [`src/job_store.py`](src/job_store.py) | Thread-safe TTL/LRU `SummaryJobStore` (`15m` TTL, max 24 jobs, in-flight dedupe) and `SummaryCache` (`1h` TTL, restricted to preset/HOF jobs so custom user URLs stay isolated). |
-| **Gemma & Gemini Synthesis** | [`src/gemma_service.py`](src/gemma_service.py) | `synthesize_digest()` via **Google Gemma 4** (`thinkingLevel: MINIMAL`) / Ollama / OpenRouter behind `check_output()`, plus `generate_tab_text()` fast JSON lane via **Gemini 3.1 Flash Lite**. |
+| **Gemma & Gemini Synthesis** | [`src/gemma_service.py`](src/gemma_service.py) | `synthesize_digest()` via **Google Gemma 4** (`thinkingLevel: MINIMAL`) / Ollama / OpenRouter behind `check_output()`, plus `generate_tab_text()` fast JSON lane via **Gemini 3.1 Flash Lite** and multi-lane Open-Weight Gemma pool. |
 | **Cloud Browser & DOM Extractor** | [`src/browserbase_service.py`](src/browserbase_service.py) | Live **Browserbase** Chromium CDP WebSocket session manager (`MAX_CDP_URLS = 16`), section-aware HTML extractor, catalog sanitizer (`_sanitize_catalog_tab()`), and `REQUEST_RELEASE` cleanup. |
 | **Quantile Triage Engine** | [`src/tabpfn_engine.py`](src/tabpfn_engine.py) | **Prior Labs TabPFN v2** CPU regressor (`output_type="quantiles"`, `[0.10, 0.50, 0.90]`) with warm context and `NaN`/`Inf` feature sanitization. |
 | **Voice I/O** | [`src/audio_service.py`](src/audio_service.py) | **ElevenLabs Scribe v2** (`transcribe_and_forget()` with immediate remote transcript deletion) + **ElevenLabs Flash v2.5** (`Charlie` voice TTS). |
-| **Observability & Scrubbing** | [`src/telemetry.py`](src/telemetry.py) | **Sentry SDK + OpenTelemetry** `gen_ai.request` spans and recursive `before_send` credential scrubber. |
-| **Frontend Workspace** | [`src/static/`](src/static/) | Responsive Vanilla JS + CSS workspace (`0px` overflow from `320px` to `1440px`), segmented card tabs, live filter bar, `@media print` sheet, and Markdown export. |
-| **Browser Extension** | [`chrome_extension/`](chrome_extension/) | Manifest V3 popup that captures the current window's `http(s)` tabs and launches Folivora or renders an instant digest. |
+| **Observability & Scrubbing** | [`src/telemetry.py`](src/telemetry.py) | **Sentry SDK + OpenTelemetry** `gen_ai.request` spans and recursive `before_send` credential scrubber (`(?<!put_)token(?!s)`). |
+| **Frontend Workspace** | [`src/static/`](src/static/) | Botanical Reading Room design system (`Newsreader` + `Plus Jakarta Sans`), responsive from `320px` to `1440px+`, segmented card tabs, live filter bar, `@media print` sheet, and Markdown/Bookmark exports. |
+| **Browser Extension** | [`chrome_extension/`](chrome_extension/) | Manifest V3 popup packaged dynamically at `/download-extension.zip` with 1-click tab hibernation (`chrome.tabs.discard()`) and Undo snapshot restore. |
 
 ---
 
@@ -383,6 +425,6 @@ python run_local.py
 <div align="center">
 
 **Folivora — Open-Source Intelligent Browser Tab Digest · MIT Licensed**  
-[Live Application](https://folivora.tech) · [OpenAPI Docs](https://folivora.tech/docs) · [Gemma Eval (`59/60`)](eval/EVAL.md) · [Hand Audit](eval/REVIEW.md) · [Summary Quality Harness](eval/summary_quality.py) · [Red-Team Suite](eval/redteam_eval.py)
+[Live Application](https://folivora.tech) · [Download Chrome Extension](https://folivora.tech/download-extension.zip) · [OpenAPI Docs](https://folivora.tech/docs) · [Gemma Eval (`59/60`)](eval/EVAL.md) · [Hand Audit](eval/REVIEW.md) · [Summary Quality Harness](eval/summary_quality.py) · [Red-Team Suite](eval/redteam_eval.py)
 
 </div>

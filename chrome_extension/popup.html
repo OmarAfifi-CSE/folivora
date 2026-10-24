@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Folivora</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 370px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      background: #0F172A;
+      color: #F8FAFC;
+      padding: 16px;
+    }
+    .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .brand { font-size: 16px; font-weight: 800; color: #F8FAFC; }
+    .badge { font-size: 11px; background: #065F46; color: #6EE7B7; padding: 3px 8px; border-radius: 99px; font-weight: 700; }
+    .desc { font-size: 12px; color: #94A3B8; line-height: 1.45; margin-bottom: 10px; }
+    .field-label { font-size: 11px; font-weight: 700; color: #94A3B8; margin-bottom: 4px; display: block; }
+    .server-input {
+      width: 100%; padding: 8px 10px; border-radius: 7px; border: 1px solid #334155;
+      background: #1E293B; color: #E2E8F0; font-size: 12px; margin-bottom: 9px;
+    }
+    .btn {
+      width: 100%; padding: 10px 13px; border-radius: 9px; border: none;
+      font-weight: 700; font-size: 12.5px; cursor: pointer; margin-bottom: 7px;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .btn-primary { background: #10B981; color: #052E16; }
+    .btn-primary:hover { background: #34D399; }
+    .btn-secondary { background: #1E293B; color: #E2E8F0; border: 1px solid #334155; }
+    .btn-secondary:hover { border-color: #10B981; }
+    .btn-warn { background: #7C2D12; color: #FFEDD5; border: 1px solid #9A3412; }
+    .btn-warn:hover { background: #9A3412; }
+    .btn-undo { background: #1E3A8A; color: #DBEAFE; border: 1px solid #1D4ED8; }
+    .status {
+      font-size: 12px; color: #E2E8F0; margin-top: 8px; line-height: 1.5;
+      background: #1E293B; border: 1px solid #334155; border-radius: 8px; padding: 10px;
+    }
+    .cleanup-actions { margin-top: 8px; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <span class="brand">🦥 Folivora</span>
+    <span class="badge" id="tab-count-badge">Scanning…</span>
+  </div>
+  <p class="desc">Analyze all open tabs in this window with TabPFN + Gemma, then hibernate or close unrelated tabs in one click.</p>
+
+  <label class="field-label" for="intent-input">What topic are you working on? (Optional filter)</label>
+  <input id="intent-input" class="server-input" type="text" placeholder="e.g. Flutter, Postgres, AI Agents (or leave blank)">
+
+  <label class="field-label" for="server-url">Folivora Server URL</label>
+  <input id="server-url" class="server-input" type="text" value="http://localhost:8000" title="Folivora Server URL">
+
+  <button id="btn-open-dashboard" class="btn btn-primary">
+    🚀 Open All Tabs in Full Workspace
+  </button>
+
+  <button id="btn-quick-summary" class="btn btn-secondary">
+    ⚡ Triage &amp; Clean Window Here
+  </button>
+
+  <div id="cleanup-box" class="cleanup-actions hidden">
+    <button id="btn-hibernate-closed" class="btn btn-secondary">
+      💤 Hibernate Unrelated Tabs (0 RAM)
+    </button>
+    <button id="btn-close-unrelated" class="btn btn-warn">
+      🗑️ Close Unrelated Tabs (Save Undo Snapshot)
+    </button>
+  </div>
+
+  <button id="btn-undo-close" class="btn btn-undo hidden">
+    ↩️ Restore Last Closed Tabs
+  </button>
+
+  <div id="result-box" class="status hidden"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

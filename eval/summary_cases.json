@@ -1,0 +1,924 @@
+[
+  {
+    "case_id": "hof-00",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "DEV Community",
+      "beginner guide",
+      "Education Tracks"
+    ],
+    "expected_sections": [
+      "Header",
+      "Available for",
+      "Meme Monday",
+      "Dev.to Education Tracks!"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-1",
+      "title": "Get Started on Dev.to! A Beginner's Guide to Engage with the Community! 💡",
+      "url": "https://dev.to/francistrdev/get-started-on-devto-a-beginners-guide-to-engage-with-the-community-4ach",
+      "domain": "dev.to",
+      "overview": "This is part of the dev.to Official Help Guide. See more community resources here: https://dev.to/help/community-resources",
+      "takeaways": [
+        "Header — Under your name, add what your role is and other things you believe are important. For example, I added my role and a quote that stood by me as a developer. It doesn’t have to be perfect, but it’s a good starting point for others to know your occupation and what you are up to.",
+        "Available for — This means a lot of things. It could mean that you are currently available seeking opportunities to contribute to open source or a subject to talk about.",
+        "Meme Monday — Pro Tip: Balance is key when you are both posting and commenting on other people's post! These small interactions go a long way on Dev.to and it is a way to grow your following. For me, I started commenting before I made my first post on Dev.to! A great balance allows you to get recognize from the community.",
+        "Dev.to Education Tracks! — If you like to learn and earn certifications to build your portfolio as a developer, the Dev Education Track is the go-to! You get great experience and will prepare you for your career in tech! Keep in mind that more courses are to be publish in the future!"
+      ],
+      "topics": [
+        "DEV Community",
+        "Learning & Growth",
+        "Developer Productivity"
+      ],
+      "full_text": "Get Started on Dev.to! A Beginner's Guide to Engage with the Community! 💡 DEV Community Learning & Growth Developer Productivity community learning productivity writing discuss ama tutorial meta It made it onto DEV's official community resources page and earned a badge for it. This is part of the dev.to Official Help Guide. See more community resources here: https://dev.to/help/community-resources Header — Under your name, add what your role is and other things you believe are important. For example, I added my role and a quote that stood by me as a developer. It doesn’t have to be perfect, but it’s a good starting point for others to know your occupation and what you are up to. Skills/Languages — Add your skills and Languages that you use in your development. It can be Python, Java, etc. Currently Learning — Add what you are learning right now as a developer. It can be “Learning AI” for example. Currently Hacking on — It essentially means what you are currently “building”. If you are not building anything, that’s ok! Available for — This means a lot of things. It could mean that you are currently available seeking opportunities to contribute to open source or a subject to talk about. FrancisTRᴅᴇᴠ Follow — Documenting your daily/weekly/monthly journey. 😁12 things you didn't know you could do with DEV — Encouragement from people who’ve been there before. Meme Monday — Pro Tip: Balance is key when you are both posting and commenting on other people's post! These small interactions go a long way on Dev.to and it is a way to grow your following. For me, I started commenting before I made my first post on Dev.to! A great balance allows you to get recognize from the community. Participate in Dev.to Hackathons/Challenges! — Dev.to offer events every month where you get the chance to participate in challenges. Events usually last either a minimum of a few days to a few months! It is a great way to showcase your work to others on Dev.to and even on the MLH discord server! Here is one example where they announce the Google Gemini Writing Challenge along with the Winners! Keep a lookout for events and make sure to participate on the Dev.to Challenges Page! Pro Tip: When submitting to any challenges, the most likes on a post DOES NOT mean you will guarantee win the challenge. In my experience, winners tend to have little engagement to no engagement at all! With that said, do not be overwhelmed by the likes. Focus on polishing your work! Did you know: You win serious prizes such as cash, items, and even a Dev++ Membership for Free!! Dev.to Education Tracks! — If you like to learn and earn certifications to build your portfolio as a developer, the Dev Education Track is the go-to! You get great experience and will prepare you for your career in tech! Keep in mind that more courses are to be publish in the future! DEV is open source! — You hear that right. dev.to is built on Forem (For Empowering Community)! It is own by the same developers who owns dev.to, @ben, @jess, and @peter! DEV is open source! — Want to contribute and make dev.to a great place for developers? Visit the official GitHub Repository below! For empowering community 🌱 — Welcome to the Forem codebase, the platform that powers dev.to. We are so excited to have you. With your help, we can build out Forem’s usability, scalability, and stability to better serve our communities. What is Forem? — Forem is open source software for building communities. Communities for your peers, customers, fanbases, families, friends, and any other time and space where people need to come together to be part of a collective See our announcement post for a high-level overview of what Forem is. What is Forem? — Dev.to (or just DEV) is hosted by Forem. It is a community of software developers who write articles, take part in discussions, build their professional profiles. We value supportive and constructive dialogue in the pursuit of great code and career growth for all members. The ecosystem spans from beginner to advanced developers, and all are welcome to find their place… Ask a DEV Community Mod! 🚀 — Fun Fact: If you engage with the Dev.to community, you may be entitled to be a Dev.to Mod! Check out the Community Moderation page for more information: https://dev.to/community-moderation This is part of the dev.to Official Help Guide. See more community resources here: https://dev.to/help/community-resources Important Information: This post is not a \"get popular fast\" approach. This guide is meant to help people get the most out of dev.to. Keep in mind that this post will continue to be refined and modified based on community feedback to make this the most beginners friendly guide into being part of the Dev.to community! Feedback in the comments is appreciated! If you are new to Dev.to or are veteran, welcome! This article allows you to get started on Dev.to whether you are new on the platform or returning and in need of a refresher. Whether what it may be, this article is for everyone! To get started, understand one thing! Dev.to is a space where developers come together and interact within the community with inclusiveness when it comes to sharing one’s journey in the development world. We must treat others with respect and understand we all have different views on various subjects. This article is a guide that allows you to get the most out of Dev.to and in hopes that this platform will leverage you in your professional career! Your Dev.to profile is the most important part! It allows others to see who you are! Here are some things you can add to your profile as a starter: Note: You do not need to fill out everything that I have listed. However, it is helpful for others to understand you and your niche. It is a great first steps into other seeing who you are in a unique way. When making your post on Dev.to, there are some things to keep in mind. You don’t need to be a perfect writer. Writing from a learner’s perspective is important on Dev.to and it makes you stand out from the crowd! Your post can range from: You can write about anything you want. Just to keep in mind to keep it \"developer\" related. Remember, it will be difficult at first, but the more you start putting yourself out there, the more people will meet! Check out @javz and @hemapriya_kanagala post on their experience on DEV: If you would like to learn more about writing your post and how to make a great post, take a look at these resources: Pro Tip: There is no such thing as a “correct” posting schedule on Dev.to. Some people write weekly while others write daily. However, the most important thing is consistency. If you are engaging with a community in a healthy way, it’s a win-win (You get to learn and grow as a developer and you gain connections on Dev.to)! Disclaimer: If you used AI to assist on your writing in some way, it is highly recommend to leave a disclaimer with the intention of how you used AI. Engagement on Dev.to is the best way to get yourself out there in the community. How else would anyone know you? There is a lot of great topics on Dev.to and there is no pressure into reading the topics that stood out to you. When engaging to a post, it is not about “farming for likes”. It is about having a genuine conversation about the topic. That is what makes Dev.to a great space. You get actual feedback from users about the topic you wrote and being able to learn something new instead of seeing comments like “Great Post!”. The way I approach commenting is starting off what reside with me and what to add on. For example, “I agree about what you say about ‘X’. [Anything to add in that first sentence].” That way, you will get engagement naturally and will receive genuine responses. Another thing to note is to remember to be respectful to other people's point of view. The general vibe you may experience in the comments section in the post: The key is to stay open. Not every comment will perfectly align with your perspective, but most are written with the intention to help. Responding thoughtfully builds trust and shows that you value the community aspect of the platform. Of course, your comment doesn't need to be professional. It can just be casual. Just be yourself and enjoy reading other people's thoughts! A great way is to follow @ben! He post \"Meme Monday\" every Monday (Who would have thought) and it's great way to showcase your sense of humor and just to have fun if you would like to take a break from reading! Here is one of the Meme Monday post below as an example: Pro Tip: Balance is key when you are both posting and commenting on other people's post! These small interactions go a long way on Dev.to and it is a way to grow your following. For me, I started commenting before I made my first post on Dev.to! A great balance allows you to get recognize from the community. Dev.to offer events every month where you get the chance to participate in challenges. Events usually last either a minimum of a few days to a few months! It is a great way to showcase your work to others on Dev.to and even on the MLH discord server! Here is one example where they announce the Google Gemini Writing Challenge along with the Winners! Keep a lookout for events and make sure to participate on the Dev.to Challenges Page! Pro Tip: When submitting to any challenges, the most likes on a post DOES NOT mean you will guarantee win the challenge. In my experience, winners tend to have little engagement to no engagement at all! With that said, do not be overwhelmed by the likes. Focus on polishing your work! Did you know: You win serious prizes such as cash, items, and even a Dev++ Membership for Free!! If you like to learn and earn certifications to build your portfolio as a developer, the Dev Education Track is the go-to! You get great experience and will prepare you for your career in tech! Keep in mind that more courses are to be publish in the future! You hear that right. dev.to is built on Forem (For Empowering Community)! It is own by the same developers who owns dev.to, @ben, @jess, and @peter! If you want to get into open-source and know the full stack, Forem is a great place to get your feet wet and understanding how dev.to runs! Learn more here: Want to contribute and make dev.to a great place for developers? Visit the official GitHub Repository below! Welcome to the Forem codebase, the platform that powers dev.to. We are so excited to have you. With your help, we can build out Forem’s usability, scalability, and stability to better serve our communities. Forem is open source software for building communities. Communities for your peers, customers, fanbases, families, friends, and any other time and space where people need to come together to be part of a collective See our announcement post for a high-level overview of what Forem is. Dev.to (or just DEV) is hosted by Forem. It is a community of software developers who write articles, take part in discussions, build their professional profiles. We value supportive and constructive dialogue in the pursuit of great code and career growth for all members. The ecosystem spans from beginner to advanced developers, and all are welcome to find their place… You have made it to the end of the guide! If you find this helpful, leave a like and share to others who are new or returning to Dev.to! Thanks for reading and hope your journey goes well on Dev.to! Any question about DEV can be reach out below: Fun Fact: If you engage with the Dev.to community, you may be entitled to be a Dev.to Mod! Check out the Community Moderation page for more information: https://dev.to/community-moderation",
+      "code_blocks": [],
+      "word_count": 1880,
+      "code_block_count": 17,
+      "heading_count": 25
+    }
+  },
+  {
+    "case_id": "hof-03",
+    "rated": true,
+    "intent": "Developer Wellbeing",
+    "expected_facts": [
+      "jobseekers",
+      "motivation",
+      "asking for help"
+    ],
+    "expected_sections": [
+      "Let's Begin with My Story",
+      "The Struggle is Real, But So Are You",
+      "Don't be afraid to ask for help"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-4",
+      "title": "A Letter to Jobseekers: Don't Give Up!",
+      "url": "https://dev.to/westernal/a-letter-to-jobseekers-dont-give-up-2jim",
+      "domain": "dev.to",
+      "overview": "Looking for a job can be hard sometimes, especially if you are at the beginning of your career.",
+      "takeaways": [
+        "Let's Begin with My Story — I remember waking up, opening my Gmail app, and seeing the rejection email on my screen. It felt like the world was over. After four months of searching for a job, I thought this one was the one. The interview went well, but a week later, they rejected me.",
+        "Let's Begin with My Story — I hit rock bottom. I stayed in bed for hours, quit the gym, and didn’t talk much. I stopped going out. I saw days go by without doing anything.",
+        "The Struggle is Real, But So Are You — Take it easy on yourself, and don't give up. Continue to grow and improve. I know it's tough, but don’t let rejections bring you down. Use them as fuel to become better—not only in your career but in your life. And remember: You are valuable, and your time will come.",
+        "Don't be afraid to ask for help — Continue interacting with your loved ones and know that there are people who care for you and don’t want to see you sad."
+      ],
+      "topics": [
+        "Developer Wellbeing",
+        "Career & Motivation",
+        "Career & Growth"
+      ],
+      "full_text": "A Letter to Jobseekers: Don't Give Up! Developer Wellbeing Career & Motivation Career & Growth mentalhealth programming motivation career  Looking for a job can be hard sometimes, especially if you are at the beginning of your career. Looking for a job can be hard sometimes, especially if you are at the beginning of your career. Let's Begin with My Story — I remember waking up, opening my Gmail app, and seeing the rejection email on my screen. It felt like the world was over. After four months of searching for a job, I thought this one was the one. The interview went well, but a week later, they rejected me. Let's Begin with My Story — I hit rock bottom. I stayed in bed for hours, quit the gym, and didn’t talk much. I stopped going out. I saw days go by without doing anything. Let's Begin with My Story — I sent more than 500 applications, and nothing. I was trying so hard not to give up, not to break. Let's Begin with My Story — But I stood up. I knew it would end eventually. I never gave up on myself; I just couldn’t. I knew I was good at my job, and I kept moving forward. The Struggle is Real, But So Are You — What I'm saying is that job hunting is a rough path. Most of us have gone through it, and you probably will too. The Struggle is Real, But So Are You — Take it easy on yourself, and don't give up. Continue to grow and improve. I know it's tough, but don’t let rejections bring you down. Use them as fuel to become better—not only in your career but in your life. And remember: You are valuable, and your time will come. Don't be afraid to ask for help — Continue interacting with your loved ones and know that there are people who care for you and don’t want to see you sad. Don't be afraid to ask for help — Don’t be shy to ask for help, whether it’s from a family member or a senior in your field. Sometimes, all it takes is sending a quick message on WhatsApp or LinkedIn to start a meaningful conversation. Don't be afraid to ask for help — I hope you get past these hard days, and last but not least, don’t give up on yourself. Don't be afraid to ask for help — If you have any advice or stories for jobseekers, I would be happy to hear them in the comments. Sharing your experience might help someone else on their journey. Looking for a job can be hard sometimes, especially if you are at the beginning of your career. I remember waking up, opening my Gmail app, and seeing the rejection email on my screen. It felt like the world was over. After four months of searching for a job, I thought this one was the one. The interview went well, but a week later, they rejected me. I hit rock bottom. I stayed in bed for hours, quit the gym, and didn’t talk much. I stopped going out. I saw days go by without doing anything. Every day, I wondered what happened to me. A few months earlier, I was in a much better place. My boss was happy with my work, and I was motivated and productive as ever. Now, I look back and think, \"Am I really that bad?\" What happened to the guy who was promoted to a lead position after just four months? I sent more than 500 applications, and nothing. I was trying so hard not to give up, not to break. But I stood up. I knew it would end eventually. I never gave up on myself; I just couldn’t. I knew I was good at my job, and I kept moving forward. What I'm saying is that job hunting is a rough path. Most of us have gone through it, and you probably will too. Take it easy on yourself, and don't give up. Continue to grow and improve. I know it's tough, but don’t let rejections bring you down. Use them as fuel to become better—not only in your career but in your life. And remember: You are valuable, and your time will come. Continue interacting with your loved ones and know that there are people who care for you and don’t want to see you sad. Don’t be shy to ask for help, whether it’s from a family member or a senior in your field. Sometimes, all it takes is sending a quick message on WhatsApp or LinkedIn to start a meaningful conversation. If none of that works for you, a hug is always free here. I hope you get past these hard days, and last but not least, don’t give up on yourself. If you have any advice or stories for jobseekers, I would be happy to hear them in the comments. Sharing your experience might help someone else on their journey.",
+      "code_blocks": [],
+      "word_count": 431,
+      "code_block_count": 7,
+      "heading_count": 3,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Developer Wellbeing\"",
+        "why_relevant": "The page connects Developer Wellbeing to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Let's Begin with My Story — I remember waking up, opening my Gmail app, and seeing the rejection email on my screen. It felt like the world was over. After four months of searching for a job, I thought this one was the one. The interview went well, but a week later, they rejected me.",
+          "Let's Begin with My Story — I hit rock bottom. I stayed in bed for hours, quit the gym, and didn’t talk much. I stopped going out. I saw days go by without doing anything."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "hof-08",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "open source",
+      "indie hacking",
+      "7 users"
+    ],
+    "expected_sections": [],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-9",
+      "title": "I Built the Product. Made It Open Source. Deployed It Cheaply. Then... 7 Users Signed Up.",
+      "url": "https://dev.to/puneetkumar2010/i-built-the-product-made-it-open-source-deployed-it-cheaply-then-7-users-signed-up-51h8",
+      "domain": "dev.to",
+      "overview": "I built a real project, spent hours improving the UI, added features that users actually need, kept optimizing the experience, and even made the source code public because I wanted people to trust what I was building.",
+      "takeaways": [
+        "And somehow, that hurts more than failing to build the project itself.",
+        "I'm just another developer trying to build something useful with almost no budget, deploying in the cheapest way possible and learning everything along the way.",
+        "It was realizing that building something good doesn't mean people will come.",
+        "I'm writing this because I know there are hundreds of developers here who have experienced the exact same thing."
+      ],
+      "topics": [
+        "Build in Public",
+        "Open Source",
+        "Indie Hacking"
+      ],
+      "full_text": "I Built the Product. Made It Open Source. Deployed It Cheaply. Then... 7 Users Signed Up. Build in Public Open Source Indie Hacking discuss buildinpublic opensource indiehack  I built a real project, spent hours improving the UI, added features that users actually need, kept optimizing the experience, and even made the source code public because I wanted people to trust what I was building. And somehow, that hurts more than failing to build the project itself. I built a real project, spent hours improving the UI, added features that users actually need, kept optimizing the experience, and even made the source code public because I wanted people to trust what I was building. I'm just another developer trying to build something useful with almost no budget, deploying in the cheapest way possible and learning everything along the way. It was realizing that building something good doesn't mean people will come. I'm writing this because I know there are hundreds of developers here who have experienced the exact same thing. If you've ever been in that position, I'd genuinely love your feedback. I'd rather hear honest criticism than watch another day go by with zero users. And somehow, that hurts more than failing to build the project itself. I built a real project, spent hours improving the UI, added features that users actually need, kept optimizing the experience, and even made the source code public because I wanted people to trust what I was building. Repository: https://github.com/DeveloperPuneet/Rizzzler-Stable I'm just another developer trying to build something useful with almost no budget, deploying in the cheapest way possible and learning everything along the way. It was realizing that building something good doesn't mean people will come. I'm writing this because I know there are hundreds of developers here who have experienced the exact same thing. You compare your product with others and keep adding features. If you've ever been in that position, I'd genuinely love your feedback. I'd rather hear honest criticism than watch another day go by with zero users. Or maybe someone reading this becomes user number 8.",
+      "code_blocks": [],
+      "word_count": 272,
+      "code_block_count": 7,
+      "heading_count": 1
+    }
+  },
+  {
+    "case_id": "hof-13",
+    "rated": true,
+    "intent": "Databases & SQL",
+    "expected_facts": [
+      "CTE",
+      "window functions",
+      "COALESCE"
+    ],
+    "expected_sections": [
+      "Getting Started",
+      "Defining a CTE",
+      "What Does COALESCE Do?",
+      "What Are Window Functions?"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-14",
+      "title": "SQL Common Table Expressions and Window functions",
+      "url": "https://dev.to/mrpercival/sql-common-table-expressions-and-window-functions-25ce",
+      "domain": "dev.to",
+      "overview": "Sometimes when writing queries for reporting purposes, the queries required to manipulate the data can get complex.",
+      "takeaways": [
+        "Getting Started — With any complex query, the trick is to break it down into its parts and work on each part until you are ready to put it all together.",
+        "Defining a CTE — If I wanted to return the numbers 1 to 6 I could use a recursive CTE to generate the numbers",
+        "What Does COALESCE Do? — COALEASCE(value,0) will replace the value with 0 if the value is NULL. Equally COALESCE(value, null,null,0) will also replace with 0 as its the first non null value in the list of values.",
+        "What Are Window Functions? — LEAD - return a value from a row ahead of the current row LAG - return a value from a previous row NTILE - break rows out into sections, this would allow you to only return the top 25% of results for example."
+      ],
+      "topics": [
+        "Databases & SQL",
+        "MySQL & Databases",
+        "Data Science"
+      ],
+      "full_text": "SQL Common Table Expressions and Window functions Databases & SQL MySQL & Databases Data Science sql mysql database datascience His first real dip into tech writing, and he spent the time digging into the database to make sure everything he wrote was fact. Sometimes when writing queries for reporting purposes, the queries required to manipulate the data can get complex. Sometimes when writing queries for reporting purposes, the queries required to manipulate the data can get complex. If you are able to use PHP or Python to manipulate the data after running a query, then the query required to get the desired result is much simpler. But sometimes you just have to find a way to fetch the data you need using only a SQL query. For the purposes of this article, the desired outcome from the query is to fetch the total amount transacted each day and display both the daily amount and a running tally for a 7 day period. Getting Started — With any complex query, the trick is to break it down into its parts and work on each part until you are ready to put it all together. Getting Started — Here I would run a query to fetch the data for the date range just so I can see what I need to do. Getting Started — Now I need to group the data by day and SUM the amount transacted each day. Getting Started — The date is in the right format, the amounts are grouped and summed correctly, but we are missing days. Getting Started — There are many ways in SQL to fill in the gaps, some are fairly simple and others are overly complex. What are Common Table Expressions (CTE) — CTEs are reusable temporary result sets. In their simplest form they can replace a sub query or a view, but they have some unique characteristics which makes them powerful. What are Common Table Expressions (CTE) — CTEs are reusable, which means that a query is run once, but the resulting data set can be used/queried multiple times. Defining a CTE — This creates a temporary result set that can then be used in a query Defining a CTE — Where CTEs become powerful is in their ability to reference themselves recursively Defining a CTE — If I wanted to return the numbers 1 to 6 I could use a recursive CTE to generate the numbers Using a CTE to generate a date range — For our original request, all dates within the date range were required even for dates where there were no transactions. Joining CTEs In Queries — For the purposes of the original requirements, I am adding the query that fetched the transactions into its own CTE so I can manipulate the data a little later on Joining CTEs In Queries — A feature of CTEs is the ability to check the result from each CTE before putting it all together Joining CTEs In Queries — SELECT * FROM transactions OR SELECT * FROM dates will help me verify that the data the queries produce are correct. Joining CTEs In Queries — While this query works as-is, if the date range needs to change, both CTEs would need to be updated. Joining CTEs In Queries — A CTE can reference another CTE. To change the query so only one CTE needs to be updated in order to change the date range, we can reference the dates CTE from within the transactions CTE. Joining CTEs In Queries — Other than the NULLs, the data is looking good so far. To remove the NULL values, we can use the COALESCE function. What Does COALESCE Do? — COALESCE replaces NULL values with the first non null value in a list of values What Does COALESCE Do? — COALEASCE(value,0) will replace the value with 0 if the value is NULL. Equally COALESCE(value, null,null,0) will also replace with 0 as its the first non null value in the list of values. What Does COALESCE Do? — The last part of the request was a running tally. To return a running tally, SQL Window functions are required. What Are Window Functions? — Window functions are functions that are run across the entire result set. They allow you to fetch a running tally, or data from a previous row, or from the rows ahead of the current row. What Are Window Functions? — There are quite a few window function, some of them are LEAD, LAG, NTILE What Are Window Functions? — LEAD - return a value from a row ahead of the current row LAG - return a value from a previous row NTILE - break rows out into sections, this would allow you to only return the top 25% of results for example. What Are Window Functions? — In a window function the function is run over every row, it won't group rows together, but it will produce a result that grouped values together in its calculation. What Are Window Functions? — ORDER BY will order the results in a specific way that is then used to calculate a result. Fetching A Running Tally — To fetch the running tally required, we need to add a window function field into the query Predefining a Window — While the method above is fine to use. If you find yourself in a situation where multiple window functions are required, it is possible to pre define the window and reference it. Final Query — Common Table Expressions and Windows open up SQL for better data processing especially for reporting and data analysis. Final Query — CTEs contain powerful features that simplify tasks, they also add readability making building or debugging complex queries easier. Final Query — Being reusable means that where you might have to run a subquery more than once in a query, the CTE will only run the query once and use the result set instead of running multiple subqueries, which can add efficiency to the query in some cases. Final Query — Window functions are a great way to provide analysis over the result set, this is evident in accounting type reports, but not limited to just accounting, it has a lot of use cases where using window functions allow you to gather additional information needed to produce the results required. Sometimes when writing queries for reporting purposes, the queries required to manipulate the data can get complex. If you are able to use PHP or Python to manipulate the data after running a query, then the query required to get the desired result is much simpler. But sometimes you just have to find a way to fetch the data you need using only a SQL query. For the purposes of this article, the desired outcome from the query is to fetch the total amount transacted each day and display both the daily amount and a running tally for a 7 day period. With any complex query, the trick is to break it down into its parts and work on each part until you are ready to put it all together. Here I would run a query to fetch the data for the date range just so I can see what I need to do. Now I need to group the data by day and SUM the amount transacted each day. The date is in the right format, the amounts are grouped and summed correctly, but we are missing days. There are many ways in SQL to fill in the gaps, some are fairly simple and others are overly complex. For me, my preferred method is to use Common Table Expressions. CTEs are reusable temporary result sets. In their simplest form they can replace a sub query or a view, but they have some unique characteristics which makes them powerful. CTEs are reusable, which means that a query is run once, but the resulting data set can be used/queried multiple times. This creates a temporary result set that can then be used in a query If needed, the field name returned from a CTE can be defined Where CTEs become powerful is in their ability to reference themselves recursively If I wanted to return the numbers 1 to 6 I could use a recursive CTE to generate the numbers For our original request, all dates within the date range were required even for dates where there were no transactions. To do this, a CTE can be created to return the date range required. For the purposes of the original requirements, I am adding the query that fetched the transactions into its own CTE so I can manipulate the data a little later on A feature of CTEs is the ability to check the result from each CTE before putting it all together SELECT * FROM transactions OR SELECT * FROM dates will help me verify that the data the queries produce are correct. While this query works as-is, if the date range needs to change, both CTEs would need to be updated. A CTE can reference another CTE. To change the query so only one CTE needs to be updated in order to change the date range, we can reference the dates CTE from within the transactions CTE. Now to join the two CTEs together to see all the data together Other than the NULLs, the data is looking good so far. To remove the NULL values, we can use the COALESCE function. COALESCE replaces NULL values with the first non null value in a list of values COALEASCE(value,0) will replace the value with 0 if the value is NULL. Equally COALESCE(value, null,null,0) will also replace with 0 as its the first non null value in the list of values. The last part of the request was a running tally. To return a running tally, SQL Window functions are required. Window functions are functions that are run across the entire result set. They allow you to fetch a running tally, or data from a previous row, or from the rows ahead of the current row. There are quite a few window function, some of them are LEAD, LAG, NTILE LEAD - return a value from a row ahead of the current row LAG - return a value from a previous row NTILE - break rows out into sections, this would allow you to only return the top 25% of results for example. You can also use aggregating functions in a window (SUM,AVG etc) We will use the SUM function to fetch the running tally. The PARTITION BY clause is similar to a GROUP BY but not the same. In a window function the function is run over every row, it won't group rows together, but it will produce a result that grouped values together in its calculation. ORDER BY will order the results in a specific way that is then used to calculate a result. To fetch the running tally required, we need to add a window function field into the query While the method above is fine to use. If you find yourself in a situation where multiple window functions are required, it is possible to pre define the window and reference it. The final query using the window functions and CTEs looks like Common Table Expressions and Windows open up SQL for better data processing especially for reporting and data analysis. CTEs contain powerful features that simplify tasks, they also add readability making building or debugging complex queries easier. Being reusable means that where you might have to run a subquery more than once in a query, the CTE will only run the query once and use the result set instead of running multiple subqueries, which can add efficiency to the query in some cases. Window functions are a great way to provide analysis over the result set, this is evident in accounting type reports, but not limited to just accounting, it has a lot of use cases where using window functions allow you to gather additional information needed to produce the results required.",
+      "code_blocks": [],
+      "word_count": 1610,
+      "code_block_count": 25,
+      "heading_count": 10,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Databases & SQL\"",
+        "why_relevant": "The page connects Databases & SQL to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Getting Started — With any complex query, the trick is to break it down into its parts and work on each part until you are ready to put it all together.",
+          "Defining a CTE — If I wanted to return the numbers 1 to 6 I could use a recursive CTE to generate the numbers"
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "hof-18",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "metadata",
+      "search",
+      "social platforms",
+      "browser"
+    ],
+    "expected_sections": [
+      "What I ran into on my own portfolio",
+      "Search & Discovery",
+      "Social Platforms",
+      "Browser"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-19",
+      "title": "Fixing your site's metadata: a practical checklist",
+      "url": "https://dev.to/namingthingsishard/fixing-your-sites-metadata-a-practical-checklist-3ka0",
+      "domain": "dev.to",
+      "overview": "You've done it. You're finally done building the website or application you've been working on for quite a while. Proud and elated, you go to share this on your socials or to your buddies — uh oh, what's this now? The preview in WhatsApp shows no headline, your avatar is cropped and dimensions seem wrong. I've been there too. The site looked fine in the browser.",
+      "takeaways": [
+        "What I ran into on my own portfolio — When I ran this audit on shwethaadiraj.com, the site rendered fine — but sharing it told a different story. I had pointed both the favicon and Open Graph image at my profile avatar. At tab size the illustration was unreadable; in link previews it got cropped awkwardly.",
+        "Search & Discovery — The title and description in your app's <meta> tags tell search engines, crawlers, and AI chatbots how relevant your content is to a user's query.",
+        "Social Platforms — Open Graph (OG) and Twitter/X cards give you more control over how your app is presented when shared on social platforms.",
+        "Browser — Adding favicons and apple touch icons helps consolidate your brand identity across browser tabs, notifications and bookmarks."
+      ],
+      "topics": [
+        "Web Development",
+        "SEO & Metadata",
+        "AI Agents"
+      ],
+      "full_text": "Fixing your site's metadata: a practical checklist Web Development SEO & Metadata AI Agents webdev seo metadata  You've done it. You're finally done building the website or application you've been working on for quite a while. Proud and elated, you go to share this on your socials or to your buddies — uh oh, what's this now? The preview in WhatsApp shows no headline, your avatar is cropped and dimensions seem wrong. I've been there too. The site looked fine in the browser. You've done it. You're finally done building the website or application you've been working on for quite a while. Proud and elated, you go to share this on your socials or to your buddies — uh oh, what's this now? The preview in WhatsApp shows no headline, your avatar is cropped and dimensions seem wrong. I've been there too. The site looked fine in the browser. The problem was everything outside the browser: link previews, search snippets, and tab icons all use a separate metadata layer most of us skip until something breaks. So, how do you fix this? Use this as a pre-launch checklist — or run it on a site that's already live but sharing badly. What I ran into on my own portfolio — When I ran this audit on shwethaadiraj.com, the site rendered fine — but sharing it told a different story. I had pointed both the favicon and Open Graph image at my profile avatar. At tab size the illustration was unreadable; in link previews it got cropped awkwardly. What I ran into on my own portfolio — None of this required rethinking the app. It was a metadata pass — the kind of work that's easy to defer and annoying to discover at the share button. Search & Discovery — The title and description in your app's <meta> tags tell search engines, crawlers, and AI chatbots how relevant your content is to a user's query. Social Platforms — Open Graph (OG) and Twitter/X cards give you more control over how your app is presented when shared on social platforms. Browser — Adding favicons and apple touch icons helps consolidate your brand identity across browser tabs, notifications and bookmarks. The metadata audit checklist — A page can render properly and function well but it can still fail when it comes to browser, socials or search engine checks. Run this audit on every public-facing page on your app. Favicon and touch icons — Does the browser tab show a clear icon at 16×16 and 32×32? Page title and description — What is the length of the titles? Are they concise and readable? Canonical URL — Does every page declare one canonical URL via <link rel=\"canonical\">? Does the image include readable headline and/or CTA text — many validators flag “no conversion text” because platforms often show the image without your meta title overlay. Opengraph.xyz — paste URL, inspect warnings. Facebook Sharing Debugger — use “Scrape Again” after fixes. Open your og:image URL directly in the browser — confirm it loads and reads at thumbnail size. Robots and indexing — Does your robots.txt allow crawling of public pages and block only private or paywalled content? Sitemap — Does /sitemap.xml exist and return valid XML? Going further: agentic browsing — Once the basics above are solid, there's a second audience worth optimizing for: AI agents browsing on behalf of users. That means accessibility tree completeness, llms.txt, layout stability, and eventually APIs like WebMCP. I wrote a separate post on this — Your Website's New Audience: AI Agents — but the order matters: get favicons, Open Graph, and canonical URLs right first, then layer agent-ready improvements on top. Closing thoughts — When building any new application, people focus on the app itself — metadata gets deferred until you share a link and it looks unpolished. You don't need every advanced technique on day one — get titles and descriptions, canonical URLs, favicons, and Open Graph images right first; robots.txt and sitemap next. That covers the failures people actually notice. Closing thoughts — I've been experimenting with a Cursor agent skill that runs this checklist against a real codebase — try it on your project and let me know how it works. You've done it. You're finally done building the website or application you've been working on for quite a while. Proud and elated, you go to share this on your socials or to your buddies — uh oh, what's this now? The preview in WhatsApp shows no headline, your avatar is cropped and dimensions seem wrong. I've been there too. The site looked fine in the browser. The problem was everything outside the browser: link previews, search snippets, and tab icons all use a separate metadata layer most of us skip until something breaks. So, how do you fix this? Use this as a pre-launch checklist — or run it on a site that's already live but sharing badly. When I ran this audit on shwethaadiraj.com, the site rendered fine — but sharing it told a different story. I had pointed both the favicon and Open Graph image at my profile avatar. At tab size the illustration was unreadable; in link previews it got cropped awkwardly. None of this required rethinking the app. It was a metadata pass — the kind of work that's easy to defer and annoying to discover at the share button. Metadata, simply put, is data about data. Search engines, crawlers and social sites all parse different metadata from your app. A page can render properly and function well but it can still fail when it comes to browser, socials or search engine checks. Run this audit on every public-facing page on your app. Why it matters: Large images or detailed illustrations lose detail at tab size. Users with many tabs rely on favicons to find your site. A blurry or generic icon makes the site look unfinished even when the page itself is polished. Why it matters: Title and description are what show up in Google results and often in link previews when OG tags are missing. Duplicate or empty metadata makes pages compete with each other and look spammy in search. Why it matters: Search engines treat duplicate URLs (http/https, www/bare, trailing slash variants) as separate pages. Canonical URL tells them which version to index and pass ranking signals to. Why it matters: These tags control how your link appears on Slack, LinkedIn, iMessage, and X. Wrong aspect ratio gets cropped; missing image means no preview. X can fall back to OG tags, but explicit Twitter tags and the right card type avoid inconsistent layouts. Why it matters: Accidentally blocking / or omitting the sitemap slows discovery. Blocking too little exposes internal paths to crawlers. Why it matters: Sitemaps help search engines find pages that aren't heavily linked. Once the basics above are solid, there's a second audience worth optimizing for: AI agents browsing on behalf of users. That means accessibility tree completeness, llms.txt, layout stability, and eventually APIs like WebMCP. I wrote a separate post on this — Your Website's New Audience: AI Agents — but the order matters: get favicons, Open Graph, and canonical URLs right first, then layer agent-ready improvements on top. When building any new application, people focus on the app itself — metadata gets deferred until you share a link and it looks unpolished. You don't need every advanced technique on day one — get titles and descriptions, canonical URLs, favicons, and Open Graph images right first; robots.txt and sitemap next. That covers the failures people actually notice. I've been experimenting with a Cursor agent skill that runs this checklist against a real codebase — try it on your project and let me know how it works.",
+      "code_blocks": [],
+      "word_count": 1277,
+      "code_block_count": 14,
+      "heading_count": 11
+    }
+  },
+  {
+    "case_id": "hof-24",
+    "rated": true,
+    "intent": "Android & Mobile",
+    "expected_facts": [
+      "Gemini",
+      "phone",
+      "Android"
+    ],
+    "expected_sections": [
+      "🤖 Handing the Terminal to Gemini",
+      "🎨 Step 1: The Canvas Deduction",
+      "🔬 Step 2: Disassembling the Phone on the Fly",
+      "💥 Step 3: The Domino Effect"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-25",
+      "title": "My Phone Broke, and Gemini Fixed It",
+      "url": "https://dev.to/omarafifi/my-phone-broke-and-gemini-fixed-it-329l",
+      "domain": "dev.to",
+      "overview": "After an all-nighter, an accidental ADB command triggered an undocumented debug overlay that survived reboots. Instead of factory resetting, he reverse-engineered the phone's UI bytecode with Gemini.",
+      "takeaways": [
+        "🤖 Handing the Terminal to Gemini — \"Hey, you ran some ADB commands on my phone earlier for some app testing and now there's this weird red text on my screen and the edges are lagging. I plugged it in—fix it.\"",
+        "🎨 Step 1: The Canvas Deduction — \"This text does not exist as a TextView or a system overlay window. It is being painted directly onto the hardware Canvas buffer during draw passes by an internal UI component.\"",
+        "🔬 Step 2: Disassembling the Phone on the Fly — Because these OEM classes are completely proprietary and unreleased, Gemini couldn't look up documentation. It had to read the machine code directly from the phone.",
+        "💥 Step 3: The Domino Effect — Finding Patient Zero — COUILog.isLoggable() simply calls Android's built-in android.util.Log.isLoggable(tag, level)."
+      ],
+      "topics": [
+        "Android & Mobile",
+        "Google Gemini",
+        "Google AI"
+      ],
+      "full_text": "My Phone Broke, and Gemini Fixed It Android & Mobile Google Gemini Google AI android gemini googleai debugging After an all-nighter, an accidental ADB command triggered an undocumented debug overlay that survived reboots. Instead of factory resetting, he reverse-engineered the phone's UI bytecode with Gemini. After an all-nighter, an accidental ADB command triggered an undocumented debug overlay that survived reboots. Instead of factory resetting, he reverse-engineered the phone's UI bytecode with Gemini. 📱 Picture This: An All-Nighter Turns Into a Morning Nightmare — It is early morning. You’ve just pulled an all-nighter tinkering with an Android project over ADB. The sun is already creeping through the window, tests finally pass, and you unplug the USB cable from your OnePlus to finally go to bed. 📱 Picture This: An All-Nighter Turns Into a Morning Nightmare — You stare at it, then touch the screen again. The numbers immediately jump, recalculating in real time with every movement of your thumb. You swipe fast, and FlingVY shoots into the tens of thousands. 📱 Picture This: An All-Nighter Turns Into a Morning Nightmare — When you swipe from the screen edge to go back, the gesture stutters. Pulling out the OnePlus Smart Sidebar hesitates and drops frames. The smooth 120Hz display suddenly feels like a cheap phone struggling to keep up. 🥶 Zero Results: When Google Goes Completely Silent — \"red text on android screen\": Generic guides telling you to turn off Developer Options. 😴 \"That’s Future Me’s Problem\" — I put the phone face-down on the nightstand, closed my eyes, and hoped it would just magically disappear by the time I woke up. 😴 \"That’s Future Me’s Problem\" — Fast forward to later that afternoon: I woke up, tapped the screen, and nope—the red velocity numbers were still right there, tracking every single swipe while I was still half-asleep. 😴 \"That’s Future Me’s Problem\" — Now awake and ready to deal with it, I decided it was time to bring in serious backup. 🤖 Handing the Terminal to Gemini — \"Hey, you ran some ADB commands on my phone earlier for some app testing and now there's this weird red text on my screen and the edges are lagging. I plugged it in—fix it.\" 🤖 Handing the Terminal to Gemini — \"Go to Settings > Developer Options and disable 'Pointer Location', 'Show Layout Bounds', or 'Strict Mode'. If those are already off, try backing up your data and performing a factory reset.\" 🤖 Handing the Terminal to Gemini — Every standard LLM defaults to that exact script because it assumes you're dealing with standard Android toggles. And when you tell it they're already off, it hits a complete dead end. 🤖 Handing the Terminal to Gemini — Instead, Gemini took the wheel. What happened on my terminal over the next few minutes was impressive: rather than giving boilerplate advice, Gemini started systematically diagnosing the operating system from the inside out. 🎨 Step 1: The Canvas Deduction — Both came back 0. Standard Android touch telemetry was definitively off. 🎨 Step 1: The Canvas Deduction — \"This text does not exist as a TextView or a system overlay window. It is being painted directly onto the hardware Canvas buffer during draw passes by an internal UI component.\" 🎨 Step 1: The Canvas Deduction — Because the text appeared during scrolling in OnePlus system menus, Gemini formed an immediate hypothesis: the code belonged to OnePlus/OPPO’s proprietary UI toolkit—COUI (ColorOS UI). 🔬 Step 2: Disassembling the Phone on the Fly — Because these OEM classes are completely proprietary and unreleased, Gemini couldn't look up documentation. It had to read the machine code directly from the phone. 🔬 Step 2: Disassembling the Phone on the Fly — Then, right inside my terminal, Gemini wrote and executed Python scripts to parse the raw binary DEX (Dalvik Executable) structures of the APK. Class — androidx.recyclerview.widget.COUIRecyclerView (OnePlus’s internal extension of the Jetpack RecyclerView) Method — dispatchDraw(Canvas canvas) at bytecode offset 0x1fbea0 Reading the Dalvik Bytecode — There it was: an undocumented, internal scroll-physics debugger built by OEM engineers to measure fling velocities during ROM development. 💥 Step 3: The Domino Effect — Finding Patient Zero — COUILog.isLoggable() simply calls Android's built-in android.util.Log.isLoggable(tag, level). Why it survived reboots — Properties starting with persist. are saved directly to flash storage (/data/property). A reboot does not wipe them. Why the red text appeared — Every time any app initialized a scrollable list, COUIRecyclerView checked if debug logging was enabled. Because persist.log.tag was set globally to V, Android replied that everything was in verbose mode. COUI_DEBUG became true, and the red velocity overlay activated. Why the edges were lagging — With global verbose logging enabled across the entire OS, every single touch event, swipe coordinate, and edge gesture flooded the system log daemon with hundreds of log lines per second. The CPU was overwhelmed with logging I/O, dropping frames and causing noticeable edge touch lag. Killing the Active Process for Instant Testing — Gemini triggered an automated swipe gesture through ADB, captured a live screenshot, and verified that the red text had vanished from Settings. The Final Device Reboot: Flushing In-Memory State — The red text was 100% gone across all apps. 🎓 Final Thoughts: An Engineering Student Left Speechless — It systematically eliminated UI layers until only hardware Canvas rendering was left. It is early morning. You’ve just pulled an all-nighter tinkering with an Android project over ADB. The sun is already creeping through the window, tests finally pass, and you unplug the USB cable from your OnePlus to finally go to bed. You unlock your screen, swipe down to open Settings, and freeze. You stare at it, then touch the screen again. The numbers immediately jump, recalculating in real time with every movement of your thumb. You swipe fast, and FlingVY shoots into the tens of thousands. Then you notice something even worse: the phone is lagging badly. When you swipe from the screen edge to go back, the gesture stutters. Pulling out the OnePlus Smart Sidebar hesitates and drops frames. The smooth 120Hz display suddenly feels like a cheap phone struggling to keep up. Fine. You hold down the power button and reboot. The phone restarts, you unlock it, open Settings, scroll down—and the red numbers are still right there. Zero results. Not a single thread on XDA Forums, not a mention on Reddit, and nothing on the OnePlus Community. If you've worked with Android long enough, you know what this silence means: when an issue has zero documentation in AOSP and zero community threads, you're usually looking at a full factory reset. At that point, the morning sun was already up. I had stayed up all night, I was running on zero sleep, completely exhausted, and my brain felt like an OutOfMemory error. I stared at the red numbers on my screen and made the most mature engineering decision possible: I put the phone face-down on the nightstand, closed my eyes, and hoped it would just magically disappear by the time I woke up. Fast forward to later that afternoon: I woke up, tapped the screen, and nope—the red velocity numbers were still right there, tracking every single swipe while I was still half-asleep. Now awake and ready to deal with it, I decided it was time to bring in serious backup. I plugged the USB cable back into my laptop. I opened my Antigravity IDE where I had been pair-programming with Gemini, and typed out of pure frustration: \"Hey, you ran some ADB commands on my phone earlier for some app testing and now there's this weird red text on my screen and the edges are lagging. I plugged it in—fix it.\" \"Go to Settings > Developer Options and disable 'Pointer Location', 'Show Layout Bounds', or 'Strict Mode'. If those are already off, try backing up your data and performing a factory reset.\" Every standard LLM defaults to that exact script because it assumes you're dealing with standard Android toggles. And when you tell it they're already off, it hits a complete dead end. Instead, Gemini took the wheel. What happened on my terminal over the next few minutes was impressive: rather than giving boilerplate advice, Gemini started systematically diagnosing the operating system from the inside out. Both came back 0. Standard Android touch telemetry was definitively off. It grepped the XML tree for isOverScrolling. The result? Empty. \"This text does not exist as a TextView or a system overlay window. It is being painted directly onto the hardware Canvas buffer during draw passes by an internal UI component.\" Because the text appeared during scrolling in OnePlus system menus, Gemini formed an immediate hypothesis: the code belonged to OnePlus/OPPO’s proprietary UI toolkit—COUI (ColorOS UI). Because these OEM classes are completely proprietary and unreleased, Gemini couldn't look up documentation. It had to read the machine code directly from the phone. To inspect the COUI framework without needing root access, Gemini pulled a built-in pre-installed app that uses the same UI components: Then, right inside my terminal, Gemini wrote and executed Python scripts to parse the raw binary DEX (Dalvik Executable) structures of the APK. It mapped those string IDs across every class definition in the binary. In seconds, Gemini had the exact location: There it was: an undocumented, internal scroll-physics debugger built by OEM engineers to measure fling velocities during ROM development. Gemini now knew what was painting the screen, but why had COUI_DEBUG suddenly turned true across my entire phone? COUILog.isLoggable() simply calls Android's built-in android.util.Log.isLoggable(tag, level). In Android, Log.isLoggable() first checks for a tag-specific system property (log.tag.<TAG>). If that doesn't exist, it checks the global fallback property: Hours earlier, while debugging an audio service over ADB, a command had set persist.log.tag to V (Verbose) to inspect background audio logs. To make sure COUIRecyclerView could never wake up its debug drawing again—even if global verbose logging were accidentally enabled in a future project—Gemini injected a permanent tag-level suppression rule: Gemini triggered an automated swipe gesture through ADB, captured a live screenshot, and verified that the red text had vanished from Settings. In the Dalvik/ART virtual machine, static initializers (<clinit>) run only once when a class is first loaded into a process. That meant any app or system service already running in RAM (like the Launcher, SystemUI, or Contacts) still held COUI_DEBUG = true cached in memory. To guarantee that every background process, system daemon, and service reloaded cleanly from scratch with the new suppressed properties, we performed a fresh device reboot: As a Computer & Systems Engineering student, I usually take AI hype with a grain of salt. I understand how systems work under the hood, and I know how complex and messy OEM Android frameworks get when low-level state gets corrupted. If I had posted this on a forum or asked a standard chatbot, the advice would have been the same generic response: back up your data and factory reset. Watching Gemini handle this live in my terminal was genuinely impressive. It didn't guess, and it didn't give generic tips. It followed a solid systems debugging process: Watching an AI autonomously reverse-engineer compiled bytecode on a live device—and solve an undocumented framework issue in minutes without touching a single byte of my personal data—was amazing to see. This isn't just about autocompleting syntax or generating boilerplate code anymore. This is a real glimpse into the future of systems engineering—and as an engineering student, it completely blew me away.",
+      "code_blocks": [],
+      "word_count": 1825,
+      "code_block_count": 25,
+      "heading_count": 18,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Android & Mobile\"",
+        "why_relevant": "The page connects Android & Mobile to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "🤖 Handing the Terminal to Gemini — \"Hey, you ran some ADB commands on my phone earlier for some app testing and now there's this weird red text on my screen and the edges are lagging. I plugged it in—fix it.\"",
+          "🎨 Step 1: The Canvas Deduction — \"This text does not exist as a TextView or a system overlay window. It is being painted directly onto the hardware Canvas buffer during draw passes by an internal UI component.\""
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "hof-31",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "Laravel",
+      "batch process",
+      "CSV",
+      "email"
+    ],
+    "expected_sections": [
+      "Memory",
+      "Email Limitations"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-32",
+      "title": "How to make a batch process that emails big CSV (~1-2 Mbytes) from complex unoptimized queries using laravel.",
+      "url": "https://dev.to/pcmagas/how-to-make-a-batch-process-that-emails-big-csv-1-2-mbytes-from-complex-unoptimized-queries-using-laravel-4lha",
+      "domain": "dev.to",
+      "overview": "For some reason in my current work, I need to crunch data from an non-optimal sql query and send the result into a csv to an email. All I have though is a php laravel system. Due to memory limitations we need to build the file line by line instead of one-go that laravel's API provide.",
+      "takeaways": [
+        "Memory — We cannot use the laravel's DB layer because of: SQL complexity, I need to execute the query once pagination offers no use",
+        "Email Limitations — CSV may be huge. I cannot send it as is even if it is compressesed."
+      ],
+      "topics": [
+        "PHP & Laravel"
+      ],
+      "full_text": "How to make a batch process that emails big CSV (~1-2 Mbytes) from complex unoptimized queries using laravel. PHP & Laravel howto php laravel It points in the direction he wants to follow professionally. For some reason in my current work, I need to crunch data from an non-optimal sql query and send the result into a csv to an email. All I have though is a php laravel system. Due to memory limitations we need to build the file line by line instead of one-go that laravel's API provide. Memory — We cannot use the laravel's DB layer because of: SQL complexity, I need to execute the query once pagination offers no use Result Set size — I cannot fetch the results alltogether Email Limitations — CSV may be huge. I cannot send it as is even if it is compressesed. Then upload it into — An s3 bucket hosted as static website or served via a CDN For some reason in my current work, I need to crunch data from an non-optimal sql query and send the result into a csv to an email. All I have though is a php laravel system. For 1.1 and 1.2 we can use a console command that sends the email. Jobs decause data crunching takes time is a no go. As you can see we avoid using Artisan class because we need to run the command into background. In order to do it the command at shell_exec must be terminated with &. In this case as you can see at ./app/Console/Kernel.php we utilize the runInBackground method. The command itself should use the PDO directly instead of laravel's db layer. For this use the following code: For multiple DB connections use (replace the my_connection with the appropriate one defined upon ./config/database.php): Due to memory limitations we need to build the file line by line instead of one-go that laravel's API provide. fflush() ensures that line is written in case of unexpected termination. The idea is that we need a URL where the end user needs to be able top download the file.Therefore, we need to upload the file into a storage that is able to provide a public-available url. And send this email. The reason why is because mailboxes cannot handle huge files. If CDN is used, the files can be served via signed URLS if possible.",
+      "code_blocks": [],
+      "word_count": 444,
+      "code_block_count": 13,
+      "heading_count": 1
+    }
+  },
+  {
+    "case_id": "hof-38",
+    "rated": true,
+    "intent": "Python",
+    "expected_facts": [
+      "local-first",
+      "32 messaging platforms",
+      "13 LLM providers"
+    ],
+    "expected_sections": [
+      "The gateway pipeline",
+      "Plugin SDK",
+      "Multi-Agent Orchestrator",
+      "Why open source?"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-39",
+      "title": "I built a local-first personal AI gateway that connects 32 messaging platforms to 13 LLM providers — NeuralCleave",
+      "url": "https://dev.to/amitchandra/i-built-a-local-first-personal-ai-gateway-that-connects-32-messaging-platforms-to-13-llm-providers-o9f",
+      "domain": "dev.to",
+      "overview": "🚀 We're live on Product Hunt! NeuralCleave is featured today — if this article was useful, an upvote would mean the world. 👉 Support us on Product Hunt",
+      "takeaways": [
+        "The gateway pipeline — `plaintext Channel Adapter ↓ AgentRuntime ↓ ModelRouter (picks the right LLM for this task type) ↓ 3-Tier Memory (reads context, writes back) ↓ ReflectionEngine (scores response, regenerates if quality < threshold) ↓ Channel Adapter (sends reply back to the originating platform) `",
+        "Plugin SDK — NeuralCleave uses PEP 451 entry-points for plugin discovery — the same mechanism pip itself uses. You write a Python package, register it under the neuralcleave.plugins entry-point group, and the gateway discovers and loads it automatically.",
+        "Multi-Agent Orchestrator — The AgentOrchestrator runs a filter → priority → round-robin pipeline. Each node has its own LRU memory namespace, so the coder agent's context doesn't bleed into the researcher agent's memory.",
+        "Why open source? — The code is under BUSL 1.1 (source-available, free for personal use). It converts automatically to Apache 2.0 on 2030-06-26."
+      ],
+      "topics": [
+        "Python",
+        "AI & LLMs",
+        "Open Source"
+      ],
+      "full_text": "I built a local-first personal AI gateway that connects 32 messaging platforms to 13 LLM providers — NeuralCleave Python AI & LLMs Open Source python ai opensource showdev A personal AI assistant powered by the models you choose, connected to your messaging platforms, running locally to protect your privacy. 🚀 We're live on Product Hunt! NeuralCleave is featured today — if this article was useful, an upvote would mean the world. 👉 Support us on Product Hunt Fixed — Desktop app stuck on \"Connecting…\" — Two root causes found and fixed. Tauri v2.11+ on Windows sends http://tauri.localhost as the WebView2 origin (HTTP, not HTTPS); the backend CORS list only allowed the HTTPS variant, silently discarding every response (200 status, 0 bytes transferred). Separately, Windows 11 resolves localhost → IPv6 (::1) before 127.0.0.1 — the Python backend binds IPv4 only, causing silent timeouts. Both fixed. New: Automatic orphan recovery — If the backend crashes or is force-quit, the next launch detects the stale process, kills it, and spawns fresh automatically. No reboot needed. New: DevTools in release builds — Right-click → Inspect is now available in the packaged .exe/.msi for in-field diagnostics. What it is — NeuralCleave is a local-first AI assistant gateway written in Python. You run it on your machine (or a small VPS), point your Telegram/Discord/Slack/WhatsApp at it, and from that moment every message you send to any of those platforms reaches the same agent — with the same memory, the same tools, and the same personality. The problem: fragmented AI — ChatGPT open in a browser tab for general questions The gateway pipeline — `plaintext Channel Adapter ↓ AgentRuntime ↓ ModelRouter (picks the right LLM for this task type) ↓ 3-Tier Memory (reads context, writes back) ↓ ReflectionEngine (scores response, regenerates if quality < threshold) ↓ Channel Adapter (sends reply back to the originating platform) ` The gateway pipeline — The gateway is a FastAPI application. Every integration is async, every LLM call is streamed, and the whole thing runs on a single Python process with optional Redis and Qdrant for the memory tiers. Starting it — `bash pip install neuralcleave neuralcleave init # writes ~/.neuralcleave/config.toml neuralcleave start # gateway up on localhost:7432 ` Starting it — That's it. The gateway starts with a WebSocket chat UI at http://localhost:7432/app and a full REST API at /api/v1/. 32 Channel Adapters — Mainstream Telegram · Discord · WhatsApp · Slack · Microsoft Teams · Email (IMAP/SMTP) 32 Channel Adapters — Social & federated Bluesky (AT Protocol) · Mastodon · Nostr (NIP-04 encrypted DMs) · Twitter/X (via webhook) 32 Channel Adapters — Asian platforms WeChat Work · LINE · Zalo · QQ Bot · Feishu / Lark · Doubao 32 Channel Adapters — Workplace Mattermost · Rocket.Chat · Google Chat · Nextcloud Talk · Synology Chat 32 Channel Adapters — Dev / infrastructure IRC · XMPP · Matrix · Generic Webhook · WebSocket 32 Channel Adapters — Voice & telephony Twilio Voice (multi-turn speech via TwiML) · SMS (Twilio) 32 Channel Adapters — `toml [channels.telegram] enabled = true bot_token = \"ENV:TELEGRAM_BOT_TOKEN\" 32 Channel Adapters — [channels.discord] enabled = true bot_token = \"ENV:DISCORD_BOT_TOKEN\" 32 Channel Adapters — [channels.slack] enabled = true bot_token = \"ENV:SLACK_BOT_TOKEN\" signing_secret = \"ENV:SLACK_SIGNING_SECRET\" ` 32 Channel Adapters — All secret values support ENV:VAR_NAME resolution — nothing sensitive lives in the config file. 13 LLM Providers with Task-Aware Routing — Global: Anthropic · OpenAI · Google Gemini · Mistral AI · xAI Grok · Cohere Local/open: Ollama (any GGUF model) Asia: DeepSeek · Moonshot / Kimi · Zhipu GLM · Alibaba Qwen · Baidu ERNIE · ByteDance Doubao 13 LLM Providers with Task-Aware Routing — You can override routing per-request or set a privacy mode that forces everything to Ollama — no data ever leaves your machine. 13 LLM Providers with Task-Aware Routing — Anthropic_api_key = \"ENV:ANTHROPIC_API_KEY\" openai_api_key = \"ENV:OPENAI_API_KEY\" deepseek_api_key = \"ENV:DEEPSEEK_API_KEY\" ollama_base_url = \"http://localhost:11434\" ` The hot tier is checked first — recent context loads in < 1 ms Relevance — did it actually answer the question? Completeness — is anything obviously missing? Accuracy — does it contradict known facts from memory? Tone — does it match the requested persona? TTS: 3-tier cascade — ElevenLabs (highest quality) → Kokoro (offline, good quality) → pyttsx3 (offline, always available) Wake word — OpenWakeWord — always-on detection, CPU-only Voice cloning — ElevenLabs voice cloning API if you have a key Plugin SDK — NeuralCleave uses PEP 451 entry-points for plugin discovery — the same mechanism pip itself uses. You write a Python package, register it under the neuralcleave.plugins entry-point group, and the gateway discovers and loads it automatically. Plugin SDK — Class WeatherTool(Tool): name = \"get_weather\" description = \"Get current weather for a city\" parameters = { \"city\": {\"type\": \"string\", \"description\": \"City name\"} } Plugin SDK — Class WeatherPlugin(Plugin): name = \"weather\" version = \"1.0.0\" tools = [WeatherTool] Plugin SDK — [project.entry-points.\"neuralcleave.plugins\"] weather = \"my_plugin.plugin:WeatherPlugin\" ` Plugin SDK — Three official plugins ship with the project: neuralcleave-github, neuralcleave-notion, and neuralcleave-google-calendar. All are on PyPI. AST walk — blocks 13 dangerous imports (subprocess, ctypes, socket, etc. when used offensively) Regex scan — 14 dangerous patterns (eval(, exec(, __import__, obfuscated base64 calls) Multi-Agent Orchestrator — `toml [[orchestrator.nodes]] name = \"researcher\" model_override = \"claude-opus-4-8\" task_types = [\"complex_reasoning\", \"summarization\"] channel_patterns = [\"telegram\", \"discord\"] priority = 10 Multi-Agent Orchestrator — [[orchestrator.nodes]] name = \"coder\" model_override = \"deepseek-coder\" task_types = [\"code_generation\", \"code_review\"] priority = 8 Multi-Agent Orchestrator — [[orchestrator.nodes]] name = \"fast\" model_override = \"ollama/llama3\" task_types = [\"general\", \"cheap_inference\"] priority = 5 ` Multi-Agent Orchestrator — The AgentOrchestrator runs a filter → priority → round-robin pipeline. Each node has its own LRU memory namespace, so the coder agent's context doesn't bleed into the researcher agent's memory. Live Canvas — `bash neuralcleave canvas open # opens http://localhost:7432/canvas in browser ` Live Canvas — Block types: text · markdown · code · table · chart (bar/line/pie via Canvas API) · image · html Live Canvas — The canvas is particularly useful when asking the agent to reason through something complex — it can stream its thinking as structured blocks rather than a wall of text. Prometheus Observability — A pre-built Grafana dashboard JSON ships in the repo. Plug it into any Grafana instance and you get request rates, latency histograms, error breakdowns, and memory tier utilization — all from docker-compose up. MacOS — native .dmg, Apple Silicon + Intel Deployment — `bash neuralcleave cloud generate # writes Dockerfile, docker-compose.yml, railway.toml, render.yaml docker-compose up -d ` Deployment — The cloud generate command auto-detects your config and writes manifests for Docker, Railway, Render, Fly.io, and generic VPS. Redis and Qdrant are wired into the compose file. Everything is included. Install — Docker run -p 7432:7432 ghcr.io/theamitchandra/neuralcleave:latest ` Install — `bash neuralcleave init # interactive setup wizard (or -y for defaults) neuralcleave start # gateway on http://localhost:7432 ` Official plugins on PyPI — `bash pip install neuralcleave-sdk # Plugin/Tool/ChannelAdapter ABCs pip install neuralcleave-github # GitHub issues, PRs, repos pip install neuralcleave-notion # Notion databases and pages pip install neuralcleave-google-calendar # Google Calendar events ` Why open source? — I started this project because I was paying for four different AI subscriptions and none of them talked to each other. I wanted something that worked the way I actually work — across every app I use, with memory that persists, on hardware I own. Why open source? — The code is under BUSL 1.1 (source-available, free for personal use). It converts automatically to Apache 2.0 on 2030-06-26. GitHub — github.com/TheAmitChandra/NeuralCleave Plugin SDK — pypi.org/project/neuralcleave-sdk 🚀 We're live on Product Hunt! NeuralCleave is featured today — if this article was useful, an upvote would mean the world. 👉 Support us on Product Hunt Download: v2.1.4 release · pip install neuralcleave==2.1.4 ⚡ Update — July 26, 2025: v2.1.3 is out. This release fixed a critical bug where the desktop app showed \"Connecting…\" forever due to a CORS origin mismatch between the gateway and the Tauri WebView2 host. If you tried the desktop app earlier and it didn't connect — please try again with v2.1.3. ``Most AI assistants ask you to move to them. New app, new subscription, new interface. Your conversations live in their cloud, your integrations go through their store, and when you stop paying, it all disappears. I wanted something different: one agent that lives on my machine, connects to every messaging platform I already use, remembers everything I've told it, routes requests to the right model automatically, and never sends my data anywhere I didn't choose. GitHub: TheAmitChandra/NeuralCleave Install: pip install neuralcleave Docs: docs.neuralcleave.com Website: neuralcleave.com NeuralCleave is a local-first AI assistant gateway written in Python. You run it on your machine (or a small VPS), point your Telegram/Discord/Slack/WhatsApp at it, and from that moment every message you send to any of those platforms reaches the same agent — with the same memory, the same tools, and the same personality. None of these talk to each other. None of them remember what you told a different one yesterday. You're managing five different conversations with five different versions of \"your\" AI assistant. NeuralCleave collapses all of that into a single agent you control. `plaintext Channel Adapter ↓ AgentRuntime ↓ ModelRouter (picks the right LLM for this task type) ↓ 3-Tier Memory (reads context, writes back) ↓ ReflectionEngine (scores response, regenerates if quality < threshold) ↓ Channel Adapter (sends reply back to the originating platform) ` The gateway is a FastAPI application. Every integration is async, every LLM call is streamed, and the whole thing runs on a single Python process with optional Redis and Qdrant for the memory tiers. `bash pip install neuralcleave neuralcleave init # writes ~/.neuralcleave/config.toml neuralcleave start # gateway up on localhost:7432 ` That's it. The gateway starts with a WebSocket chat UI at http://localhost:7432/app and a full REST API at /api/v1/. Mainstream Telegram · Discord · WhatsApp · Slack · Microsoft Teams · Email (IMAP/SMTP) Social & federated Bluesky (AT Protocol) · Mastodon · Nostr (NIP-04 encrypted DMs) · Twitter/X (via webhook) Asian platforms WeChat Work · LINE · Zalo · QQ Bot · Feishu / Lark · Doubao Workplace Mattermost · Rocket.Chat · Google Chat · Nextcloud Talk · Synology Chat Dev / infrastructure IRC · XMPP · Matrix · Generic Webhook · WebSocket Voice & telephony Twilio Voice (multi-turn speech via TwiML) · SMS (Twilio) Entertainment Twitch (IRCv3) · Viber · iMessage (via BlueBubbles) Every adapter handles authentication, webhook verification (HMAC-SHA256, Ed25519, JWT — whatever the platform requires), and maps the platform's native event format to NeuralCleave's internal Message model. You enable them in your config: `toml [channels.telegram] enabled = true bot_token = \"ENV:TELEGRAM_BOT_TOKEN\" [channels.discord] enabled = true bot_token = \"ENV:DISCORD_BOT_TOKEN\" [channels.slack] enabled = true bot_token = \"ENV:SLACK_BOT_TOKEN\" signing_secret = \"ENV:SLACK_SIGNING_SECRET\" ` All secret values support ENV:VAR_NAME resolution — nothing sensitive lives in the config file. NeuralCleave does",
+      "code_blocks": [],
+      "word_count": 2247,
+      "code_block_count": 25,
+      "heading_count": 27,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Python\"",
+        "why_relevant": "The page connects Python to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "The gateway pipeline — `plaintext Channel Adapter ↓ AgentRuntime ↓ ModelRouter (picks the right LLM for this task type) ↓ 3-Tier Memory (reads context, writes back) ↓ ReflectionEngine (scores response, regenerates if quality < threshold) ↓ Channel Adapter (sends reply back to the originating platform) `",
+          "Plugin SDK — NeuralCleave uses PEP 451 entry-points for plugin discovery — the same mechanism pip itself uses. You write a Python package, register it under the neuralcleave.plugins entry-point group, and the gateway discovers and loads it automatically."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "hof-44",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "tool use",
+      "production systems",
+      "observability"
+    ],
+    "expected_sections": [
+      "Why did Honeycomb ship before OpenAI's function calling API existed?",
+      "Not as reliable as a single demo suggests",
+      "How reliable is LLM function calling, measured honestly?",
+      "But haven't the models gotten good enough by now?"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-45",
+      "title": "Tool Use in LLMs: What It Actually Means for Production Systems",
+      "url": "https://dev.to/robat_das_3c6e956212f6408/tool-use-in-llms-what-it-actually-means-for-production-systems-246j",
+      "domain": "dev.to",
+      "overview": "LLM function calling is the technique of having a model output a structured, machine-readable call — a function name and typed arguments — instead of free text, so that surrounding code can execute it against a real API or database. It is the mechanism underneath every \"AI agent\" that books a flight, queries a database, or issues a refund.",
+      "takeaways": [
+        "Why did Honeycomb ship before OpenAI's function calling API existed? — Because they couldn't wait. Honeycomb announced Query Assistant on May 3, 2023, after a six-week build (Honeycomb press release). OpenAI's function calling API did not arrive until June 13, 2023 (OpenAI) — more than a month later.",
+        "Not as reliable as a single demo suggests — and the gap is widest exactly where production lives, in multi-step conversations. The most honest public measurement comes from τ-bench, a 2024 benchmark from Sierra (the company co-founded by former Salesforce co-CEO Bret Taylor) that tests agents on realistic, multi-turn tool-use tasks (arXiv:2406.12045).",
+        "How reliable is LLM function calling, measured honestly? — The benchmark's own conclusion is blunt and worth quoting: state-of-the-art function calling agents \"succeed on less than 50% of the tasks, and are quite inconsistent.\" This is the uncomfortable place the evidence leads. The single-call accuracy that vendor demos showcase is not the number that governs a production agent, because production is rarely one call. It is a chain, and reliability compounds downward at every link.",
+        "But haven't the models gotten good enough by now? — It isn't, and the leaderboard itself shows why. Break the score apart and the single-turn, expert-curated categories sit in the high 80s and 90s, while multi-turn accuracy — sustained tool use across a conversation — drops dramatically, into the 50s for many strong models. Single calls are nearly solved. Sequences are not. A 90% headline and a 55% multi-turn reality describe the same model, and your production agent lives in the second number."
+      ],
+      "topics": [
+        "LLM Tool Use",
+        "AI Agents",
+        "Observability"
+      ],
+      "full_text": "Tool Use in LLMs: What It Actually Means for Production Systems LLM Tool Use AI Agents Observability llmfunctioncalling tooluse aiagents honeycomb It's their personal favorite. LLM function calling is the technique of having a model output a structured, machine-readable call — a function name and typed arguments — instead of free text, so that surrounding code can execute it against a real API or database. It is the mechanism underneath every \"AI agent\" that books a flight, queries a database, or issues a refund. This is the story of what they found. It is less flattering than the demos, and more useful. What is LLM function calling, really? — LLM function calling is the technique of having a model output a structured, machine-readable call — a function name and typed arguments — instead of free text, so that surrounding code can execute it against a real API or database. It is the mechanism underneath every \"AI agent\" that books a flight, queries a database, or issues a refund. What is LLM function calling, really? — The framing most teams inherit from a quickstart tutorial is that the function call is the feature. You define a JSON schema, the model fills it in, you run the function. Honeycomb's experience is the clearest published evidence that this framing is backwards. The call itself was the easy 10%. Everything that made it shippable lived in the other 90% — the part the API surface quietly leaves to you. Why did Honeycomb ship before OpenAI's function calling API existed? — Because they couldn't wait. Honeycomb announced Query Assistant on May 3, 2023, after a six-week build (Honeycomb press release). OpenAI's function calling API did not arrive until June 13, 2023 (OpenAI) — more than a month later. What actually breaks when you put function calling in production? — The thing that breaks is your assumption that a valid function call is a correct one. A model will happily produce a syntactically perfect, schema-valid call that is semantically wrong — the right shape, the wrong answer — and your code has no way to tell the difference at the moment of execution. What actually breaks when you put function calling in production? — Read that twice, because it inverts the usual instinct. They did not make the model reliable enough to trust. They built a system where the model did not need to be reliable, because every action it could take was cheap to undo. That is the real lesson of function calling in production, and it is architectural, not prompt-level. Not as reliable as a single demo suggests — and the gap is widest exactly where production lives, in multi-step conversations. The most honest public measurement comes from τ-bench, a 2024 benchmark from Sierra (the company co-founded by former Salesforce co-CEO Bret Taylor) that tests agents on realistic, multi-turn tool-use tasks (arXiv:2406.12045). How reliable is LLM function calling, measured honestly? — The benchmark's own conclusion is blunt and worth quoting: state-of-the-art function calling agents \"succeed on less than 50% of the tasks, and are quite inconsistent.\" This is the uncomfortable place the evidence leads. The single-call accuracy that vendor demos showcase is not the number that governs a production agent, because production is rarely one call. It is a chain, and reliability compounds downward at every link. But haven't the models gotten good enough by now? — This is the natural objection, and it's worth taking seriously rather than waving away. The Berkeley Function Calling Leaderboard — the most-cited public scoreboard for this capability — shows top models scoring around 90% overall (Claude 3.5 Sonnet) and the mid-80s for GPT-4 class models (Berkeley Function Calling Leaderboard). Ninety percent sounds like a solved problem. But haven't the models gotten good enough by now? — It isn't, and the leaderboard itself shows why. Break the score apart and the single-turn, expert-curated categories sit in the high 80s and 90s, while multi-turn accuracy — sustained tool use across a conversation — drops dramatically, into the 50s for many strong models. Single calls are nearly solved. Sequences are not. A 90% headline and a 55% multi-turn reality describe the same model, and your production agent lives in the second number. So what does tool use actually mean for a production system? — It means the function call is the easy part, and your job is everything around it: validation that catches semantically-wrong-but-schema-valid output, an architecture where the model's actions are reversible, an honest reliability number measured across sequences instead of single shots. That is the conclusion the evidence forces, and Honeycomb reached it before most of the industry started. This is the story of what they found. It is less flattering than the demos, and more useful. LLM function calling is the technique of having a model output a structured, machine-readable call — a function name and typed arguments — instead of free text, so that surrounding code can execute it against a real API or database. It is the mechanism underneath every \"AI agent\" that books a flight, queries a database, or issues a refund. The framing most teams inherit from a quickstart tutorial is that the function call is the feature. You define a JSON schema, the model fills it in, you run the function. Honeycomb's experience is the clearest published evidence that this framing is backwards. The call itself was the easy 10%. Everything that made it shippable lived in the other 90% — the part the API surface quietly leaves to you. Because they couldn't wait. Honeycomb announced Query Assistant on May 3, 2023, after a six-week build (Honeycomb press release). OpenAI's function calling API did not arrive until June 13, 2023 (OpenAI) — more than a month later. So Honeycomb did what you do when the convenient abstraction doesn't exist yet: they wrote the prompt by hand. They described their query specification to GPT-3.5, fed it the user's question, and parsed the JSON that came back. There was no tools parameter, no enforced schema, no guardrails. Carter's team learned the shape of the problem before the industry papered over it with a tidy API parameter — which is exactly why their write-up is so revealing. They saw the raw machinery. What they discovered first was that the model was the least of their problems. Their Honeycomb query schema was large, and large schemas eat context windows. The latency was real: queries took anywhere from two to over fifteen seconds. And the prompt engineering had no established best practices to copy — they reported that few-shot prompting, stuffing the prompt with worked examples, gave the best results, but they found that out by trial. None of this is in a function calling tutorial. All of it is in production. The thing that breaks is your assumption that a valid function call is a correct one. A model will happily produce a syntactically perfect, schema-valid call that is semantically wrong — the right shape, the wrong answer — and your code has no way to tell the difference at the moment of execution. This is the gap between correctness and usefulness that Carter wrote about in Honeycomb's now-widely-cited post, \"All the Hard Stuff Nobody Talks About when Building Products with LLMs\" — a piece Simon Willison called the single most useful article he'd read on the topic at the time (simonwillison.net, May 2023). A query that returns something feels successful. Whether it returns the right something is a separate question your validation layer has to answer, and most teams don't build that layer until it burns them. Read that twice, because it inverts the usual instinct. They did not make the model reliable enough to trust. They built a system where the model did not need to be reliable, because every action it could take was cheap to undo. That is the real lesson of function calling in production, and it is architectural, not prompt-level. Not as reliable as a single demo suggests — and the gap is widest exactly where production lives, in multi-step conversations. The most honest public measurement comes from τ-bench, a 2024 benchmark from Sierra (the company co-founded by former Salesforce co-CEO Bret Taylor) that tests agents on realistic, multi-turn tool-use tasks (arXiv:2406.12045). Τ-bench introduced a metric called pass^k: not \"can the agent do this task once,\" but \"can it do it consistently across k attempts.\" The results are sobering. A state-of-the-art GPT-4o function-calling agent passed a retail task on the first try about 65% of the time — but its pass^8 score, the rate at which it succeeded on the same task eight times running, fell to roughly 25%. That is close to a 60% collapse in reliability simply from asking the model to be consistent rather than lucky once. The benchmark's own conclusion is blunt and worth quoting: state-of-the-art function calling agents \"succeed on less than 50% of the tasks, and are quite inconsistent.\" This is the uncomfortable place the evidence leads. The single-call accuracy that vendor demos showcase is not the number that governs a production agent, because production is rarely one call. It is a chain, and reliability compounds downward at every link. This is the natural objection, and it's worth taking seriously rather than waving away. The Berkeley Function Calling Leaderboard — the most-cited public scoreboard for this capability — shows top models scoring around 90% overall (Claude 3.5 Sonnet) and the mid-80s for GPT-4 class models (Berkeley Function Calling Leaderboard). Ninety percent sounds like a solved problem. It isn't, and the leaderboard itself shows why. Break the score apart and the single-turn, expert-curated categories sit in the high 80s and 90s, while multi-turn accuracy — sustained tool use across a conversation — drops dramatically, into the 50s for many strong models. Single calls are nearly solved. Sequences are not. A 90% headline and a 55% multi-turn reality describe the same model, and your production agent lives in the second number. It means the function call is the easy part, and your job is everything around it: validation that catches semantically-wrong-but-schema-valid output, an architecture where the model's actions are reversible, an honest reliability number measured across sequences instead of single shots. That is the conclusion the evidence forces, and Honeycomb reached it before most of the industry started. The engineer who sat down in March 2023 thought the hard problem was getting the model to emit the right function call. That was never the hard problem. The hard problem — the one that separates a demo from a system people trust with real money and real telemetry — is designing for a component that will be confidently, validly, schema-perfectly wrong a meaningful fraction of the time, and making sure that when it is, nothing breaks that you can't undo. The function call is where the work appears to be. It is not where the work is.",
+      "code_blocks": [],
+      "word_count": 1568,
+      "code_block_count": 12,
+      "heading_count": 6
+    }
+  },
+  {
+    "case_id": "hof-51",
+    "rated": true,
+    "intent": "AI & LLMs",
+    "expected_facts": [
+      "generative AI",
+      "gacha",
+      "retries"
+    ],
+    "expected_sections": [
+      "Generative AI Is Basically a Gacha Game",
+      "Retries are only cheap on the invoice",
+      "A PNG is a picture of a logo",
+      "So when does each one win"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "hof-tab-52",
+      "title": "Generative AI is a gacha game with no pity system",
+      "url": "https://dev.to/phalkmin/generative-ai-is-a-gacha-game-with-no-pity-system-38in",
+      "domain": "dev.to",
+      "overview": "Last week, I posted about a personal situation where I struggled with Generative AI and how I was able to fix the problem by asking if a real person could help me. I believe that some people got the point of the story, but some comments started piling up, and I thought that a full post following up on that discussion would be better than a long discussion thread.",
+      "takeaways": [
+        "Generative AI Is Basically a Gacha Game — The strongest counterargument deserves to be stated properly: Inference is cheap. A hundred image generations cost less than one hour of a senior designer, and there's no dispute on that.",
+        "Retries are only cheap on the invoice — Run 40 attempts, and you spent much more than 40 generations: you spent an afternoon doing quality control for a machine that doesn't understand or even remember why attempt 12 failed. So not only did you spend time reviewing the art, but you also piled up frustration and stress.",
+        "A PNG is a picture of a logo — But OK, let's suppose that the model finally nailed it after attempt 400. Congratulations, now what you have is a raster image: pixels, at one size, on one background.",
+        "So when does each one win — No AI can do that. No AI will say \"hey, cool prompt, bro, but remember that time that you asked at 2 am if tomato could be added to a fruit salad?\" and then proceed to suggest a new logo idea. There's a price on human creativity."
+      ],
+      "topics": [
+        "AI & LLMs",
+        "Product & UI Design"
+      ],
+      "full_text": "Generative AI is a gacha game with no pity system AI & LLMs Product & UI Design ai programming design He doesn't know why it got so few views. Last week, I posted about a personal situation where I struggled with Generative AI and how I was able to fix the problem by asking if a real person could help me. I believe that some people got the point of the story, but some comments started piling up, and I thought that a full post following up on that discussion would be better than a long discussion thread. Last week, I posted about a personal situation where I struggled with Generative AI and how I was able to fix the problem by asking if a real person could help me. I believe that some people got the point of the story, but some comments started piling up, and I thought that a full post following up on that discussion would be better than a long discussion thread. Generative AI Is Basically a Gacha Game — The strongest counterargument deserves to be stated properly: Inference is cheap. A hundred image generations cost less than one hour of a senior designer, and there's no dispute on that. Generative AI Is Basically a Gacha Game — And you could argue \"ok, but it's still cheaper than a designer\", and again, sometimes that math is correct. I use GenAI myself for blog illustrations and placeholder art, where honestly even an uncommon pull in the gacha machine is a good result. Retries are only cheap on the invoice — Every attempt on GenAI needs a human on the other side to open the output, compare it against the mental picture they're aiming for, figure out what went wrong, translate that judgment into new prompt language. The single generation costs cents. But the judgment can cost hours, and that part can't be parallelized. Retries are only cheap on the invoice — Run 40 attempts, and you spent much more than 40 generations: you spent an afternoon doing quality control for a machine that doesn't understand or even remember why attempt 12 failed. So not only did you spend time reviewing the art, but you also piled up frustration and stress. Retries are only cheap on the invoice — All these problems matter more than the price per pull. And here's one aspect where I feel that GenAI can be worse than a gacha game: Most gachas have some sort of \"pity system\", where you have a better chance to get a high-tier item after XX interactions. But GenAI is a gacha with no pity system. Retries are only cheap on the invoice — So, it's a gacha. But the chances won't improve as you keep playing. A PNG is a picture of a logo — But OK, let's suppose that the model finally nailed it after attempt 400. Congratulations, now what you have is a raster image: pixels, at one size, on one background. A PNG is a picture of a logo — A real working logo is a vector system. Editable anchor points, light and dark variants, a monogram for tight spaces, letterforms that survive both a 16-pixel favicon and a four-meter banner. A PNG is a picture of a logo — Moving from the perfect PNG to that system means manual vectorization and redrawing, which lands you right back in Figma or Inkscape, doing the design work the generation was supposed to replace. A PNG is a picture of a logo — \"But OK, I could just ask the model to output the vector directly, right?\" Right. That was my Claude experiment in the original post, and there's actual research explaining why it failed. Why the models fail where even a junior designer wouldn't — Meanwhile, a junior designer with a year of Illustrator experience solves the same problem by... looking at it. Why the models fail where even a junior designer wouldn't — The feedback loop the models lack is the baseline of the craft, and every \"paste the screenshot back and ask for fixes\" workaround is a lossy imitation of it, filtered through a vision encoder built to answer semantic questions rather than optical ones. So when does each one win — Generation wins when constraints are loose, and outputs are disposable. Hero images, textures, placeholder illustrations, twenty rough layout directions to react to. Any good result is acceptable, verification takes two seconds per attempt, nobody will ever need to edit the curves. You just need to pull something from the gacha machine, and anything is acceptable. So when does each one win — A person wins when the artifact carries identity, when the constraints are dense and non-negotiable, when the deliverable must stay editable by other humans later. A logo checks every box. So does a brand system, and so does any piece where \"close enough\" means \"wrong\". So when does each one win — There's a third factor that goes underdiscussed: a designer looks at a reference and knows which constraints can flex and which can't, usually even before the client finishes explaining. That judgment is the actual service. So when does each one win — No AI can do that. No AI will say \"hey, cool prompt, bro, but remember that time that you asked at 2 am if tomato could be added to a fruit salad?\" and then proceed to suggest a new logo idea. There's a price on human creativity. So when does each one win — A human designer with a fair rate buys convergence: a professional who gets closer with every round, remembers exactly why the last round missed, asks the questions you forgot to answer, and hands over source files at the end. So when does each one win — Tokens buy attempts. Designers sell convergence. Those are different products, and you will always be limited by the number of tokens you can use and the time you have to finally pull the perfect drop. So when does each one win — The models will improve, and I believe that some opinions in this post will age badly. The final verification bill, though, stays on the human side of the table for as long as the human is the one who knows what \"right\" looks like. Last week, I posted about a personal situation where I struggled with Generative AI and how I was able to fix the problem by asking if a real person could help me. I believe that some people got the point of the story, but some comments started piling up, and I thought that a full post following up on that discussion would be better than a long discussion thread. The strongest counterargument deserves to be stated properly: Inference is cheap. A hundred image generations cost less than one hour of a senior designer, and there's no dispute on that. The problem starts when you notice that the winning result might show up at attempt 2 or only at attempt 1,000, or never show at all. In a way, content generation is like a gacha game. Every prompt is another pull. Better prompts don't necessarily guarantee the rare drop, they simply improve the odds that you'll get it before your token budget runs out. Even if you structure the first prompt like a real design brief instead of drip-feeding small corrections, a good model will often still require several tries. And you could argue \"ok, but it's still cheaper than a designer\", and again, sometimes that math is correct. I use GenAI myself for blog illustrations and placeholder art, where honestly even an uncommon pull in the gacha machine is a good result. But, hypothetically, what if you really need that SSR pull? That extremely rare card/item? Every attempt on GenAI needs a human on the other side to open the output, compare it against the mental picture they're aiming for, figure out what went wrong, translate that judgment into new prompt language. The single generation costs cents. But the judgment can cost hours, and that part can't be parallelized. Run 40 attempts, and you spent much more than 40 generations: you spent an afternoon doing quality control for a machine that doesn't understand or even remember why attempt 12 failed. So not only did you spend time reviewing the art, but you also piled up frustration and stress. All these problems matter more than the price per pull. And here's one aspect where I feel that GenAI can be worse than a gacha game: Most gachas have some sort of \"pity system\", where you have a better chance to get a high-tier item after XX interactions. But GenAI is a gacha with no pity system. So, it's a gacha. But the chances won't improve as you keep playing. But OK, let's suppose that the model finally nailed it after attempt 400. Congratulations, now what you have is a raster image: pixels, at one size, on one background. A real working logo is a vector system. Editable anchor points, light and dark variants, a monogram for tight spaces, letterforms that survive both a 16-pixel favicon and a four-meter banner. Moving from the perfect PNG to that system means manual vectorization and redrawing, which lands you right back in Figma or Inkscape, doing the design work the generation was supposed to replace. \"But OK, I could just ask the model to output the vector directly, right?\" Right. That was my Claude experiment in the original post, and there's actual research explaining why it failed. Meanwhile, a junior designer with a year of Illustrator experience solves the same problem by... looking at it. The feedback loop the models lack is the baseline of the craft, and every \"paste the screenshot back and ask for fixes\" workaround is a lossy imitation of it, filtered through a vision encoder built to answer semantic questions rather than optical ones. Generation wins when constraints are loose, and outputs are disposable. Hero images, textures, placeholder illustrations, twenty rough layout directions to react to. Any good result is acceptable, verification takes two seconds per attempt, nobody will ever need to edit the curves. You just need to pull something from the gacha machine, and anything is acceptable. A person wins when the artifact carries identity, when the constraints are dense and non-negotiable, when the deliverable must stay editable by other humans later. A logo checks every box. So does a brand system, and so does any piece where \"close enough\" means \"wrong\". There's a third factor that goes underdiscussed: a designer looks at a reference and knows which constraints can flex and which can't, usually even before the client finishes explaining. That judgment is the actual service. No AI can do that. No AI will say \"hey, cool prompt, bro, but remember that time that you asked at 2 am if tomato could be added to a fruit salad?\" and then proceed to suggest a new logo idea. There's a price on human creativity. A human designer with a fair rate buys convergence: a professional who gets closer with every round, remembers exactly why the last round missed, asks the questions you forgot to answer, and hands over source files at the end. Tokens buy attempts. Designers sell convergence. Those are different products, and you will always be limited by the number of tokens you can use and the time you have to finally pull the perfect drop. The models will improve, and I believe that some opinions in this post will age badly. The final verification bill, though, stays on the human side of the table for as long as the human is the one who knows what \"right\" looks like.",
+      "code_blocks": [],
+      "word_count": 1421,
+      "code_block_count": 13,
+      "heading_count": 5,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"AI & LLMs\"",
+        "why_relevant": "The page connects AI & LLMs to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Generative AI Is Basically a Gacha Game — The strongest counterargument deserves to be stated properly: Inference is cheap. A hundred image generations cost less than one hour of a senior designer, and there's no dispute on that.",
+          "Retries are only cheap on the invoice — Run 40 attempts, and you spent much more than 40 generations: you spent an afternoon doing quality control for a machine that doesn't understand or even remember why attempt 12 failed. So not only did you spend time reviewing the art, but you also piled up frustration and stress."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "pg-00",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "Japan",
+      "Tokyo",
+      "Kyoto",
+      "Shinkansen"
+    ],
+    "expected_sections": [
+      "Route & Hotel Split",
+      "Shinkansen vs. JR Pass Math",
+      "Transit & Timing Logistics"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-1",
+      "title": "10-Day Japan Itinerary: Tokyo, Kyoto & Shinkansen Rail Pass Guide",
+      "url": "https://travel.example.com/10-day-japan-itinerary-tokyo-kyoto",
+      "domain": "travel.example.com",
+      "overview": "Complete day-by-day travel blueprint for a 10-day trip across Tokyo, Kyoto, and Osaka with IC card and Shinkansen cost comparisons.",
+      "takeaways": [
+        "Route & Hotel Split — Recommends splitting 5 nights in Tokyo (Shinjuku/Asakusa) and 4 nights in Kyoto with a 1-day trip to Nara.",
+        "Shinkansen vs. JR Pass Math — Buying single Shinkansen tickets ($190 round-trip) is now $140 cheaper than the 7-day JR Pass ($330) after the national price hike.",
+        "Transit & Timing Logistics — Includes Suica Apple Pay setup, luggage forwarding tips, and early-morning Fushimi Inari timing (before 7:00 AM)."
+      ],
+      "topics": [
+        "Travel & Itinerary",
+        "Japan / Tokyo",
+        "Flights & Trains"
+      ],
+      "full_text": "Japan travel itinerary Tokyo Kyoto Osaka Shinkansen bullet train Suica card ramen hotels Fushimi Inari Shibuya flight vacation trip.",
+      "code_blocks": [],
+      "word_count": 2150,
+      "code_block_count": 6,
+      "heading_count": 14
+    }
+  },
+  {
+    "case_id": "pg-02",
+    "rated": true,
+    "intent": "Health & Sleep",
+    "expected_facts": [
+      "caffeine",
+      "deep sleep",
+      "circadian"
+    ],
+    "expected_sections": [
+      "Caffeine Half-Life Impact",
+      "Morning Daylight Anchor",
+      "Thermal Sleep Environment"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-3",
+      "title": "Sleep Architecture & Circadian Timing: Why Late Caffeine Cuts Deep Sleep by 20%",
+      "url": "https://health.example.com/caffeine-half-life-deep-sleep-study",
+      "domain": "health.example.com",
+      "overview": "Evidence-based summary of peer-reviewed sleep lab trials measuring caffeine half-life, morning daylight exposure, and slow-wave sleep recovery.",
+      "takeaways": [
+        "Caffeine Half-Life Impact — Caffeine has a mean half-life of 5–6 hours; consuming 200mg within 8 hours of bedtime reduces slow-wave deep sleep by ~20%.",
+        "Morning Daylight Anchor — Viewing 15 minutes of outdoor morning daylight anchors melatonin onset 14 hours later and reduces sleep latency by 18 minutes.",
+        "Thermal Sleep Environment — Keeping bedroom temperature between 18°C and 19.5°C (65–67°F) prevents midnight cortisol awakenings."
+      ],
+      "topics": [
+        "Health & Sleep",
+        "Circadian Rhythm",
+        "Recovery"
+      ],
+      "full_text": "Health sleep circadian rhythm melatonin caffeine deep sleep recovery bedtime morning sunlight temperature cortisol.",
+      "code_blocks": [],
+      "word_count": 1890,
+      "code_block_count": 6,
+      "heading_count": 10,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Health & Sleep\"",
+        "why_relevant": "The page connects Health & Sleep to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Caffeine Half-Life Impact — Caffeine has a mean half-life of 5–6 hours; consuming 200mg within 8 hours of bedtime reduces slow-wave deep sleep by ~20%.",
+          "Morning Daylight Anchor — Viewing 15 minutes of outdoor morning daylight anchors melatonin onset 14 hours later and reduces sleep latency by 18 minutes."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "pg-04",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "Flutter",
+      "networking",
+      "open source"
+    ],
+    "expected_sections": [
+      "Discovery, Connectivity & Resilience",
+      "User Interface, Fluidity & Storage",
+      "Memory Safety & Disk I/O Flow Control",
+      "Solving the Math of the Orbital Radar UI"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-5",
+      "title": "Reviving Daphq: How I Built an Open-Source, Bare-Metal File Transfer Engine Solo with GitHub Copilot",
+      "url": "https://dev.to/omarafifi/reviving-daphq-how-i-built-an-open-source-bare-metal-file-transfer-engine-solo-with-github-copilot-5cd8",
+      "domain": "dev.to",
+      "overview": "Daphq is an open-source, cross-platform file transfer engine built in Flutter (Dart) that bypasses HTTP/REST to stream directly over raw TCP sockets (SocketOption.tcpNoDelay), reaching 80–90 MB/s (~93% Wi-Fi 5 saturation) on Android and Windows.",
+      "takeaways": [
+        "Discovery, Connectivity & Resilience — Custom UDP Auto-Discovery Service with an integrated watchdog and rewritten Bulletproof Receiver Engine that recovers automatically from dropped connections.",
+        "User Interface, Fluidity & Storage — Unified Flutter dashboard anchored by an 'Orbital Radar' and Non-Blocking Async UI for sharing 1,000+ files with zero lag, plus Persistent Folders and Smart Auto-Cleaning.",
+        "Memory Safety & Disk I/O Flow Control — Implemented zero-copy byte slicing (Uint8List.sublistView) and Natural Socket Backpressure (await socket.flush()) to eliminate Out-Of-Memory crashes on multi-gigabyte files.",
+        "Solving the Math of the Orbital Radar UI — Distributes dynamic peer widgets symmetrically on a circular plane using trigonometric (cos/sin) coordinate math and assigns unique ValueKeys to prevent unnecessary re-paints."
+      ],
+      "topics": [
+        "Flutter & Dart",
+        "Open Source",
+        "Networking & P2P"
+      ],
+      "full_text": "Flutter Dart cross-platform mobile desktop application Daphq bare-metal file transfer engine TCP sockets SocketOption.tcpNoDelay BLoC Cubit ValueKeys Orbital Radar Dart VM FFI.",
+      "code_blocks": [],
+      "word_count": 1292,
+      "code_block_count": 8,
+      "heading_count": 11
+    }
+  },
+  {
+    "case_id": "pg-07",
+    "rated": true,
+    "intent": "Machine Learning",
+    "expected_facts": [
+      "PyTorch",
+      "CPU threading",
+      "OMP_NUM_THREADS",
+      "containers"
+    ],
+    "expected_sections": [
+      "Container Thread Pinning"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-8",
+      "title": "PyTorch CPU Threading & OMP_NUM_THREADS Contention on Shared Containers",
+      "url": "https://pytorch.org/docs/stable/notes/cpu_threading_torchscript_inference.html",
+      "domain": "pytorch.org",
+      "overview": "Technical documentation explaining how OpenMP and MKL thread pools behave inside shared vCPU Linux containers.",
+      "takeaways": [
+        "Container Thread Pinning — Setting OMP_NUM_THREADS=2, MKL_NUM_THREADS=2, and torch.set_num_threads(2) prevents 32-core host thread thrashing in Docker."
+      ],
+      "topics": [
+        "Machine Learning",
+        "Docker & Containers",
+        "Python"
+      ],
+      "full_text": "PyTorch CPU inference threading OMP_NUM_THREADS MKL_NUM_THREADS torch.set_num_threads Docker container.",
+      "code_blocks": [],
+      "word_count": 980,
+      "code_block_count": 7,
+      "heading_count": 9,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Machine Learning\"",
+        "why_relevant": "The page connects Machine Learning to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Container Thread Pinning — Setting OMP_NUM_THREADS=2, MKL_NUM_THREADS=2, and torch.set_num_threads(2) prevents 32-core host thread thrashing in Docker."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "pg-10",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "software complexity",
+      "corporate culture"
+    ],
+    "expected_sections": [
+      "General Commentary"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-11",
+      "title": "Why Software Complexity Is Killing Modern Culture (Opinion Essay)",
+      "url": "https://blog.example.org/software-complexity-essay-2026",
+      "domain": "blog.example.org",
+      "overview": "Long-form opinion piece discussing corporate meetings and organizational bureaucracy.",
+      "takeaways": [
+        "General Commentary — 4,850 words of broad cultural reflection with no concrete technical steps or benchmarks."
+      ],
+      "topics": [
+        "Opinion Essay",
+        "Corporate Culture"
+      ],
+      "full_text": "Opinion essay on corporate bureaucracy meetings.",
+      "code_blocks": [],
+      "word_count": 4850,
+      "code_block_count": 0,
+      "heading_count": 4
+    }
+  },
+  {
+    "case_id": "edge-00",
+    "rated": true,
+    "intent": "Google Gemma",
+    "expected_facts": [
+      "Gemma",
+      "WebGPU",
+      "Web Worker",
+      "4-bit"
+    ],
+    "expected_sections": [
+      "Zero-Cost Browser Inference",
+      "Non-Blocking Web Worker Execution"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-101",
+      "title": "Transformers.js v3 WebGPU: Running 4-bit Gemma 3 1B Inside a Browser Web Worker",
+      "url": "https://huggingface.co/onnx-community/gemma-3-1b-it-ONNX-GQA",
+      "domain": "huggingface.co",
+      "overview": "Model card and implementation guide for executing 4-bit quantized Gemma 3 1B entirely client-side on WebGPU.",
+      "takeaways": [
+        "Zero-Cost Browser Inference — Downloads a 763 MB 4-bit GQA ONNX checkpoint once into the browser cache and executes locally with zero server cost.",
+        "Non-Blocking Web Worker Execution — Runs greedy decoding inside a dedicated Web Worker so the main browser UI thread never freezes."
+      ],
+      "topics": [
+        "Google Gemma",
+        "WebGPU & Wasm",
+        "AI & LLMs"
+      ],
+      "full_text": "Transformers.js WebGPU Gemma 3 1B ONNX q4 quantization browser local inference Web Worker.",
+      "code_blocks": [],
+      "word_count": 1180,
+      "code_block_count": 9,
+      "heading_count": 10,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Google Gemma\"",
+        "why_relevant": "The page connects Google Gemma to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Zero-Cost Browser Inference — Downloads a 763 MB 4-bit GQA ONNX checkpoint once into the browser cache and executes locally with zero server cost.",
+          "Non-Blocking Web Worker Execution — Runs greedy decoding inside a dedicated Web Worker so the main browser UI thread never freezes."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "edge-02",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "Sentry",
+      "OpenTelemetry",
+      "token usage",
+      "latency"
+    ],
+    "expected_sections": [
+      "GenAI Span Telemetry"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-103",
+      "title": "Sentry OpenTelemetry GenAI Spans: Tracing Token Usage & Latency in AI Agents",
+      "url": "https://docs.sentry.io/product/agents/getting-started/",
+      "domain": "docs.sentry.io",
+      "overview": "Guide to instrumenting AI agents with OpenTelemetry gen_ai.request spans in Sentry.",
+      "takeaways": [
+        "GenAI Span Telemetry — Records model name, input_tokens, output_tokens, and latency across multi-step AI agent pipelines."
+      ],
+      "topics": [
+        "Observability",
+        "AI Agents",
+        "Python"
+      ],
+      "full_text": "Sentry Agent Tracing OpenTelemetry gen_ai.request input_tokens output_tokens latency Python.",
+      "code_blocks": [],
+      "word_count": 1120,
+      "code_block_count": 9,
+      "heading_count": 10
+    }
+  },
+  {
+    "case_id": "edge-04",
+    "rated": true,
+    "intent": "Browser Automation",
+    "expected_facts": [
+      "Browserbase",
+      "CDP",
+      "concurrency slots"
+    ],
+    "expected_sections": [
+      "Immediate Slot Release"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-105",
+      "title": "Browserbase CDP Session API: Attaching Target & Releasing Concurrency Slots",
+      "url": "https://docs.browserbase.com/reference/api/create-a-session",
+      "domain": "docs.browserbase.com",
+      "overview": "Reference guide for creating headless Chromium sessions on Browserbase and releasing concurrency slots.",
+      "takeaways": [
+        "Immediate Slot Release — POST /v1/sessions/{id} with status REQUEST_RELEASE frees the cloud browser slot immediately after DOM extraction."
+      ],
+      "topics": [
+        "Browser Automation",
+        "Cloud Infrastructure",
+        "APIs & Backend"
+      ],
+      "full_text": "Browserbase CDP session API REQUEST_RELEASE concurrency slots Playwright.",
+      "code_blocks": [],
+      "word_count": 890,
+      "code_block_count": 8,
+      "heading_count": 9,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Browser Automation\"",
+        "why_relevant": "The page connects Browser Automation to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Immediate Slot Release — POST /v1/sessions/{id} with status REQUEST_RELEASE frees the cloud browser slot immediately after DOM extraction."
+        ],
+        "mention_count": 6
+      }
+    }
+  },
+  {
+    "case_id": "edge-06",
+    "rated": false,
+    "intent": "",
+    "expected_facts": [
+      "mechanical keyboard",
+      "switch lubing",
+      "guide"
+    ],
+    "expected_sections": [
+      "Hobbyist Guide"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-107",
+      "title": "The Complete 8,000-Word Guide to Mechanical Keyboard Switch Lubing",
+      "url": "https://keyboards.example.com/switch-lubing-guide",
+      "domain": "keyboards.example.com",
+      "overview": "Hobbyist guide on disassembling mechanical switches.",
+      "takeaways": [
+        "Hobbyist Guide — 7,900 words of mechanical keyboard commentary sitting untouched for 22 days."
+      ],
+      "topics": [
+        "Keyboards",
+        "Hobby"
+      ],
+      "full_text": "Mechanical keyboards cherry mx switches lubing.",
+      "code_blocks": [],
+      "word_count": 7900,
+      "code_block_count": 0,
+      "heading_count": 18
+    }
+  },
+  {
+    "case_id": "edge-09",
+    "rated": true,
+    "intent": "Desk Setup",
+    "expected_facts": [
+      "minimalist",
+      "home office",
+      "desk"
+    ],
+    "expected_sections": [
+      "Desk Setup Blog"
+    ],
+    "forbidden_claims": [
+      "guaranteed production result",
+      "works for every codebase",
+      "no tradeoffs"
+    ],
+    "tab": {
+      "id": "tab-110",
+      "title": "My Minimalist Home Office Desk Tour 2026",
+      "url": "https://gear.example.com/desk-tour-2026",
+      "domain": "gear.example.com",
+      "overview": "Blog post showcasing desk plants and affiliate shopping links.",
+      "takeaways": [
+        "Desk Setup Blog — Affiliate post (2,950 words) open for 13 days."
+      ],
+      "topics": [
+        "Desk Setup",
+        "Blog"
+      ],
+      "full_text": "Minimalist desk setup monitor arm walnut desk.",
+      "code_blocks": [],
+      "word_count": 2950,
+      "code_block_count": 0,
+      "heading_count": 7,
+      "interest_section": {
+        "active": true,
+        "headline": "Focused on \"Desk Setup\"",
+        "why_relevant": "The page connects Desk Setup to concrete implementation choices, the tradeoffs the team accepted, and verification steps that make the result credible.",
+        "tailored_points": [
+          "Desk Setup Blog — Affiliate post (2,950 words) open for 13 days."
+        ],
+        "mention_count": 6
+      }
+    }
+  }
+]

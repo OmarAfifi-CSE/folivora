@@ -370,6 +370,207 @@ class GemmaDigestService:
             timeout_s=timeout_s,
         )
 
+    def generate_tab_text(
+        self,
+        prompt: str,
+        *,
+        max_tokens: int = 900,
+        temperature: float = 0.2,
+        timeout_s: float | None = None,
+    ) -> tuple[str | None, str, int, int]:
+        """Multi-lane Open-Weight Gemma load balancer for per-tab JSON summaries.
+
+        Distributes concurrent card requests round-robin across Open-Weight Gemma
+        endpoints (`google/gemma-4-26b-a4b-it` and `google/gemma-4-31b-it` with
+        MINIMAL thinking on Google AI Studio, plus throughput-sorted
+        `openrouter/google/gemma-3-12b-it` and local Ollama `gemma3:4b`), with
+        automatic fast-lane failover when remaining wall-clock budget is tight.
+        """
+        provider = os.getenv("SUMMARY_POLISH_PROVIDER", "auto").strip().lower()
+        total_timeout = self.timeout_s if timeout_s is None else max(0.8, float(timeout_s))
+        started = time.monotonic()
+        deadline = started + total_timeout
+        self.last_tab_error = ""
+
+        # 1. Local Ollama open-weight lane (when configured)
+        if provider in {"auto", "gemma", "ollama"} and self.ollama_base_url:
+            rem = deadline - time.monotonic()
+            if rem > 0.8:
+                try:
+                    resp = requests.post(
+                        f"{self.ollama_base_url.rstrip('/')}/api/generate",
+                        json={
+                            "model": self.ollama_model,
+                            "prompt": prompt,
+                            "stream": False,
+                            "format": "json",
+                            "options": {
+                                "temperature": float(temperature),
+                                "num_predict": max(160, int(max_tokens)),
+                            },
+                        },
+                        timeout=min(rem, 10.0),
+                    )
+                    if resp.status_code == 200:
+                        txt = (resp.json().get("response") or "").strip()
+                        if txt:
+                            return (
+                                txt,
+                                f"ollama/{self.ollama_model}",
+                                len(prompt.split()),
+                                len(txt.split()),
+                            )
+                except Exception as exc:
+                    self.last_tab_error = type(exc).__name__
+
+        # 2. Multi-lane Open-Weight Gemma load balancer (Google Gemma 4 + OpenRouter Gemma 3)
+        if provider in {"auto", "gemma"} and (deadline - time.monotonic()) >= 8.0:
+            open_lanes: list[tuple[str, str]] = []
+            if self.google_api_key:
+                open_lanes.append(("google_gemma", "gemma-4-26b-a4b-it"))
+            if self.openrouter_api_key:
+                open_lanes.append(("openrouter_gemma", "google/gemma-3-12b-it"))
+
+            if open_lanes:
+                idx = GemmaDigestService._TAB_LANE_COUNTER
+                GemmaDigestService._TAB_LANE_COUNTER = idx + 1
+                lane_kind, lane_model = open_lanes[idx % len(open_lanes)]
+                req_timeout = max(1.0, min(deadline - time.monotonic() - 4.0, 11.0))
+                if lane_kind == "google_gemma":
+                    try:
+                        url = (
+                            "https://generativelanguage.googleapis.com/v1beta/models/"
+                            f"{lane_model}:generateContent?key={self.google_api_key}"
+                        )
+                        response = requests.post(
+                            url,
+                            json={
+                                "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                                "generationConfig": {
+                                    "maxOutputTokens": max(240, int(max_tokens)),
+                                    "temperature": float(temperature),
+                                    "responseMimeType": "application/json",
+                                    "thinkingConfig": {"thinkingLevel": "MINIMAL"},
+                                },
+                            },
+                            timeout=req_timeout,
+                        )
+                        if response.status_code == 200:
+                            data = response.json()
+                            candidates = data.get("candidates") or []
+                            if candidates:
+                                parts = candidates[0].get("content", {}).get("parts") or []
+                                text = "".join(
+                                    part.get("text", "")
+                                    for part in parts
+                                    if part.get("text", "").strip() and not part.get("thought")
+                                ).strip()
+                                if text:
+                                    usage = data.get("usageMetadata") or {}
+                                    return (
+                                        text,
+                                        f"google/{lane_model}",
+                                        int(usage.get("promptTokenCount") or len(prompt.split())),
+                                        int(usage.get("candidatesTokenCount") or len(text.split())),
+                                    )
+                        else:
+                            self.last_tab_error = f"http_{response.status_code}"
+                    except Exception as exc:
+                        self.last_tab_error = type(exc).__name__
+                else:
+                    try:
+                        response = requests.post(
+                            self.OPENROUTER_URL,
+                            headers={
+                                "Authorization": f"Bearer {self.openrouter_api_key}",
+                                "Content-Type": "application/json",
+                                "HTTP-Referer": "https://folivora.tech",
+                                "X-Title": "Folivora Open-Weight Triage",
+                            },
+                            json={
+                                "model": lane_model,
+                                "messages": [{"role": "user", "content": prompt}],
+                                "max_tokens": max(240, int(max_tokens)),
+                                "temperature": float(temperature),
+                                "provider": {"sort": "throughput"},
+                            },
+                            timeout=req_timeout,
+                        )
+                        if response.status_code == 200:
+                            body = response.json()
+                            choices = body.get("choices") or []
+                            if choices:
+                                text = (choices[0].get("message", {}).get("content") or "").strip()
+                                if text:
+                                    usage = body.get("usage") or {}
+                                    return (
+                                        text,
+                                        f"openrouter/{lane_model}",
+                                        int(usage.get("prompt_tokens") or len(prompt.split())),
+                                        int(usage.get("completion_tokens") or len(text.split())),
+                                    )
+                        else:
+                            self.last_tab_error = f"http_{response.status_code}"
+                    except Exception as exc:
+                        self.last_tab_error = type(exc).__name__
+
+        # 3. Fast backup / repair lane (used on tight repair budgets or when SUMMARY_POLISH_PROVIDER=gemini)
+        gemini_model = os.getenv("SUMMARY_GEMINI_MODEL", "gemini-3.1-flash-lite").strip()
+        if provider in {"auto", "gemini"} and self.google_api_key and gemini_model:
+            rem = deadline - time.monotonic()
+            if rem > 0.8:
+                try:
+                    url = (
+                        "https://generativelanguage.googleapis.com/v1beta/models/"
+                        f"{gemini_model}:generateContent?key={self.google_api_key}"
+                    )
+                    response = requests.post(
+                        url,
+                        json={
+                            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                            "generationConfig": {
+                                "maxOutputTokens": max(160, int(max_tokens)),
+                                "temperature": float(temperature),
+                                "responseMimeType": "application/json",
+                                "thinkingConfig": {"thinkingBudget": 0},
+                            },
+                        },
+                        timeout=max(0.8, rem),
+                    )
+                    if response.status_code == 200:
+                        data = response.json()
+                        candidates = data.get("candidates") or []
+                        if candidates:
+                            parts = candidates[0].get("content", {}).get("parts") or []
+                            text = "".join(
+                                part.get("text", "")
+                                for part in parts
+                                if part.get("text", "").strip() and not part.get("thought")
+                            ).strip()
+                            if text:
+                                usage = data.get("usageMetadata") or {}
+                                return (
+                                    text,
+                                    f"google/{gemini_model}",
+                                    int(usage.get("promptTokenCount") or len(prompt.split())),
+                                    int(usage.get("candidatesTokenCount") or len(text.split())),
+                                )
+                        self.last_tab_error = "empty_text"
+                    else:
+                        self.last_tab_error = f"http_{response.status_code}"
+                except Exception as exc:
+                    self.last_tab_error = type(exc).__name__
+                return None, f"google/{gemini_model}", 0, 0
+
+        remaining = deadline - time.monotonic()
+        if remaining > 0.8:
+            return self._call_raw_model(
+                prompt,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                timeout_s=remaining,
+            )
+        return None, "provider-timeout", 0, 0
 
     def synthesize_digest(
         self,

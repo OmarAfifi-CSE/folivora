@@ -669,11 +669,6 @@ button:disabled {
   color: var(--moss-700);
   background: var(--moss-50);
 }
-.btn-QuickDemo-hof {
-  background: var(--moss-50);
-  color: var(--moss-700);
-  border-color: var(--moss-100);
-}
 
 /* ==========================================================================
    STAGE 2: READING DIGEST WORKSPACE

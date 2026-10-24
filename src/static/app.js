@@ -106,9 +106,12 @@ function roundTo(num, decimals = 1) {
 }
 
 function cleanWindowTitle(rawName) {
-  return String(rawName || "Open Tabs")
+  const str = String(rawName || "Open Tabs");
+  if (/DEV Hall of Fame/i.test(str)) {
+    return "65 DEV Article Library";
+  }
+  return str
     .replace(/^Sample Window \d+:\s*/i, "")
-    .replace(/^DEV Hall of Fame:\s*/i, "")
     .replace(/\s*\(\d+\s*(?:Open Tabs|Links Analyzed)\)/i, "")
     .trim();
 }
@@ -730,12 +733,12 @@ function renderWorkspace(data) {
     if (keptCounterLabel) keptCounterLabel.textContent = "Matching tabs";
     if (closedColTitle) {
       closedColTitle.innerHTML = isHallOfFame
-        ? `Other Articles in Collection (<span id="closed-header-count">${data.closed_count}</span>)`
+        ? `Other DEV Articles in Library (<span id="closed-header-count">${data.closed_count}</span>)`
         : `Set Aside — Outside Your Topic (<span id="closed-header-count">${data.closed_count}</span>)`;
     }
     if (closedColSub) {
       closedColSub.textContent = isHallOfFame
-        ? "These articles cover other subjects in the collection. You can still peek at their summaries below."
+        ? "These DEV articles cover other engineering topics in the library. You can still peek at their summaries below."
         : "These tabs cover other topics. You can still peek at their summaries below or close them safely.";
     }
     if (closedCounterLabel) {
@@ -881,8 +884,8 @@ function renderWorkspace(data) {
 
           const hofUnpackHtml = t.is_collection_roundup
             ? `<div class="hof-unpack-banner no-print">
-                <span class="hof-unpack-text">This collection links to 65 curated community articles (600+ min of reading).</span>
-                <button type="button" class="btn-hof-unpack pressable">Open All 65 Articles →</button>
+                <span class="hof-unpack-text">This roundup post links to all 65 DEV Community articles (600+ min of reading).</span>
+                <button type="button" class="btn-hof-unpack pressable">Open All 65 DEV Articles →</button>
               </div>`
             : "";
 

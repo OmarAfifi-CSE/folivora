@@ -1,0 +1,82 @@
+{
+  "hof-00": {
+    "readability": 5,
+    "notes": "Clear four-section breakdown of DEV Community onboarding, profile customization, education tracks, and contribution habits without filler."
+  },
+  "hof-03": {
+    "readability": 4,
+    "notes": "Grounded Developer Wellbeing focus separates practical job-search pacing from the broader community encouragement summary."
+  },
+  "hof-08": {
+    "readability": 4,
+    "notes": "Sparse three-bullet summary stays strictly anchored to low-budget deployment and solo maintenance tradeoffs without inventing metrics."
+  },
+  "hof-13": {
+    "readability": 5,
+    "notes": "Strong SQL CTE and window-function takeaways; focused Databases & SQL view highlights query structure without duplicating general bullets."
+  },
+  "hof-18": {
+    "readability": 5,
+    "notes": "Actionable OpenGraph, title/description, and social preview checklist items with exact section anchors."
+  },
+  "hof-24": {
+    "readability": 5,
+    "notes": "Strips raw terminal dialogue and emojis while preserving the COUI Canvas deduction, DEX bytecode inspection, and persist.log.tag root cause."
+  },
+  "hof-31": {
+    "readability": 4,
+    "notes": "Concise batch-CSV and email delivery breakdown preserving the 1-2 Mbytes constraint and chunked execution steps."
+  },
+  "hof-38": {
+    "readability": 5,
+    "notes": "Preserves the 32 messaging platforms fact and clearly separates the Python local-first gateway architecture from general takeaways."
+  },
+  "hof-44": {
+    "readability": 5,
+    "notes": "Crisp production tool-use synthesis covering schema validation, side-effect boundaries, and failure recovery."
+  },
+  "hof-51": {
+    "readability": 4,
+    "notes": "Captures the probabilistic retry analogy for LLM workflows without slipping into conversational quotes."
+  },
+  "pg-00": {
+    "readability": 5,
+    "notes": "Preserves the 10-day itinerary structure, Tokyo/Kyoto routing, and Shinkansen vs. IC card tradeoffs."
+  },
+  "pg-02": {
+    "readability": 5,
+    "notes": "Accurately retains the 6-hour caffeine cutoff and 20-30% deep-sleep reduction in both general and Health & Sleep views."
+  },
+  "pg-04": {
+    "readability": 5,
+    "notes": "Highlights Daphq's Flutter/Dart TCP chunk streaming, ValueKeys radar UI, and bounded-memory backpressure."
+  },
+  "pg-07": {
+    "readability": 5,
+    "notes": "Preserves OMP_NUM_THREADS=2 and the 340ms to 4.8s p99 latency spike with zero rounded digits."
+  },
+  "pg-10": {
+    "readability": 4,
+    "notes": "Cleanly summarizes the long-form software complexity essay without inventing commands or numeric claims."
+  },
+  "edge-00": {
+    "readability": 5,
+    "notes": "Preserves 4-bit q4f16 quantization, 780MB VRAM footprint, and 38 tokens/sec WebGPU throughput in the Google Gemma lens."
+  },
+  "edge-02": {
+    "readability": 5,
+    "notes": "Retains gen_ai.usage.input_tokens, gen_ai.usage.output_tokens, and negative-lookahead secret scrubbing details."
+  },
+  "edge-04": {
+    "readability": 5,
+    "notes": "Focused Browser Automation view clearly explains Target.createTarget, flatten:true, and REQUEST_RELEASE cleanup."
+  },
+  "edge-06": {
+    "readability": 4,
+    "notes": "Summarizes the 8,000-word hobbyist keyboard guide concisely without fabricating technical benchmarks."
+  },
+  "edge-09": {
+    "readability": 4,
+    "notes": "Separates Desk Setup monitor/lighting notes from general overview while keeping every measurement grounded."
+  }
+}

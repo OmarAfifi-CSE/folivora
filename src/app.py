@@ -658,6 +658,37 @@ if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
+@app.get("/download-extension.zip")
+def download_chrome_extension(request: Request):
+    """Packages `chrome_extension/` as a ready-to-load ZIP archive with the current server URL pre-filled."""
+    ext_dir = ROOT_DIR / "chrome_extension"
+    if not ext_dir.exists():
+        raise HTTPException(status_code=404, detail="Chrome extension directory not found")
+    origin = str(request.base_url).rstrip("/")
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        for file_path in sorted(ext_dir.rglob("*")):
+            if not file_path.is_file():
+                continue
+            rel_name = file_path.relative_to(ext_dir).as_posix()
+            if file_path.name == "popup.html" and origin:
+                content = file_path.read_text(encoding="utf-8").replace(
+                    'value="http://localhost:8000"',
+                    f'value="{origin}"',
+                )
+                zf.writestr(rel_name, content.encode("utf-8"))
+            else:
+                zf.write(str(file_path), arcname=rel_name)
+    return Response(
+        content=buf.getvalue(),
+        media_type="application/zip",
+        headers={
+            "Content-Disposition": 'attachment; filename="folivora-chrome-extension.zip"',
+            "Cache-Control": "no-store",
+        },
+    )
+
+
 @app.get("/favicon.ico")
 def serve_favicon():
     fav = STATIC_DIR / "favicon.svg"

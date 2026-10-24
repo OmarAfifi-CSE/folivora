@@ -1,0 +1,128 @@
+{
+  "dataset_total_rows": 3600,
+  "train_context_rows": 600,
+  "unseen_test_rows": 720,
+  "benchmarks": [
+    {
+      "model": "Reading-Time & Recency Heuristic",
+      "mae": 21.88,
+      "rmse": 26.68,
+      "spearman_r": 0.033,
+      "p90_coverage_pct": null,
+      "within_80pct_band_pct": null
+    },
+    {
+      "model": "HistGradientBoosting (Quantile)",
+      "mae": 3.95,
+      "rmse": 4.94,
+      "spearman_r": 0.967,
+      "p90_coverage_pct": 77.4,
+      "within_80pct_band_pct": 55.3
+    },
+    {
+      "model": "TabPFN (All 7 Features)",
+      "mae": 3.5,
+      "rmse": 4.31,
+      "spearman_r": 0.975,
+      "p90_coverage_pct": 90.0,
+      "within_80pct_band_pct": 77.9,
+      "eval_wall_time_s": 6.22
+    },
+    {
+      "model": "TabPFN Ablation (without `code_block_count`)",
+      "mae": 4.18,
+      "rmse": 5.37,
+      "spearman_r": 0.965,
+      "p90_coverage_pct": 92.1,
+      "within_80pct_band_pct": 80.7
+    },
+    {
+      "model": "TabPFN Ablation (without `intent_match_score`)",
+      "mae": 15.4,
+      "rmse": 18.32,
+      "spearman_r": 0.39,
+      "p90_coverage_pct": 91.7,
+      "within_80pct_band_pct": 81.2
+    },
+    {
+      "model": "TabPFN Ablation (without `age_days`)",
+      "mae": 3.87,
+      "rmse": 4.79,
+      "spearman_r": 0.971,
+      "p90_coverage_pct": 90.4,
+      "within_80pct_band_pct": 78.5
+    }
+  ],
+  "decision_safety_analysis": [
+    {
+      "policy": "Reading-Time Heuristic (score < 45)",
+      "false_close_count": 66,
+      "useful_tabs_total": 276,
+      "false_close_rate_pct": 23.91,
+      "dead_tabs_cleared_pct": 34.9,
+      "utility_conserved_pct": 72.3
+    },
+    {
+      "policy": "HistGradientBoosting Point Triage (P50 < 45)",
+      "false_close_count": 23,
+      "useful_tabs_total": 276,
+      "false_close_rate_pct": 8.33,
+      "dead_tabs_cleared_pct": 95.9,
+      "utility_conserved_pct": 57.9
+    },
+    {
+      "policy": "HistGradientBoosting Upper-Bound Triage (P90 < 45)",
+      "false_close_count": 13,
+      "useful_tabs_total": 276,
+      "false_close_rate_pct": 4.71,
+      "dead_tabs_cleared_pct": 90.8,
+      "utility_conserved_pct": 62.7
+    },
+    {
+      "policy": "TabPFN Point Triage (P50 < 45)",
+      "false_close_count": 23,
+      "useful_tabs_total": 276,
+      "false_close_rate_pct": 8.33,
+      "dead_tabs_cleared_pct": 96.8,
+      "utility_conserved_pct": 57.3
+    },
+    {
+      "policy": "TabPFN Quantile Guardrail (P90 < 45, Shipped)",
+      "false_close_count": 1,
+      "useful_tabs_total": 276,
+      "false_close_rate_pct": 0.36,
+      "dead_tabs_cleared_pct": 86.3,
+      "utility_conserved_pct": 67.6
+    }
+  ],
+  "archetype_breakdown": {
+    "deep_guide": {
+      "count": 1305,
+      "avg_word_count": 1530,
+      "avg_code_blocks": 8.6,
+      "avg_utility_score": 48.8,
+      "pct_safe_to_close_after_7d": 44.6
+    },
+    "long_essay": {
+      "count": 1039,
+      "avg_word_count": 4031,
+      "avg_code_blocks": 0.3,
+      "avg_utility_score": 32.1,
+      "pct_safe_to_close_after_7d": 80.5
+    },
+    "nav_hub": {
+      "count": 512,
+      "avg_word_count": 644,
+      "avg_code_blocks": 0.1,
+      "avg_utility_score": 27.8,
+      "pct_safe_to_close_after_7d": 91.1
+    },
+    "tech_brief": {
+      "count": 744,
+      "avg_word_count": 973,
+      "avg_code_blocks": 4.6,
+      "avg_utility_score": 44.1,
+      "pct_safe_to_close_after_7d": 55.1
+    }
+  }
+}

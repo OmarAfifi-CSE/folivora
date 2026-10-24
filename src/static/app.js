@@ -1,15 +1,14 @@
 /**
- * app.js - Folivora v7 Universal Tab Summarizer, Topic-Focused Card Tabs & DEV Hall of Fame Explorer
+ * app.js - Folivora Reading Digest Workspace
  *
- * Strict Two-Mode State Machine:
- * • Mode A (`data.rated === false` — No interest specified):
- *   Renders clean Executive Summaries (`Complete Tab Summary`) for ALL open tabs with ZERO percentage badges
- *   and hides the "Unrelated / Safe to Close" column (unless a broken 404 link exists).
- * • Mode B (`data.rated === true` — User specified an interest in any life or tech topic):
- *   Displays exact 0–100% relevance ratings, match explanations, and interactive Segmented Card Tabs:
- *   - Tab 1 (Active by default): `🎯 Focused on "<Topic>"` (Synthesized topic overview + section-anchored takeaways)
- *   - Tab 2: `📖 Complete Tab Summary` (General article overview + 4 section-diverse takeaways)
- *   Never stacks both sections simultaneously!
+ * Two-Mode Reading Experience:
+ * • Mode A (`data.rated === false` — No specific topic entered):
+ *   Renders clean, structured summaries for all open tabs without percentage badges
+ *   and hides the "Set Aside" column unless an unreadable 404 link exists.
+ * • Mode B (`data.rated === true` — User entered a topic of interest):
+ *   Displays relevance ratings, match explanations, and interactive card tabs:
+ *   - Tab 1 (Active by default): Focused on the user's topic
+ *   - Tab 2: Full Summary of the page
  */
 
 const state = {
@@ -106,6 +105,14 @@ function roundTo(num, decimals = 1) {
   return Math.round((Number(num) || 0) * f) / f;
 }
 
+function cleanWindowTitle(rawName) {
+  return String(rawName || "Open Tabs")
+    .replace(/^Sample Window \d+:\s*/i, "")
+    .replace(/^DEV Hall of Fame:\s*/i, "")
+    .replace(/\s*\(\d+\s*(?:Open Tabs|Links Analyzed)\)/i, "")
+    .trim();
+}
+
 function extractUrlsFromText(rawText) {
   if (!rawText) return [];
   const matches = String(rawText).match(/https?:\/\/(?:(?!https?:\/\/)[^\s"'<>)\],])+/gi) || [];
@@ -127,7 +134,7 @@ function updateDetectedUrlCounter() {
   if (runLabel) {
     if (urls.length > 0) {
       runLabel.textContent = intentVal
-        ? `Summarize & Score ${urls.length} Link${urls.length === 1 ? "" : "s"} for "${intentVal}"`
+        ? `Summarize & Filter ${urls.length} Link${urls.length === 1 ? "" : "s"} for "${intentVal}"`
         : `Summarize My ${urls.length} Open Link${urls.length === 1 ? "" : "s"}`;
     } else {
       runLabel.textContent = intentVal
@@ -272,13 +279,13 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
   const rawUrlCount = (String(urlsBox ? urlsBox.value : "").match(/https?:\/\//gi) || []).length;
 
   if (activeIntent.length > 240) {
-    showToast("Keep the topic under 240 characters.", "error");
+    showToast("Please keep your topic under 240 characters.", "error");
     (resultsVisible ? liveIntentInput : intentInput)?.focus();
     return;
   }
 
   if (extractedUrls.length === 0 && !chosenPreset) {
-    showToast("Paste at least one link, or choose a sample window or the DEV Hall of Fame.", "error", 5200);
+    showToast("Paste at least one link, or pick a sample window below to get started.", "error", 5000);
     if (!resultsVisible) {
       switchIntakeMode("paste", true);
       urlsBox?.focus();
@@ -287,7 +294,7 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
   }
 
   if (rawUrlCount > 65) {
-    showToast("Only the first 65 links will be analyzed.", "info", 4200);
+    showToast("Summarizing the first 65 links.", "info", 4000);
   }
 
   state.triageController?.abort();
@@ -302,7 +309,7 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
   if (runLabel) {
     runLabel.textContent =
       extractedUrls.length > 0
-        ? `Reading & summarizing ${extractedUrls.length} live links…`
+        ? `Reading & summarizing ${extractedUrls.length} link${extractedUrls.length === 1 ? "" : "s"}…`
         : "Reading & summarizing tabs…";
   }
 
@@ -318,8 +325,8 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
   showToast(
     resultsVisible
       ? activeIntent
-        ? `Re-scoring tabs for “${activeIntent}”…`
-        : "Rebuilding the unrated summary…"
+        ? `Focusing on “${activeIntent}”…`
+        : "Showing summaries for all tabs…"
       : "Reading and summarizing your tabs…",
     "info",
     0
@@ -360,7 +367,7 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
     console.error("Triage failed:", err);
     if (requestId === state.triageRequestId) {
       setAppBusy(false);
-      showToast(`Could not analyze tabs: ${err.message}`, "error", 6000);
+      showToast(`Could not summarize tabs: ${err.message}`, "error", 6000);
     }
   } finally {
     if (requestId === state.triageRequestId) {
@@ -373,7 +380,7 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
 
 async function upgradeDigestWithGemma(data, requestId) {
   const badge = $("gemma-source-badge");
-  if (badge) badge.textContent = "Verifying summary…";
+  if (badge) badge.textContent = "Refining…";
 
   state.digestController?.abort();
   const controller = new AbortController();
@@ -406,26 +413,12 @@ async function upgradeDigestWithGemma(data, requestId) {
       state.lastResult.digest_model = gemmaData.model;
       const dirEl = $("directive-text");
       if (dirEl) dirEl.textContent = gemmaData.spoken_digest;
-      if (badge) badge.textContent = "Gemma Verified";
-    } else if (badge) {
-      badge.textContent = "Deterministic";
     }
-
-    if (
-      gemmaData &&
-      Array.isArray(gemmaData.sentry_spans) &&
-      gemmaData.sentry_spans.length > 0
-    ) {
-      state.lastResult.sentry_spans = [
-        ...(state.lastResult.sentry_spans || []),
-        ...gemmaData.sentry_spans,
-      ];
-      renderSentrySpans(state.lastResult.sentry_spans);
-    }
+    if (badge) badge.textContent = "Ready";
   } catch (e) {
-    if (e.name !== "AbortError") console.warn("Gemma upgrade skipped:", e);
+    if (e.name !== "AbortError") console.warn("Digest refinement skipped:", e);
     if (requestId === state.triageRequestId && badge) {
-      badge.textContent = "Deterministic";
+      badge.textContent = "Ready";
     }
   } finally {
     if (requestId === state.triageRequestId) state.digestController = null;
@@ -454,7 +447,7 @@ function disableAllPolishActions() {
   });
 }
 
-function setCardPolishState(cardEl, status, note = "", source = "") {
+function setCardPolishState(cardEl, status, note = "") {
   if (!cardEl) return;
   const badge = cardEl.querySelector("[data-polish-badge]");
   const noteEl = cardEl.querySelector("[data-polish-note]");
@@ -466,30 +459,21 @@ function setCardPolishState(cardEl, status, note = "", source = "") {
     badge.className = "summary-source-badge";
     badge.classList.add("hidden");
     if (normalized === "polished") {
-      badge.textContent =
-        source === "gemini_verified"
-          ? "Gemini grounded"
-          : source === "gemma_verified"
-            ? "Gemma grounded"
-            : "AI grounded";
+      badge.textContent = "Refined";
       badge.classList.add("verified");
       badge.classList.remove("hidden");
-    } else if (normalized === "fallback") {
-      badge.textContent = "Python summary";
-      badge.classList.add("fallback");
-      badge.classList.remove("hidden");
     } else if (normalized === "pending") {
-      badge.textContent = "Polishing…";
+      badge.textContent = "Refining…";
       badge.classList.remove("hidden");
     }
   }
 
   const defaultNotes = {
-    polished: "Grounded in this page's evidence.",
-    fallback: "Deterministic Python summary; the AI rewrite did not pass grounding checks.",
-    pending: "Improving clarity without adding facts…",
-    ready: "Deterministic Python summary · AI polish available.",
-    unavailable: "Deterministic Python summary.",
+    polished: "Key points refined directly from this page.",
+    fallback: "Key points extracted directly from this page.",
+    pending: "Refining summary for easier reading…",
+    ready: "Key points extracted directly from this page.",
+    unavailable: "Key points extracted directly from this page.",
   };
   if (noteEl) noteEl.textContent = note || defaultNotes[normalized] || defaultNotes.ready;
 
@@ -498,20 +482,17 @@ function setCardPolishState(cardEl, status, note = "", source = "") {
     button.hidden = false;
     button.disabled = false;
     if (normalized === "polished") {
-      button.textContent = "Polished";
+      button.textContent = "Refined";
       button.disabled = true;
       button.hidden = true;
     } else if (normalized === "pending") {
-      button.textContent = "Polishing…";
+      button.textContent = "Refining…";
       button.disabled = true;
-    } else if (normalized === "fallback") {
-      button.textContent = "Python summary";
+    } else if (normalized === "fallback" || normalized === "unavailable") {
       button.disabled = true;
-      button.hidden = true;
-    } else if (normalized === "unavailable") {
       button.hidden = true;
     } else {
-      button.textContent = "Polish with AI";
+      button.textContent = "Refine wording";
     }
   }
 }
@@ -535,13 +516,13 @@ function updateCardSummaryDom(cardEl, tabId, result, data) {
 
   const generalMeta = cardEl.querySelector("[data-general-meta]");
   if (generalMeta) {
-    generalMeta.textContent = `Reads in ~${sumReadSec} sec (vs. ${fullReadMin} min full article)`;
+    generalMeta.textContent = `~${sumReadSec} sec read (vs. ${fullReadMin} min full page)`;
   }
   const generalTabMeta = cardEl.querySelector("[data-general-tab-meta]");
   if (generalTabMeta) generalTabMeta.textContent = `~${sumReadSec}s read`;
   const readTimePill = cardEl.querySelector("[data-card-readtime]");
   if (readTimePill) {
-    readTimePill.textContent = `Full article: ${fullReadMin} min → Summary: ~${sumReadSec}s`;
+    readTimePill.textContent = `${fullReadMin} min read → ~${sumReadSec}s summary`;
   }
 
   if (interest && interest.active) {
@@ -556,20 +537,12 @@ function updateCardSummaryDom(cardEl, tabId, result, data) {
     const interestMeta = cardEl.querySelector("[data-interest-meta]");
     if (interestMeta) {
       const pct = Math.round(Number(sourceTab.p50_score || 0));
-      interestMeta.textContent = `${pct}% Relevance · ${Number(interest.mention_count || 0)} mentions in text`;
+      interestMeta.textContent = `${pct}% match · ${Number(interest.mention_count || 0)} mentions`;
     }
   }
 
   const status = result.polish_status || "ready";
-  const reasons =
-    result.summary_validation && Array.isArray(result.summary_validation.reasons)
-      ? result.summary_validation.reasons
-      : [];
-  const fallbackNote =
-    status === "fallback" && reasons.length > 0
-      ? `Kept verified Python summary — AI draft rejected by grounding gate (${reasons.slice(0, 2).join(", ")}).`
-      : "";
-  setCardPolishState(cardEl, status, fallbackNote, result.summary_source || "");
+  setCardPolishState(cardEl, status);
 }
 
 function updatePolishedCards(data, results) {
@@ -592,7 +565,7 @@ function maybeRefreshDigestAfterPolish(data, requestId, previousMinutes) {
 
 async function upgradeTabSummaries(data, requestId, tabIds, { manual = false } = {}) {
   if (!data || !data.job_id) {
-    if (manual) showToast("Polish is unavailable for this result. Run triage again.", "info");
+    if (manual) showToast("Please re-run your summary to refine this card.", "info");
     return;
   }
   const ids = [...new Set((tabIds || []).map((id) => String(id)).filter(Boolean))];
@@ -602,7 +575,7 @@ async function upgradeTabSummaries(data, requestId, tabIds, { manual = false } =
   state.summaryPolishControllers.add(controller);
   ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "pending"));
   setSummaryPolishStatus(
-    manual ? "Polishing this summary with grounded AI…" : `Polishing ${ids.length} summaries with grounded AI…`
+    manual ? "Refining this summary…" : "Refining top summaries for easier reading…"
   );
   const previousMinutes = Number(data.minutes_saved || 0);
 
@@ -615,30 +588,14 @@ async function upgradeTabSummaries(data, requestId, tabIds, { manual = false } =
     });
     if (requestId !== state.triageRequestId) return;
     if (!resp.ok) {
-      let detail = `HTTP ${resp.status}`;
-      try {
-        const errorPayload = await resp.json();
-        if (errorPayload && errorPayload.detail) detail = String(errorPayload.detail);
-      } catch (error) {
-        // Keep the HTTP status.
-      }
-      if (resp.status === 404 || resp.status === 410) {
+      if (resp.status === 404 || resp.status === 410 || resp.status === 503) {
         data.polish_available = false;
         disableAllPolishActions();
         ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "unavailable"));
-        setSummaryPolishStatus("Polish session expired. Deterministic summaries remain active.");
-      } else if (resp.status === 422) {
-        ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "unavailable"));
-        setSummaryPolishStatus("That tab is no longer part of this polish session.");
-      } else if (resp.status === 503) {
-        data.polish_available = false;
-        disableAllPolishActions();
-        ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "unavailable"));
-        setSummaryPolishStatus("Grounded AI polish is unavailable. Deterministic summaries remain active.");
       } else {
-        setSummaryPolishStatus("AI polish could not start. Deterministic summaries remain active.");
+        ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "ready"));
       }
-      if (manual) showToast(detail, "error", 5000);
+      setSummaryPolishStatus("");
       return;
     }
 
@@ -648,33 +605,13 @@ async function upgradeTabSummaries(data, requestId, tabIds, { manual = false } =
     updatePolishedCards(data, results);
     if (payload.minutes_saved != null) data.minutes_saved = Number(payload.minutes_saved);
 
-    const resultValues = Object.values(results);
-    const polishedCount = resultValues.filter((result) => result.polish_status === "polished").length;
-    const fallbackCount = resultValues.filter((result) => result.polish_status === "fallback").length;
-    const pendingCount = resultValues.filter((result) => result.polish_status === "pending").length;
-    if (polishedCount > 0 && fallbackCount === 0) {
-      setSummaryPolishStatus(
-        `${polishedCount} summar${polishedCount === 1 ? "y" : "ies"} polished and grounded in page evidence.`
-      );
-    } else if (polishedCount > 0 && fallbackCount > 0) {
-      setSummaryPolishStatus(
-        `${polishedCount} polished; ${fallbackCount} kept the deterministic version after grounding checks.`
-      );
-    } else if (fallbackCount > 0) {
-      setSummaryPolishStatus(
-        `${fallbackCount} rewrite${fallbackCount === 1 ? "" : "s"} could not be verified; deterministic summaries remain active.`
-      );
-    } else if (pendingCount > 0) {
-      setSummaryPolishStatus("A summary is already being polished. The deterministic version remains visible.");
-    }
+    setSummaryPolishStatus("");
     maybeRefreshDigestAfterPolish(data, requestId, previousMinutes);
   } catch (error) {
     if (error.name === "AbortError") return;
     if (requestId !== state.triageRequestId) return;
-    console.warn("Grounded tab polish skipped:", error);
     ids.forEach((tabId) => setCardPolishState(cardForTab(tabId), "ready"));
-    setSummaryPolishStatus("AI polish is unavailable. Deterministic summaries remain active.");
-    if (manual) showToast("AI polish is unavailable right now.", "error");
+    setSummaryPolishStatus("");
   } finally {
     state.summaryPolishControllers.delete(controller);
   }
@@ -682,48 +619,45 @@ async function upgradeTabSummaries(data, requestId, tabIds, { manual = false } =
 
 function polishSingleTabSummary(tabId, button) {
   if (!state.lastResult || !state.lastResult.job_id) {
-    showToast("Polish is unavailable for this result. Run triage again.", "info");
+    showToast("Please re-run your summary to refine this card.", "info");
     return;
   }
   if (button) {
     button.disabled = true;
-    button.textContent = "Polishing…";
+    button.textContent = "Refining…";
   }
   upgradeTabSummaries(state.lastResult, state.triageRequestId, [tabId], { manual: true });
 }
 
 function renderWorkspace(data) {
   const isRated = Boolean(data.rated);
-  $("pile-title-display").textContent = data.pile_name || "Open Tabs";
+  $("pile-title-display").textContent = cleanWindowTitle(data.pile_name);
   $("raw-tab-count").textContent = data.total_tabs;
   $("glance-minutes").textContent = `${data.minutes_saved} min`;
   $("glance-closed").textContent = data.closed_count;
   $("glance-kept").textContent = data.kept_count;
   const glanceWords = $("glance-words");
   if (glanceWords) glanceWords.textContent = Number(data.closed_words || 0).toLocaleString();
-  $("glance-latency").textContent = `TabPFN: ${data.ml_latency_ms} ms`;
 
   const badge = $("gemma-source-badge");
-  if (badge) badge.textContent = isRated ? "Verifying summary…" : "Deterministic";
+  if (badge) badge.textContent = isRated ? "Refining…" : "Ready";
 
   const polishTargets = new Set((data.polish_targets || []).map((id) => String(id)));
   const polishAvailable = Boolean(data.polish_available && data.job_id);
   setSummaryPolishStatus(
-    polishAvailable
-      ? polishTargets.size > 0
-        ? `Queued ${polishTargets.size} summaries for grounded AI polish.`
-        : "Deterministic summaries ready. AI polish is available per card."
-      : "Deterministic summaries ready."
+    polishAvailable && polishTargets.size > 0
+      ? "Refining top summaries for easier reading…"
+      : ""
   );
 
   const focusPill = $("active-focus-pill");
   const clearLiveBtn = $("btn-clear-live-filter");
   if (focusPill) {
     if (isRated && data.effective_intent) {
-      focusPill.textContent = `Filtered by Interest: "${data.effective_intent}"`;
+      focusPill.textContent = `Focused on: "${data.effective_intent}"`;
       clearLiveBtn?.classList.remove("hidden");
     } else {
-      focusPill.textContent = "Mode: Summarize All Tabs (No Rating)";
+      focusPill.textContent = "Showing all tabs";
       clearLiveBtn?.classList.add("hidden");
     }
   }
@@ -764,56 +698,48 @@ function renderWorkspace(data) {
     closePanel?.classList.toggle("hidden", !hasClosed);
     globalSwitcher?.classList.add("hidden");
     if (keptColTitle) keptColTitle.innerHTML = `All Open Tabs Summarized (<span id="kept-header-count">${data.kept_count}</span>)`;
-    if (keptColSub) keptColSub.textContent = "Complete executive summary and section-anchored takeaways from every page—type any topic above to unlock a Topic-Focused Tab.";
+    if (keptColSub) keptColSub.textContent = "Clear overview and key takeaways from every page — type any topic above to filter by what you're looking for.";
     if (keptCounterLabel) keptCounterLabel.textContent = `Tabs summarized (${Number(data.total_words || 0).toLocaleString()} words)`;
-    if (closedColTitle) closedColTitle.innerHTML = `Unreadable or Broken Tabs (<span id="closed-header-count">${data.closed_count}</span>)`;
-    if (closedColSub) closedColSub.textContent = "These links could not be read and can be safely skipped.";
+    if (closedColTitle) closedColTitle.innerHTML = `Unreadable Links (<span id="closed-header-count">${data.closed_count}</span>)`;
+    if (closedColSub) closedColSub.textContent = "These pages could not be opened and can be safely skipped.";
     if (closedCounterLabel) {
-      closedCounterLabel.innerHTML = `Broken or unreadable tabs (<span id="glance-words">${Number(data.closed_words || 0).toLocaleString()}</span> words)`;
+      closedCounterLabel.innerHTML = `Unreadable links (<span id="glance-words">${Number(data.closed_words || 0).toLocaleString()}</span> words)`;
     }
   } else if (data.closed_count === 0) {
     splitContainer?.classList.add("single-col-mode");
     closePanel?.classList.add("hidden");
     globalSwitcher?.classList.toggle("hidden", data.kept_count === 0);
-    if (keptColTitle) keptColTitle.innerHTML = `Matches Your Interest (<span id="kept-header-count">${data.kept_count}</span>)`;
-    if (keptColSub) keptColSub.textContent = `All ${data.kept_count} open tabs match "${data.effective_intent}" — switch between the Topic-Focused Tab and Complete Summary on any card.`;
+    if (keptColTitle) keptColTitle.innerHTML = `Worth Your Time (<span id="kept-header-count">${data.kept_count}</span>)`;
+    if (keptColSub) keptColSub.textContent = `All ${data.kept_count} open tabs cover "${data.effective_intent}" — switch between Topic Focus and Full Summary on any card.`;
     if (keptCounterLabel) keptCounterLabel.textContent = "Matching tabs";
     if (closedColTitle) {
-      closedColTitle.innerHTML = isHallOfFame
-        ? `All Hall of Fame Exhibits Match (<span id="closed-header-count">${data.closed_count}</span>)`
-        : `Unrelated to Your Interest — Safe to Close (<span id="closed-header-count">${data.closed_count}</span>)`;
+      closedColTitle.innerHTML = `Set Aside (<span id="closed-header-count">${data.closed_count}</span>)`;
     }
     if (closedColSub) {
-      closedColSub.textContent = isHallOfFame
-        ? `Every exhibit in the collection matches "${data.effective_intent}".`
-        : "These tabs don't cover the topic you asked for right now.";
+      closedColSub.textContent = `Every open page covers "${data.effective_intent}".`;
     }
     if (closedCounterLabel) {
-      closedCounterLabel.innerHTML = `${
-        isHallOfFame ? "Other Hall of Fame exhibits" : "Unrelated tabs to close"
-      } (0 min · <span id="glance-words">0</span> words)`;
+      closedCounterLabel.innerHTML = `Set aside (0 min · <span id="glance-words">0</span> words)`;
     }
   } else {
     splitContainer?.classList.remove("single-col-mode");
     closePanel?.classList.remove("hidden");
     globalSwitcher?.classList.toggle("hidden", data.kept_count === 0);
-    if (keptColTitle) keptColTitle.innerHTML = `Matches Your Interest (<span id="kept-header-count">${data.kept_count}</span>)`;
-    if (keptColSub) keptColSub.textContent = `Ranked by relevance to "${data.effective_intent}" — click the tabs on any card to switch between Topic Focus and Complete Summary.`;
-    if (keptCounterLabel) keptCounterLabel.textContent = "Relevant tabs kept";
+    if (keptColTitle) keptColTitle.innerHTML = `Worth Your Time (<span id="kept-header-count">${data.kept_count}</span>)`;
+    if (keptColSub) keptColSub.textContent = `Ranked by how closely each page covers "${data.effective_intent}" — switch between Topic Focus and Full Summary on any card.`;
+    if (keptCounterLabel) keptCounterLabel.textContent = "Matching tabs";
     if (closedColTitle) {
       closedColTitle.innerHTML = isHallOfFame
-        ? `Other Hall of Fame Exhibits (<span id="closed-header-count">${data.closed_count}</span>)`
-        : `Unrelated to Your Interest — Safe to Close (<span id="closed-header-count">${data.closed_count}</span>)`;
+        ? `Other Articles in Collection (<span id="closed-header-count">${data.closed_count}</span>)`
+        : `Set Aside — Outside Your Topic (<span id="closed-header-count">${data.closed_count}</span>)`;
     }
     if (closedColSub) {
       closedColSub.textContent = isHallOfFame
-        ? `These masterpieces live in other Hall of Fame wings. Nothing is deleted—open them anytime or filter by another topic.`
-        : "These tabs don't cover the topic you asked for right now.";
+        ? "These articles cover other subjects in the collection. You can still peek at their summaries below."
+        : "These tabs cover other topics. You can still peek at their summaries below or close them safely.";
     }
     if (closedCounterLabel) {
-      closedCounterLabel.innerHTML = isHallOfFame
-        ? `Other exhibits not matched (${data.closed_read_min || data.minutes_saved} min · <span id="glance-words">${Number(data.closed_words || 0).toLocaleString()}</span> words)`
-        : `Unrelated tabs to close (${data.closed_read_min || data.minutes_saved} min · <span id="glance-words">${Number(data.closed_words || 0).toLocaleString()}</span> words)`;
+      closedCounterLabel.innerHTML = `Set aside (${data.closed_read_min || data.minutes_saved} min · <span id="glance-words">${Number(data.closed_words || 0).toLocaleString()}</span> words)`;
     }
   }
 
@@ -851,7 +777,7 @@ function renderWorkspace(data) {
     tabStrip.innerHTML = tabsHtml + overflowHtml;
   }
 
-  // 2. Browserbase Session Banner
+  // 2. Cloud Browser Session Banner
   const bbBanner = $("bb-session-banner");
   const bb = data.browserbase || {};
   if (bbBanner) {
@@ -859,8 +785,8 @@ function renderWorkspace(data) {
       bbBanner.classList.remove("hidden");
       const cdpPages = Number(bb.cdp_pages_inspected || 0);
       $("bb-session-text").textContent =
-        `Browserbase Cloud Chromium Session: ${bb.session_id.slice(0, 8)}…` +
-        (cdpPages > 0 ? ` · ${cdpPages} live DOM page${cdpPages === 1 ? "" : "s"} inspected over CDP` : "");
+        "Live cloud browser session active" +
+        (cdpPages > 0 ? ` · ${cdpPages} page${cdpPages === 1 ? "" : "s"} opened` : "");
       const dbgLink = $("bb-debugger-link");
       if (dbgLink && bb.debugger_url) {
         dbgLink.href = bb.debugger_url;
@@ -876,7 +802,7 @@ function renderWorkspace(data) {
     }
   }
 
-  // 3. Left / Main Column: Summarized Cards with Interactive Segmented Tabs!
+  // 3. Main Column: Summarized Cards with Interactive Segmented Tabs
   const keptGrid = $("kept-tabs-grid");
   if (keptGrid) {
     if (!data.kept_tabs || data.kept_tabs.length === 0) {
@@ -884,19 +810,19 @@ function renderWorkspace(data) {
         ? `
         <div class="kept-card">
           <p class="tab-overview">
-            <strong>0 of your ${data.total_tabs} open tabs matched "${escapeHtml(data.effective_intent)}".</strong>
-            None of the open pages discuss that topic in depth. Their general summaries are available on the right, or you can switch to unrated summaries of all tabs:
+            <strong>None of your ${data.total_tabs} open tabs focus on "${escapeHtml(data.effective_intent)}".</strong>
+            Their general summaries are available on the right, or you can view full summaries of every open tab:
           </p>
           <div>
             <button type="button" id="btn-empty-show-all" class="btn-action-outline pressable">
-              Show General Summaries of All ${data.total_tabs} Tabs (No Filter)
+              Show Summaries for All ${data.total_tabs} Tabs
             </button>
           </div>
         </div>`
         : `
         <div class="kept-card">
           <p class="tab-overview">
-            <strong>No readable tabs were found in that pile.</strong>
+            <strong>No readable pages were found.</strong>
             Try another sample window or paste different links.
           </p>
         </div>`;
@@ -915,32 +841,30 @@ function renderWorkspace(data) {
           const hasInterestTab = Boolean(isRated && interestSec && interestSec.active);
           const isPolishTarget = polishTargets.has(String(t.id));
           const polishNote = isPolishTarget
-            ? "Queued for grounded polish…"
-            : polishAvailable
-            ? "Deterministic Python summary · AI rewrite available."
-            : "Deterministic Python summary.";
+            ? "Refining summary for easier reading…"
+            : "Key points extracted directly from this page.";
           const polishButtonHtml = polishAvailable && data.job_id
             ? `<button type="button" class="btn-polish-summary pressable" data-polish-tab="${escapeHtml(String(t.id))}" ${
                 isPolishTarget ? "disabled" : ""
-              }>${isPolishTarget ? "Polishing…" : "Polish with AI"}</button>`
+              }>${isPolishTarget ? "Refining…" : "Refine wording"}</button>`
             : "";
 
           const circumference = 69.1;
           const dashOffset = roundTo(circumference * (1 - Math.min(100, Math.max(4, pct)) / 100), 1);
           const scoreBoxHtml = isRated
-            ? `<div class="radial-score-wrap" title="${pct}% relevance match">
+            ? `<div class="radial-score-wrap" title="${pct}% topic match">
                 <svg class="radial-svg" viewBox="0 0 28 28" aria-hidden="true">
                   <circle class="radial-bg" cx="14" cy="14" r="11"></circle>
                   <circle class="radial-fill" cx="14" cy="14" r="11" stroke-dasharray="${circumference}" stroke-dashoffset="${dashOffset}"></circle>
                 </svg>
-                <span class="radial-label">${pct}% Match</span>
+                <span class="radial-label">${pct}% match</span>
               </div>`
             : `<div class="score-box">
-                <span class="readtime-pill font-mono" data-card-readtime>Full article: ${fullReadMin} min → Summary: ~${sumReadSec}s</span>
+                <span class="readtime-pill font-mono" data-card-readtime>${fullReadMin} min read → ~${sumReadSec}s summary</span>
               </div>`;
 
           const wingPillHtml = t.wing
-            ? `<span class="wing-pill">🏛️ Hall of Fame · ${escapeHtml(t.wing)}</span>`
+            ? `<span class="wing-pill">${escapeHtml(t.wing)}</span>`
             : "";
           const authorPillHtml = t.author
             ? `<span class="author-pill">by ${escapeHtml(t.author)}</span>`
@@ -955,37 +879,34 @@ function renderWorkspace(data) {
                 </div>`
               : "";
 
-          // Special 1-click unpack banner if the user pasted the DEV Hall of Fame Roundup URL
           const hofUnpackHtml = t.is_collection_roundup
             ? `<div class="hof-unpack-banner no-print">
-                <span class="hof-unpack-text">🏛️ This roundup post links to all 65 DEV Hall of Fame masterpieces (600+ min total reading).</span>
-                <button type="button" class="btn-hof-unpack pressable">Unpack &amp; Filter All 65 Hall of Fame Articles →</button>
+                <span class="hof-unpack-text">This collection links to 65 curated community articles (600+ min of reading).</span>
+                <button type="button" class="btn-hof-unpack pressable">Open All 65 Articles →</button>
               </div>`
             : "";
 
-          // Segmented Tab Bar inside the card (shown when a topic match exists!)
           const segmentedTabsHtml = hasInterestTab
             ? `<div class="card-tabs-bar no-print" role="tablist" aria-label="Summary view for ${escapeHtml(t.title)}">
                 <button type="button" id="${cardDomId}-tab-interest" class="card-tab-btn active pressable" data-card-tab="interest" role="tab" aria-selected="true" aria-controls="${cardDomId}-panel-interest" tabindex="0">
-                  <span>🎯 ${escapeHtml(interestSec.headline)}</span>
+                  <span>${escapeHtml(interestSec.headline)}</span>
                   <span class="card-tab-meta">${interestSec.mention_count} mentions</span>
                 </button>
                 <button type="button" id="${cardDomId}-tab-general" class="card-tab-btn pressable" data-card-tab="general" role="tab" aria-selected="false" aria-controls="${cardDomId}-panel-general" tabindex="-1">
-                  <span>📖 Complete Tab Summary</span>
+                  <span>Full Summary</span>
                   <span class="card-tab-meta" data-general-tab-meta>~${sumReadSec}s read</span>
                 </button>
               </div>`
             : "";
 
-          // Panel A: Topic-Focused Synthesis (Active by default when `hasInterestTab` is true!)
           const interestPanelHtml = hasInterestTab
             ? `<div id="${cardDomId}-panel-interest" class="section-block section-interest card-tab-panel" data-card-panel="interest" role="tabpanel" aria-labelledby="${cardDomId}-tab-interest" tabindex="0">
                 <div class="section-kicker-row">
                   <span class="section-kicker">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
                     <span>${escapeHtml(interestSec.headline)}</span>
                   </span>
-                  <span class="section-time-note" data-interest-meta>${pct}% Relevance · ${interestSec.mention_count} mentions in text</span>
+                  <span class="section-time-note" data-interest-meta>${pct}% match · ${interestSec.mention_count} mentions</span>
                 </div>
                 <div class="interest-why-line" data-interest-why>${escapeHtml(interestSec.why_relevant)}</div>
                 <ul class="takeaways-list" data-interest-points>
@@ -996,17 +917,16 @@ function renderWorkspace(data) {
               </div>`
             : "";
 
-          // Panel B: Complete Tab Summary (Hidden initially when `hasInterestTab` is true; shown immediately in Unrated mode!)
           const generalPanelHiddenClass = hasInterestTab ? "hidden" : "";
           const generalPanelHiddenAttr = hasInterestTab ? "hidden" : "";
           const generalPanelHtml = `
-            <div id="${cardDomId}-panel-general" class="section-block section-general card-tab-panel ${generalPanelHiddenClass}" data-card-panel="general" ${hasInterestTab ? `role="tabpanel" aria-labelledby="${cardDomId}-tab-general"` : `role="region" aria-label="Complete Tab Summary"`} tabindex="0" ${generalPanelHiddenAttr}>
+            <div id="${cardDomId}-panel-general" class="section-block section-general card-tab-panel ${generalPanelHiddenClass}" data-card-panel="general" ${hasInterestTab ? `role="tabpanel" aria-labelledby="${cardDomId}-tab-general"` : `role="region" aria-label="Full Summary"`} tabindex="0" ${generalPanelHiddenAttr}>
               <div class="section-kicker-row">
                 <span class="section-kicker">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                  <span>Complete Tab Summary</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                  <span>Key Takeaways</span>
                 </span>
-                <span class="section-time-note" data-general-meta>Reads in ~${sumReadSec} sec (vs. ${fullReadMin} min full article)</span>
+                <span class="section-time-note" data-general-meta>~${sumReadSec} sec read (vs. ${fullReadMin} min full page)</span>
               </div>
               <p class="tab-overview" data-summary-overview>${escapeHtml(overview)}</p>
               <ul class="takeaways-list" data-summary-takeaways>
@@ -1015,14 +935,12 @@ function renderWorkspace(data) {
             </div>`;
 
           return `
-          <article class="kept-card" data-tab-id="${escapeHtml(String(t.id))}" data-summary-source="deterministic" aria-labelledby="${cardDomId}-title">
+          <article class="kept-card" data-tab-id="${escapeHtml(String(t.id))}" data-summary-source="ready" aria-labelledby="${cardDomId}-title">
             <div class="kept-card-top">
               <div class="kept-title-group">
                 <div class="domain-meta font-mono">
                   <span class="domain-pill">${escapeHtml(t.domain)}</span>
-                  <span>${Number(t.word_count || 0).toLocaleString()} words (${fullReadMin} min full article)</span>
-                  <span>·</span>
-                  <span>${t.heading_count} sections</span>
+                  <span>${fullReadMin} min read (${Number(t.word_count || 0).toLocaleString()} words)</span>
                 </div>
                 <a id="${cardDomId}-title" href="${escapeHtml(t.url)}" target="_blank" rel="noopener" class="kept-title">${escapeHtml(t.title)}</a>
               </div>
@@ -1038,7 +956,7 @@ function renderWorkspace(data) {
               polishAvailable && data.job_id
                 ? `<div class="summary-polish-row no-print">
                     <span class="summary-polish-label">
-                      <span class="summary-source-badge ${isPolishTarget ? "" : "hidden"}" data-polish-badge>${isPolishTarget ? "Polishing…" : ""}</span>
+                      <span class="summary-source-badge ${isPolishTarget ? "" : "hidden"}" data-polish-badge>${isPolishTarget ? "Refining…" : ""}</span>
                       <span class="summary-polish-note" data-polish-note>${escapeHtml(polishNote)}</span>
                     </span>
                     ${polishButtonHtml}
@@ -1049,7 +967,6 @@ function renderWorkspace(data) {
         })
         .join("");
 
-      // Bind per-card Segmented Tab click and keyboard listeners
       keptGrid.querySelectorAll(".card-tabs-bar").forEach((bar) => {
         bindRovingTablist(bar, ".card-tab-btn");
       });
@@ -1061,7 +978,6 @@ function renderWorkspace(data) {
         });
       });
 
-      // Bind Hall of Fame Roundup unpack button if present
       keptGrid.querySelectorAll(".btn-hof-unpack").forEach((btn) => {
         btn.addEventListener("click", () => {
           runTriage({ forcePreset: "dev_hall_of_fame_pile" });
@@ -1080,16 +996,14 @@ function renderWorkspace(data) {
     }
   }
 
-  // 4. Right Column: Unrelated / Safe to Close Tabs
+  // 4. Right Column: Set Aside Tabs
   const closedList = $("closed-tabs-list");
   if (closedList) {
     if (!data.closed_tabs || data.closed_tabs.length === 0) {
       closedList.innerHTML = `<div class="closed-item"><p class="closed-plain-why">${
         !isRated
-          ? "No broken or unreadable tabs—nothing to close."
-          : data.preset_key === "dev_hall_of_fame_pile"
-          ? "Every Hall of Fame exhibit matches this topic."
-          : "Every tab matched your interest—nothing to close."
+          ? "All open links were summarized."
+          : "Every open tab matched your topic."
       }</p></div>`;
     } else {
       const openAttr = data.kept_count === 0 ? "open" : "";
@@ -1098,13 +1012,13 @@ function renderWorkspace(data) {
           const pct = Math.round(t.p50_score);
           const fullReadMin = t.full_read_min || roundTo(Number(t.word_count || 0) / 220, 1);
           const sumReadSec = t.summary_read_sec || 25;
-          const whyText = t.match_explanation || t.verdict_reason || `Low relevance (${pct}%)`;
+          const whyText = t.match_explanation || t.verdict_reason || `Outside your topic (${pct}% match)`;
           const overview = t.overview || "";
           const takeaways = Array.isArray(t.takeaways) ? t.takeaways : [];
           const peekHtml =
             overview || takeaways.length > 0
               ? `<details class="closed-peek" ${openAttr}>
-                  <summary>Complete Tab Summary (~${sumReadSec}s read · skips ${fullReadMin} min full article)</summary>
+                  <summary>Peek at summary (~${sumReadSec}s read · ${fullReadMin} min article)</summary>
                   <div class="closed-peek-body">
                     <p>${escapeHtml(overview)}</p>
                     ${
@@ -1123,7 +1037,7 @@ function renderWorkspace(data) {
           <div class="closed-item">
             <div class="closed-top">
               <a href="${escapeHtml(t.url)}" target="_blank" rel="noopener" class="closed-title">${escapeHtml(t.title)}</a>
-              <span class="low-score-pill font-mono">${isRated ? `${pct}% Match · ${fullReadMin}m article` : "Unreadable"}</span>
+              <span class="low-score-pill font-mono">${isRated ? `${fullReadMin}m read` : "Unreadable"}</span>
             </div>
             <div class="closed-plain-why">${escapeHtml(whyText)}</div>
             ${peekHtml}
@@ -1132,28 +1046,6 @@ function renderWorkspace(data) {
         .join("");
     }
   }
-
-  renderSentrySpans(data.sentry_spans || []);
-}
-
-function renderSentrySpans(spans) {
-  const container = $("sentry-spans-list");
-  if (!container) return;
-  container.innerHTML = spans
-    .map(
-      (s) => `
-      <div class="span-item">
-        <div class="span-top">
-          <span>${escapeHtml(s.span_name)}</span>
-          <span>${s.latency_ms} ms</span>
-        </div>
-        <div class="span-sub">
-          model: ${escapeHtml(s["gen_ai.request.model"])} ·
-          in_tokens: ${s["gen_ai.usage.input_tokens"]} · out_tokens: ${s["gen_ai.usage.output_tokens"]}
-        </div>
-      </div>`
-    )
-    .join("");
 }
 
 function stopAllAudio() {
@@ -1178,7 +1070,7 @@ function updateAudioButtonsUI(playing) {
   if (heroPlayIcon) heroPlayIcon.classList.toggle("hidden", playing);
   if (heroPauseIcon) heroPauseIcon.classList.toggle("hidden", !playing);
   if (heroLabel) {
-    heroLabel.textContent = playing ? "Pause Voice Summary" : "Listen to Summary (15s)";
+    heroLabel.textContent = playing ? "Pause Audio" : "Listen (15s)";
   }
 }
 
@@ -1207,7 +1099,7 @@ async function togglePlayDigestAudio() {
   if (!text) return;
 
   const heroLabel = $("hero-play-label");
-  if (heroLabel) heroLabel.textContent = "Synthesizing audio…";
+  if (heroLabel) heroLabel.textContent = "Preparing audio…";
 
   try {
     const resp = await fetch("/synthesize-audio", {
@@ -1246,7 +1138,7 @@ async function toggleMicRecording() {
   }
 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    alert("Microphone access is not available in this browser.");
+    showToast("Microphone access is not available in this browser.", "error");
     return;
   }
 
@@ -1265,7 +1157,7 @@ async function toggleMicRecording() {
 
       try {
         const resp = await fetch("/transcribe-voice", { method: "POST", body: formData });
-        if (!resp.ok) throw new Error(`Scribe HTTP ${resp.status}`);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const res = await resp.json();
         if (res.text) {
           $("input-intent").value = res.text;
@@ -1273,9 +1165,10 @@ async function toggleMicRecording() {
           if (badge) badge.classList.remove("hidden");
         }
       } catch (err) {
-        console.error("Scribe transcription error:", err);
+        console.error("Voice transcription error:", err);
+        showToast("Could not transcribe voice note.", "error");
       } finally {
-        micLabel.textContent = "Speak Interest";
+        micLabel.textContent = "Speak Topic";
       }
     };
 
@@ -1285,6 +1178,7 @@ async function toggleMicRecording() {
     micLabel.textContent = "Stop Recording";
   } catch (err) {
     console.error("Mic error:", err);
+    showToast("Microphone permission was denied.", "error");
   }
 }
 
@@ -1317,19 +1211,19 @@ async function copyTextToClipboard(text) {
 
 function downloadMarkdownCheatSheet() {
   if (!state.lastResult) {
-    showToast("Run an analysis before exporting a Markdown summary.", "error");
+    showToast("Summarize your tabs first before saving notes.", "error");
     return;
   }
   const d = state.lastResult;
   const isRated = Boolean(d.rated);
   const lines = [
-    `# Folivora — Executive Tab Summary`,
+    `# Folivora — Reading Digest`,
     `> **Overview:** ${d.spoken_digest}`,
-    `> **Time Saved:** ${d.minutes_saved} minutes of full-page reading saved`,
+    `> **Reading Time Saved:** ${d.minutes_saved} minutes`,
     ``,
-    `## ${isRated ? `Matches Your Interest (${d.kept_count})` : `All Summarized Tabs (${d.kept_count})`}`,
+    `## ${isRated ? `Worth Your Time (${d.kept_count})` : `All Summarized Tabs (${d.kept_count})`}`,
     ...d.kept_tabs.map((t) => {
-      const pctStr = isRated ? ` — ${Math.round(t.p50_score)}% Match` : "";
+      const pctStr = isRated ? ` — ${Math.round(t.p50_score)}% match` : "";
       const isec = t.interest_section;
       const interestBlock =
         isRated && isec && isec.active
@@ -1338,14 +1232,12 @@ function downloadMarkdownCheatSheet() {
             `\n`
           : "";
       const tks = (t.takeaways || []).map((k) => `  - ${k}`).join("\n");
-      return `### [${t.title}](${t.url})${pctStr}\n${interestBlock}- **Complete Summary:** ${t.overview || ""}\n${tks}\n`;
+      return `### [${t.title}](${t.url})${pctStr}\n${interestBlock}- **Summary:** ${t.overview || ""}\n${tks}\n`;
     }),
   ];
   if (d.closed_tabs && d.closed_tabs.length > 0) {
     lines.push(
-      d.preset_key === "dev_hall_of_fame_pile"
-        ? `## Other Hall of Fame Exhibits — Not Matched (${d.closed_count})`
-        : `## Unrelated / Safe to Close (${d.closed_count})`,
+      `## Set Aside (${d.closed_count})`,
       ...d.closed_tabs.map(
         (t) => `- [${t.title}](${t.url}) (${t.match_explanation || t.verdict_reason})`
       )
@@ -1355,12 +1247,12 @@ function downloadMarkdownCheatSheet() {
   const downloadUrl = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = downloadUrl;
-  a.download = "folivora-summary.md";
+  a.download = "folivora-reading-notes.md";
   document.body.appendChild(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(downloadUrl), 0);
-  showToast("Markdown summary exported.", "success");
+  showToast("Reading notes saved as Markdown.", "success");
 }
 
 function downloadKeepersBookmarksHtml() {
@@ -1372,10 +1264,10 @@ function downloadKeepersBookmarksHtml() {
   const html = [
     "<!DOCTYPE NETSCAPE-Bookmark-file-1>",
     '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">',
-    "<TITLE>Folivora Surviving Tabs</TITLE>",
-    "<H1>Folivora Surviving Tabs</H1>",
+    "<TITLE>Folivora Saved Tabs</TITLE>",
+    "<H1>Folivora Saved Tabs</H1>",
     "<DL><p>",
-    `  <DT><H3>Folivora Keepers (${kept.length})</H3>`,
+    `  <DT><H3>Folivora Saved Tabs (${kept.length})</H3>`,
     "  <DL><p>",
     ...rows,
     "  </DL><p>",
@@ -1385,12 +1277,12 @@ function downloadKeepersBookmarksHtml() {
   const downloadUrl = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = downloadUrl;
-  a.download = "folivora-keepers-bookmarks.html";
+  a.download = "folivora-saved-bookmarks.html";
   document.body.appendChild(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(downloadUrl), 0);
-  showToast(`Exported ${kept.length} surviving tab${kept.length === 1 ? "" : "s"} as bookmarks.html.`, "success");
+  showToast(`Saved ${kept.length} tab${kept.length === 1 ? "" : "s"} as a bookmarks file.`, "success");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1423,10 +1315,11 @@ document.addEventListener("DOMContentLoaded", () => {
         updateDetectedUrlCounter();
         showToast(`Pasted ${extracted.length} link${extracted.length === 1 ? "" : "s"} from clipboard.`, "success");
       } else {
-        showToast("No http/https links found in your clipboard.", "error");
+        showToast("No web links found in your clipboard.", "error");
       }
     } catch (_) {
-      showToast("Clipboard permission denied—press Ctrl+V inside the link box.", "error");
+      showToast("Press Ctrl+V (or Cmd+V) inside the box to paste your links.", "info");
+      urlsBox?.focus();
     }
   });
 
@@ -1435,10 +1328,6 @@ document.addEventListener("DOMContentLoaded", () => {
       urlsBox.value = SAMPLE_LIVE_URLS.join("\n");
       updateDetectedUrlCounter();
     }
-  });
-
-  $("btn-open-hof-preset")?.addEventListener("click", () => {
-    runTriage({ forcePreset: "dev_hall_of_fame_pile" });
   });
 
   $("btn-switch-to-hof")?.addEventListener("click", () => {
@@ -1564,7 +1453,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const copied = await copyTextToClipboard(txt);
     btn.textContent = copied ? "Copied" : "Copy failed";
     showToast(
-      copied ? "Summary copied to clipboard." : "Clipboard access was blocked. Select the summary text instead.",
+      copied ? "Overview copied to clipboard." : "Could not copy automatically. Please select the text directly.",
       copied ? "success" : "error"
     );
     setTimeout(() => {

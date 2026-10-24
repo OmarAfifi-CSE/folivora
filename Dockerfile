@@ -23,10 +23,11 @@ RUN pip install --no-cache-dir -r /app/src/requirements.txt
 # Pre-bake open-weight TabPFN v2 foundation weights into Docker image layer during build
 RUN python -c "from tabpfn import TabPFNRegressor; from tabpfn.constants import ModelVersion; import numpy as np; reg = TabPFNRegressor.create_default_for_version(ModelVersion.V2, device='cpu', n_estimators=4); reg.fit(np.zeros((24, 7), dtype=np.float32), np.zeros(24, dtype=np.float32))"
 
-# Copy dataset, benchmarks, evaluation reports, and application source
+# Copy dataset, benchmarks, evaluation reports, browser extension, and application source
 COPY data/ /app/data/
 COPY benchmarks/ /app/benchmarks/
 COPY eval/ /app/eval/
+COPY chrome_extension/ /app/chrome_extension/
 COPY src/ /app/src/
 
 EXPOSE 8080

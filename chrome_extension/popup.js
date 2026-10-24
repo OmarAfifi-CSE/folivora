@@ -26,7 +26,7 @@ async function refreshUndoButton() {
   const data = await chrome.storage.local.get(["lastClosedUrls"]);
   const urls = Array.isArray(data.lastClosedUrls) ? data.lastClosedUrls : [];
   if (urls.length > 0) {
-    undoBtn.textContent = `↩️ Restore ${urls.length} Last Closed Tab${urls.length === 1 ? "" : "s"}`;
+    undoBtn.textContent = `Restore ${urls.length} Last Closed Tab${urls.length === 1 ? "" : "s"}`;
     undoBtn.classList.remove("hidden");
   } else {
     undoBtn.classList.add("hidden");
@@ -59,7 +59,7 @@ document.getElementById("btn-quick-summary").addEventListener("click", async () 
     return;
   }
 
-  resBox.textContent = `Analyzing ${detectedTabs.length} open tabs with TabPFN + Gemma…`;
+  resBox.textContent = `Summarizing ${detectedTabs.length} open tabs…`;
   resBox.classList.remove("hidden");
 
   try {
@@ -96,9 +96,9 @@ document.getElementById("btn-quick-summary").addEventListener("click", async () 
       pendingCloseTabIds = matchingBrowserTabs.map((tab) => tab.id).filter(Boolean);
       pendingCloseUrls = matchingBrowserTabs.map((tab) => tab.url).filter(Boolean);
       document.getElementById("btn-hibernate-closed").textContent =
-        `💤 Hibernate ${pendingCloseTabIds.length} Unrelated Tab${pendingCloseTabIds.length === 1 ? "" : "s"} (0 RAM)`;
+        `Put ${pendingCloseTabIds.length} Unrelated Tab${pendingCloseTabIds.length === 1 ? "" : "s"} to Sleep`;
       document.getElementById("btn-close-unrelated").textContent =
-        `🗑️ Close ${pendingCloseTabIds.length} Unrelated Tab${pendingCloseTabIds.length === 1 ? "" : "s"} (With Undo)`;
+        `Close ${pendingCloseTabIds.length} Unrelated Tab${pendingCloseTabIds.length === 1 ? "" : "s"} (With Undo)`;
       cleanupBox.classList.remove("hidden");
     }
   } catch (e) {

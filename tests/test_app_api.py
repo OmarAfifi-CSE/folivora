@@ -193,6 +193,8 @@ class TestAppAPI(unittest.TestCase):
         ext = self.client.get("/download-extension.zip")
         self.assertEqual(ext.status_code, 200)
         self.assertEqual(ext.headers.get("content-type"), "application/zip")
+        dockerfile_text = (ROOT_DIR / "Dockerfile").read_text(encoding="utf-8")
+        self.assertIn("COPY chrome_extension/ /app/chrome_extension/", dockerfile_text)
         pitch = self.client.get("/pitch")
         self.assertEqual(pitch.status_code, 200)
         self.assertIn("Folivora", pitch.text)

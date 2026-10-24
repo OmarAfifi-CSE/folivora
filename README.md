@@ -236,11 +236,11 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 
 ---
 
-## ⏱️ 10-Second Judge Navigation Matrix
+## 🧭 Core Capabilities & Verification Summary
 
-| Track | How Folivora Uses It | Primary Source Modules | Reproducible Verification & Metric |
+| Capability | How Folivora Implements It | Primary Source Modules | Reproducible Verification & Metric |
 |---|---|---|---|
-| **🦥 Grand Prize ("Slow & Steady")** | Turns a 65-tab reading backlog (`600+` min) into an instant `<150ms` dossier + `~2.5s` Gemma brief + `~10s` grounded card polish | [`src/app.py`](src/app.py), [`src/summary_service.py`](src/summary_service.py) | `python run_local.py --test` (**83/83 tests passing**) |
+| **🦥 Dual-Lane Reading Digest** | Turns a 65-tab reading backlog (`600+` min) into an instant `<150ms` digest + `~2.5s` Gemma brief + `~10s` grounded card polish | [`src/app.py`](src/app.py), [`src/summary_service.py`](src/summary_service.py) | `python run_local.py --test` (**83/83 tests passing**) |
 | **📊 Prior Labs TabPFN** | `TabPFNRegressor` (`ModelVersion.V2`, CPU quantiles `P10/P50/P90`) with `P90 < 45` safety guardrail | [`src/tabpfn_engine.py`](src/tabpfn_engine.py), [`benchmarks/ablate.py`](benchmarks/ablate.py) | `python benchmarks/ablate.py` (**0.36% False-Close Rate**, **81.1% band calibration**) |
 | **💎 Google Gemma** | Open-weight Gemma 3/4 (`gemma-4-26b-a4b-it` with `thinkingLevel: MINIMAL` / Ollama `gemma3:4b`) behind `check_output()` | [`src/gemma_service.py`](src/gemma_service.py), [`eval/run_eval.py`](eval/run_eval.py) | `python eval/run_eval.py` (**59/60 [98.3%] verified**); `python eval/redteam_eval.py --gate` (**0.0% ASR**) |
 | **🌐 Browserbase** | Cloud Chromium session creation (`POST /v1/sessions`), raw CDP WebSocket DOM inspection (`<=16` tabs), `REQUEST_RELEASE` cleanup | [`src/browserbase_service.py`](src/browserbase_service.py) | `test_custom_live_urls_use_cdp_and_release_session` + live `debuggerFullscreenUrl` in UI |
@@ -303,7 +303,7 @@ python run_local.py
 
 <div align="center">
 
-**Built for the Hacktoberfest Open-Source AI Challenge · MIT Licensed**  
+**Folivora — Open-Source Intelligent Browser Tab Digest · MIT Licensed**  
 [Live Application](https://folivora.tech) · [OpenAPI Docs](https://folivora.tech/docs) · [Gemma Eval (`59/60`)](eval/EVAL.md) · [Hand Audit](eval/REVIEW.md) · [Summary Quality Harness](eval/summary_quality.py) · [Red-Team Suite](eval/redteam_eval.py)
 
 </div>

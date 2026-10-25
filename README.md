@@ -17,13 +17,13 @@
   <img src="https://img.shields.io/badge/Prior_Labs-TabPFN_v2_(P10%2FP50%2FP90)-0284C7?style=flat-square" alt="Prior Labs TabPFN" />
   <img src="https://img.shields.io/badge/Open_Weights-Google_Gemma_4_26B_%2B_Gemma_3_12B-1A73E8?style=flat-square&logo=google&logoColor=white" alt="Google Gemma 4 & 3" />
   <img src="https://img.shields.io/badge/Browserbase-Cloud_Chromium_CDP-F97316?style=flat-square" alt="Browserbase CDP" />
-  <img src="https://img.shields.io/badge/ElevenLabs-Scribe_v2_%2B_Flash_v2.5-111827?style=flat-square" alt="ElevenLabs Voice" />
+  <img src="https://img.shields.io/badge/ElevenLabs-Scribe_STT_%2B_Flash_v2.5-111827?style=flat-square" alt="ElevenLabs Voice" />
   <img src="https://img.shields.io/badge/Sentry-GenAI_OpenTelemetry-362D59?style=flat-square&logo=sentry&logoColor=white" alt="Sentry OpenTelemetry" />
 </p>
 
 <p align="center">
   <!-- Tier 2: Verification & Empirical Proof -->
-  <a href="tests/"><img src="https://img.shields.io/badge/Tests-83%2F83_Passing-16A34A?style=flat-square" alt="Tests 83/83 Passing" /></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/Tests-86%2F86_Passing-16A34A?style=flat-square" alt="Tests 86/86 Passing" /></a>
   <a href="eval/EVAL.md"><img src="https://img.shields.io/badge/Gemma_Digest_Eval-59%2F60_(98.3%25)-15803D?style=flat-square" alt="Digest Eval 59/60" /></a>
   <a href="eval/summary_quality.py"><img src="https://img.shields.io/badge/Summary_Golden_Gates-11%2F11_Passing_(20_Cases)-0D9488?style=flat-square" alt="Golden Summary Gates" /></a>
   <a href="eval/redteam_eval.py"><img src="https://img.shields.io/badge/Red_Team_ASR-0.0%25_(24%2F24_Blocked)-DC2626?style=flat-square" alt="Red Team 0.0% ASR" /></a>
@@ -54,7 +54,7 @@
 
 <p>
   <b>Folivora</b> (Latin: both the biological suborder for tree sloths and <code>folium + vorare</code>, literally <b>"the page/folio devourer"</b>) is an open-source, evidence-first browser tab triage and section-anchored reading digest engine.<br/>
-  <i>Designed as a calm editorial reading room for everyone—from travelers and shoppers to software engineers—powered under the hood by Browserbase Cloud Chromium (CDP), Prior Labs TabPFN calibrated quantiles, Multi-Lane Open-Weight Google Gemma 4 &amp; Gemma 3, ElevenLabs Scribe v2 &amp; Flash v2.5, and Sentry OpenTelemetry Agent Tracing.</i>
+  <i>Designed as a calm editorial reading room for everyone—from travelers and shoppers to software engineers—powered under the hood by Browserbase Cloud Chromium (CDP), Prior Labs TabPFN calibrated quantiles, Multi-Lane Open-Weight Google Gemma 4 &amp; Gemma 3, ElevenLabs Scribe &amp; Flash v2.5, and Sentry OpenTelemetry Agent Tracing.</i>
 </p>
 
 </div>
@@ -72,7 +72,7 @@ People don't keep 40 browser tabs open for three weeks to read 5,000-word articl
 ### ⚠️ Why Existing Tab Cleaners & Summarizers Fail
 
 - **The Reading-Time Trap:** Naive tab managers close tabs by age or word count—killing a 6-day-old reference doc with 11 code blocks while keeping a recent 4,000-word opinion essay.
-- **The Overconfident Point-Estimate Trap:** Standard gradient-boosted regressors output under-calibrated intervals (`61.8%` empirical coverage on an `80%` band), making automated tab closure unsafe.
+- **The Overconfident Point-Estimate Trap:** Standard gradient-boosted regressors output under-calibrated intervals (`55.3%` empirical coverage on an `80%` band), making automated tab closure unsafe.
 - **The Hallucinated Digit Trap:** Small LLMs "helpfully" round `152.9 minutes` to `"about 150 minutes"` or invent benchmark numbers that never appeared on the page.
 - **The Quote-Dumping & Verbatim Trap:** Raw HTML extractors dump conversational diary openings (*"Hey, you ran some ADB commands..."*) or copy-paste whole paragraphs with emojis instead of synthesizing distinct section insights.
 - **The Blocking Latency Trap:** Calling a remote 27B model synchronously across 65 open tabs takes 9–23 seconds per card, freezing the UI.
@@ -82,10 +82,10 @@ People don't keep 40 browser tabs open for three weeks to read 5,000-word articl
 
 ### ✅ How Folivora Solves It
 
-- **Calibrated `P10 / P50 / P90` Quantile Triage:** **Prior Labs TabPFN** ([`src/tabpfn_engine.py`](src/tabpfn_engine.py)) predicts full utility quantiles across 7 DOM features. A tab is only set aside when even its optimistic **`P90` upper bound** falls below threshold (**81.1% empirical coverage** on 720 unseen tabs, **0.36% False-Close Rate**).
+- **Calibrated `P10 / P50 / P90` Quantile Triage:** **Prior Labs TabPFN** ([`src/tabpfn_engine.py`](src/tabpfn_engine.py)) predicts full utility quantiles across 7 features. A tab is only set aside when even its optimistic **`P90` upper bound** falls below threshold (**77.9% empirical coverage** on 720 unseen tabs, **0.36% False-Close Rate**).
 - **Strict Digit & Citation Gates:** [`check_output()`](src/gemma_service.py) verifies every numeric literal in Gemma's spoken brief character-for-character, while [`validate_tab_summary()`](src/summary_service.py) enforces `E#`/`C#` evidence IDs, exact `6–15`-word source anchors, and a `<90%` verbatim-overlap ceiling.
-- **Dual-Lane Progressive Rendering:** `/triage` renders sanitized deterministic cards in **`<150 ms`**. In the background, `/digest` upgrades the Reading Digest overview with **Gemma 4** (`~2.5s`) and `/polish-tabs` upgrades the top 8 cards in place with **Gemini 3.1 Flash Lite** (`~10s` batch) and a multi-lane Open-Weight **Gemma 4 26B + Gemma 3 12B** load balancer plus a targeted bullet-repair pass.
-- **Zero-Retention Voice & Private Job Isolation:** **ElevenLabs Scribe v2** deletes remote voice transcripts immediately after transcription (`DELETE /v1/speech-to-text/transcripts/{id}`), and `/polish-tabs` strips raw `full_text` and `all_paragraphs` before serialization.
+- **Dual-Lane Progressive Rendering:** `/triage` paints sanitized deterministic cards with **zero LLM in the loop** (a warm TabPFN quantile pass takes **~1.3 s** for a 14-tab pile and **~1.6 s** for the 65-article library on a laptop CPU, a few seconds more on the shared 2-vCPU cloud container; identical preset requests are then served from a **10-minute TTL cache in <30 ms**, flagged `"cache": "hit"` in the response). In the background, `/digest` upgrades the Reading Digest overview with **Gemma 4** (`~2.5 s`, measured **2.68 s** on production) and `/polish-tabs` upgrades the top 8 cards in place with **Gemini 3.1 Flash Lite** (`~10-16 s` batch depending on provider load) and a multi-lane Open-Weight **Gemma 4 26B + Gemma 3 12B** load balancer plus a targeted bullet-repair pass.
+- **Zero-Retention Voice & Private Job Isolation:** **ElevenLabs Scribe (`scribe_v1`)** deletes remote voice transcripts immediately after transcription (`DELETE /v1/speech-to-text/transcripts/{id}`), and `/polish-tabs` strips raw `full_text` and `all_paragraphs` before serialization.
 
 </td>
 </tr>
@@ -166,7 +166,7 @@ People don't keep 40 browser tabs open for three weeks to read 5,000-word articl
     <tr valign="top">
       <td width="68%" align="center">
         <img src="docs/media/05-dev-library-webdev.png" width="100%" alt="Folivora 65 DEV Article Library Filtered by Web Development" />
-        <sub><em>Partitions 65 community articles in &lt;150ms: keeps 22 matching Web Development articles and sets aside 43 unrelated tabs (478.9 min saved).</em></sub>
+        <sub><em>Partitions 65 community articles in one deterministic pass (zero LLM in the loop): keeps 22 matching Web Development articles and sets aside 43 unrelated tabs (478.9 min saved).</em></sub>
       </td>
       <td width="32%" align="center">
         <img src="docs/media/06-mobile-digest.png" width="100%" alt="Folivora Mobile Responsive View" />
@@ -199,11 +199,11 @@ flowchart TB
     classDef payoff fill:#14211B,stroke:#2C825D,stroke-width:1.5px,color:#FFFFFF;
 
     subgraph S1 ["STAGE 01 · INGESTION & INTENT EXTRACTION"]
-        V["🎙️ 10s Spoken Topic Note<br/>ElevenLabs Scribe v2 STT<br/>+ Immediate DELETE /transcripts/{id}"]:::ingest
+        V["🎙️ 10s Spoken Topic Note<br/>ElevenLabs Scribe STT (`scribe_v1`)<br/>+ Immediate DELETE /transcripts/{id}"]:::ingest
         B["🌐 Open Tab URLs / 65 DEV Library<br/>Browserbase Cloud Chromium CDP<br/>Extracts 7 DOM Signals + E#/C# Evidence Pack"]:::ingest
     end
 
-    subgraph S2 ["STAGE 02 · INSTANT FAST LANE (POST /triage — <150ms First Paint)"]
+    subgraph S2 ["STAGE 02 · INSTANT FAST LANE (POST /triage — Deterministic, Zero LLM in the Loop)"]
         T["📊 Prior Labs TabPFN v2 Quantile Engine (CPU)<br/>Predicts Calibrated P10 / P50 / P90 Utility Quantiles<br/>Asymmetric Safety Guardrail: P90 < 45.0 ➔ Set Aside (0.36% False-Close)"]:::fastlane
         K["✅ Worth Your Time Cards<br/>Segmented Tabs: Focused on Topic + Full Summary<br/>Private TTL/LRU job_id (raw full_text stays server-side)"]:::ingest
     end
@@ -251,24 +251,24 @@ Reproducible via [`python benchmarks/ablate.py`](benchmarks/ablate.py) on **720 
 
 | Model (on 720 Unseen Tabs) | MAE ↓ | RMSE ↓ | Spearman $r$ ↑ | Real Scores Inside 80% (`P10–P90`) Band | Real Scores Below `P90` |
 |---|---:|---:|---:|---:|---:|
-| Reading-Time & Recency Heuristic | 19.24 | 23.17 | 0.458 | — | — |
-| `HistGradientBoosting` (Quantile) | 5.99 | 7.65 | 0.950 | 61.8% *(Under-calibrated)* | 81.2% |
-| **Prior Labs TabPFN (All 7 Features)** | **5.35** | **6.78** | **0.959** | **81.1% *(Calibrated)*** | **92.5%** |
-| TabPFN Ablation (without `code_block_count`) | 7.45 | 10.47 | 0.911 | 80.8% | 90.3% |
-| TabPFN Ablation (without `intent_match_score`) | 8.89 | 11.05 | 0.864 | 79.6% | 90.8% |
-| TabPFN Ablation (without `age_days`) | 7.03 | 8.92 | 0.942 | 78.9% | 91.0% |
+| Reading-Time & Recency Heuristic | 21.88 | 26.68 | 0.033 | — | — |
+| `HistGradientBoosting` (Quantile) | 3.95 | 4.94 | 0.967 | 55.3% *(Under-calibrated)* | 77.4% |
+| **Prior Labs TabPFN (All 7 Features)** | **3.5** | **4.31** | **0.975** | **77.9% *(Calibrated)*** | **90.0%** |
+| TabPFN Ablation (without `intent_match_score`) | 15.4 | 18.32 | 0.390 | 81.2% | 91.7% |
+| TabPFN Ablation (without `code_block_count`) | 4.18 | 5.37 | 0.965 | 80.7% | 92.1% |
+| TabPFN Ablation (without `age_days`) | 3.87 | 4.79 | 0.971 | 78.5% | 90.4% |
 
-### Why `code_block_count` Decides Which Tabs Rot
-Removing `code_block_count` increased TabPFN's RMSE by **+54.4%** (`6.78 → 10.47`). Grouping all 3,600 tabs by page archetype reveals the underlying habit:
+### Why Your Stated Intent Is the Single Most Valuable Signal
+Removing `intent_match_score` — the one feature that is not a DOM statistic at all, but how well a tab matches what you *said* you were looking for — **collapsed TabPFN's accuracy: MAE jumped from 3.5 to 15.4 (4.4×), Spearman rank correlation fell from 0.975 to 0.390, and RMSE rose +325% (`4.31 → 18.32`)**. The strongest DOM-only feature is `code_block_count` (removing it degrades RMSE by **+24.6%**, `4.31 → 5.37`), while `age_days` matters least (**+11.1%**). Grouping all 3,600 tabs by page archetype reveals the underlying habit:
 
 | Page Archetype (`n = 3,600`) | Avg Word Count | Avg Code Blocks | Avg Utility Score | Safe to Close After 7 Days |
 |---|---:|---:|---:|---:|
-| **Code & Docs Reference (`code_ref`)** | 1,253 words | **7.5** | **77.1 / 100** | **0.4%** |
-| **GitHub Issue / PR (`issue_pr`)** | 924 words | **4.3** | **71.2 / 100** | **7.1%** |
-| **Directory / Link Hub (`nav_hub`)** | 676 words | 0.1 | 41.1 / 100 | 79.4% |
-| **Long-Form Essay (`essay`)** | **3,822 words** | **0.2** | **26.0 / 100** | **91.3%** |
+| **Directory / Link Hub (`nav_hub`)** | 644 words | 0.1 | 27.8 / 100 | **91.1%** |
+| **Long-Form Essay (`long_essay`)** | **4,031 words** | 0.3 | 32.1 / 100 | **80.5%** |
+| **Tech Brief / News (`tech_brief`)** | 973 words | 4.6 | 44.1 / 100 | 55.1% |
+| **Deep Guide with Code (`deep_guide`)** | 1,530 words | **8.6** | **48.8 / 100** | **44.6%** |
 
-**91.3% of long prose essays (`>2,400` words, `0` code blocks) are dead weight after 7 days**, whereas **99.6% of code-reference tabs remain useful**.
+**91.1% of link-hub tabs and 80.5% of 4,000-word essays are safe to close after 7 days**, whereas deep guides dense with code blocks hold the highest average utility (`48.8 / 100`) and are the *least* safe to discard.
 
 ### Why Setting Tabs Aside Requires a `P90` Quantile Guardrail (`0.36%` False-Close Rate vs. `8.33%` Point Triage)
 Closing a browser tab is an asymmetric decision: keeping an extra borderline tab costs 30 seconds of skimming, whereas closing a reference tab you genuinely needed loses work. In [`benchmarks/ablate.py`](benchmarks/ablate.py) (`decision_safety_analysis`), we evaluated five triage policies across the **720 held-out unseen tabs** (`276` genuinely useful tabs with `utility >= 45.0`, `444` low-utility tabs):
@@ -287,18 +287,18 @@ Using **TabPFN's calibrated 90th-percentile upper bound (`P90 < 45.0`)** cuts th
 
 ## 🏛️ Real-World Stress Test: The 65 DEV Article Library (`600+` Min Read)
 
-Folivora ships with a built-in explorer for all **65 community-selected articles** from the [DEV Hall of Fame](https://dev.to/georgekobaidze/promise-delivered-welcome-to-the-dev-hall-of-fame-65-authors-65-masterpieces-15fa) ([`data/dev_hall_of_fame_catalog.json`](data/dev_hall_of_fame_catalog.json)). Filtering the 65-tab library by any topic partitions the collection in under a second and unlocks two segmented tabs per matching card (**`Focused on "<Topic>"`** and **`Full Summary`**):
+Folivora ships with a built-in explorer for all **65 community-selected articles** from the [DEV Hall of Fame](https://dev.to/georgekobaidze/promise-delivered-welcome-to-the-dev-hall-of-fame-65-authors-65-masterpieces-15fa) ([`data/dev_hall_of_fame_catalog.json`](data/dev_hall_of_fame_catalog.json)). Filtering the 65-tab library by any topic partitions the collection in a couple of seconds (~1.6 s warm TabPFN pass on a laptop CPU; repeat loads are served from a 10-minute TTL cache in <30 ms) and unlocks two segmented tabs per matching card (**`Focused on "<Topic>"`** and **`Full Summary`**):
 
 | Filter Query on All 65 DEV Articles | Matching Tabs Kept | Unrelated Tabs Set Aside | Full-Article Reading Time Saved | Top-Ranked Article (`P50` Match) |
 |---|---:|---:|---:|---|
-| **`"Flutter"`** | **1 / 65** | 64 | **712.7 min (~11.9 hrs)** | *Creating Adaptive Flutter Screens and Widgets* (`94.2%`) |
+| **`"Flutter"`** | **2 / 65** | 63 | **697.9 min (~11.6 hrs)** | *Creating Adaptive Flutter Screens and Widgets* (`94.2%`) |
 | **`"Gemini"`** | **3 / 65** | 62 | **691.8 min (~11.5 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) |
-| **`"Mobile Development"`** | **5 / 65** | 60 | **668.4 min (~11.1 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *Creating Adaptive Flutter Screens* (`94.2%`) |
 | **`"Security"`** | **8 / 65** | 57 | **635.1 min (~10.6 hrs)** | *The one you reported is gone. This one is still up.* (`93.7%`) |
-| **`"Databases & SQL"`** | **11 / 65** | 54 | **621.9 min (~10.4 hrs)** | *SQL Common Table Expressions and Window functions* (`96.0%`) |
-| **`"Debugging"`** | **12 / 65** | 53 | **595.5 min (~9.9 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *We Planted 180 Bugs* (`92.5%`) |
-| **`"Web Development"`** | **22 / 65** | 43 | **478.9 min (~8.0 hrs)** | *is-kit Reached 50 Stars* (`95.1%`) & *WebGPU Live Demo* (`93.7%`) |
-| **`"AI Agents"`** | **32 / 65** | 33 | **367.9 min (~6.1 hrs)** | *Pair Programming With Three AI Tools* (`95.6%`) |
+| **`"Mobile Development"`** | **5 / 65** | 60 | **623.7 min (~10.4 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *Creating Adaptive Flutter Screens* (`94.2%`) |
+| **`"Debugging"`** | **12 / 65** | 53 | **595.5 min (~9.9 hrs)** | *My Phone Broke, and Gemini Fixed It* (`95.0%`) & *Jerry Ran Out of Numbers But Drank All the Punch* (`93.7%`) |
+| **`"Databases & SQL"`** | **13 / 65** | 52 | **530.7 min (~8.8 hrs)** | *SQL Common Table Expressions and Window functions* (`96.0%`) |
+| **`"Web Development"`** | **22 / 65** | 43 | **478.9 min (~8.0 hrs)** | *is-kit Reached 50 Stars* (`94.7%`) & *Coding Without Pressure* (`94.4%`) |
+| **`"AI Agents"`** | **36 / 65** | 29 | **329.6 min (~5.5 hrs)** | *Pair Programming With Three AI Tools* (`95.6%`) |
 
 ---
 
@@ -352,15 +352,15 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 
 ### Exploration 1: Everyday Life — Filtering a 14-Tab Mixed Window by `"Japan Travel"`
 - **Input:** Launch the **14 Everyday & Travel Tabs** sample window (`postgres_docker_pile`) and click the **`Travel`** chip (`user_intent = "Japan Travel"`).
-- **Result (`<150ms` Fast Lane + `~2.5s` Gemma Brief):**
-  - **Worth Your Time (`1` tab kept):** *10-Day Japan Itinerary: Tokyo, Kyoto & Shinkansen Rail Pass Guide* (`95% match`, `35` mentions across `Route & Hotel Split`, `Shinkansen vs. JR Pass Math`, and `Transit & Timing Logistics`).
+- **Result (`~1.3 s` warm TabPFN fast lane on a laptop CPU + `~2.5 s` Gemma Brief):**
+  - **Worth Your Time (`1` tab kept):** *10-Day Japan Itinerary: Tokyo, Kyoto & Shinkansen Rail Pass Guide* (`94.6% match`, `35` relevant mentions across `Route & Hotel Split`, `Shinkansen vs. JR Pass Math`, and `Transit & Timing Logistics`).
   - **Set Aside (`13` tabs):** Meal prep, sleep science, laptop reviews, and tech tabs are moved to the **Set Aside** column, saving **`139.6 minutes`** (`30,676 words`) of full-page reading.
 - **Verification:** Covered by `test_triage_everyday_life_interest_japan_travel` in [`tests/test_app_api.py`](tests/test_app_api.py).
 
 ### Exploration 2: Developer Backlog — Filtering the 65 DEV Article Library by `"Web Development"`
 - **Input:** Launch the **65 DEV Article Library** (`dev_hall_of_fame_pile`) and click **`Web Dev`** (`user_intent = "Web Development"`).
 - **Result:**
-  - **Worth Your Time (`22 / 65` articles kept):** Led by *is-kit Reached 50 Stars* (`95% match`), *Coding Without Pressure* (`94%`), and *Fixing your site's metadata* (`94%`).
+  - **Worth Your Time (`22 / 65` articles kept):** Led by *is-kit Reached 50 Stars* (`94.7% match`), *Coding Without Pressure* (`94.4%`), and *Fixing your site's metadata* (`94.0%`).
   - **Set Aside (`43 / 65` articles):** Saves **`478.9 minutes (~8.0 hours)`** (`105,367 words`) of reading while keeping peekable summaries for all 43 set-aside articles.
 - **Verification:** Covered by `test_dev_hall_of_fame_65_masterpieces_and_section_anchored_synthesis` in [`tests/test_browserbase_and_audio.py`](tests/test_browserbase_and_audio.py).
 
@@ -381,9 +381,9 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 | **Gemma & Gemini Synthesis** | [`src/gemma_service.py`](src/gemma_service.py) | `synthesize_digest()` via **Google Gemma 4** (`thinkingLevel: MINIMAL`) / Ollama / OpenRouter behind `check_output()`, plus `generate_tab_text()` fast JSON lane via **Gemini 3.1 Flash Lite** and multi-lane Open-Weight Gemma pool. |
 | **Cloud Browser & DOM Extractor** | [`src/browserbase_service.py`](src/browserbase_service.py) | Live **Browserbase** Chromium CDP WebSocket session manager (`MAX_CDP_URLS = 16`), section-aware HTML extractor, catalog sanitizer (`_sanitize_catalog_tab()`), and `REQUEST_RELEASE` cleanup. |
 | **Quantile Triage Engine** | [`src/tabpfn_engine.py`](src/tabpfn_engine.py) | **Prior Labs TabPFN v2** CPU regressor (`output_type="quantiles"`, `[0.10, 0.50, 0.90]`) with warm context and `NaN`/`Inf` feature sanitization. |
-| **Voice I/O** | [`src/audio_service.py`](src/audio_service.py) | **ElevenLabs Scribe v2** (`transcribe_and_forget()` with immediate remote transcript deletion) + **ElevenLabs Flash v2.5** (`Charlie` voice TTS). |
+| **Voice I/O** | [`src/audio_service.py`](src/audio_service.py) | **ElevenLabs Scribe (`scribe_v1`)** (`transcribe_and_forget()` with immediate remote transcript deletion) + **ElevenLabs Flash v2.5** (`Charlie` voice TTS). |
 | **Observability & Scrubbing** | [`src/telemetry.py`](src/telemetry.py) | **Sentry SDK + OpenTelemetry** `gen_ai.request` spans and recursive `before_send` credential scrubber (`(?<!put_)token(?!s)`). |
-| **Frontend Workspace** | [`src/static/`](src/static/) | Botanical Reading Room design system (`Newsreader` + `Plus Jakarta Sans`), responsive from `320px` to `1440px+`, segmented card tabs, live filter bar, `@media print` sheet, and Markdown/Bookmark exports. |
+| **Frontend Workspace** | [`src/static/`](src/static/) | Botanical Reading Room design system (`Newsreader` + `Plus Jakarta Sans`), responsive from `320px` to `1440px+` (44px+ touch targets on mobile & coarse pointers), segmented card tabs, live filter bar, `@media print` sheet, and Markdown/Bookmark exports. |
 | **Browser Extension** | [`chrome_extension/`](chrome_extension/) | Manifest V3 popup packaged dynamically at `/download-extension.zip` with 1-click tab hibernation (`chrome.tabs.discard()`) and Undo snapshot restore. |
 
 ---
@@ -398,7 +398,7 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 # 1. Install dependencies
 pip install -r src/requirements.txt
 
-# 2. Run all 83 automated unit, integration & red-team tests
+# 2. Run all 86 automated unit, integration & red-team tests
 python run_local.py --test
 
 # 3. Run the 20-case tab-summary golden harness (all 11 gates)

@@ -81,6 +81,8 @@ body {
 
 .font-mono { font-family: var(--font-mono); }
 .hidden { display: none !important; }
+body.app-busy { cursor: progress; }
+body.app-busy button:not(:disabled) { cursor: progress; }
 .print-only-header { display: none; }
 
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
@@ -1745,6 +1747,9 @@ button:disabled {
   .no-print, .topbar, #intake-screen, .browser-preview-bar, .col-close, .footer {
     display: none !important;
   }
+  /* Never un-hide the results workspace if no digest has been built yet,
+     otherwise printing from the landing page emits an empty skeleton sheet. */
+  .results-workspace.hidden { display: none !important; }
   .results-workspace { display: block !important; }
   .print-only-header { display: block !important; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 10px; }
   .payoff-bar, .split-results, .col-keep { border: none !important; box-shadow: none !important; padding: 0 !important; display: block !important; }

@@ -16,6 +16,9 @@ const state = {
   lastResult: null,
   isPlayingAudio: false,
   audioElement: null,
+  audioObjectUrl: null,
+  audioFetchController: null,
+  audioRequestId: 0,
   mediaRecorder: null,
   audioChunks: [],
   isRecording: false,
@@ -164,8 +167,25 @@ function switchIntakeMode(mode, focusTab = false) {
   });
 }
 
+function stopMicRecording() {
+  // Stop an in-progress voice note when leaving the results view; the onstop
+  // handler still transcribes and fills the intent box for the next run, so
+  // nothing the user said is lost — but the mic indicator never stays on.
+  if (state.isRecording && state.mediaRecorder && state.mediaRecorder.state !== "inactive") {
+    try {
+      state.mediaRecorder.stop();
+    } catch (_) {
+      // already stopped
+    }
+  }
+  state.isRecording = false;
+  const micBtn = $("btn-mic-scribe");
+  micBtn?.classList.remove("recording");
+}
+
 function showIntakeScreen() {
   stopAllAudio();
+  stopMicRecording();
   state.triageController?.abort();
   state.digestController?.abort();
   state.summaryPolishControllers.forEach((controller) => controller.abort());
@@ -346,7 +366,12 @@ async function runTriage({ forcePreset = null, overrideIntent = null } = {}) {
       let detail = `HTTP ${resp.status}`;
       try {
         const errorPayload = await resp.json();
-        if (errorPayload && errorPayload.detail) detail = String(errorPayload.detail);
+        if (errorPayload && errorPayload.detail) {
+          // FastAPI 422s arrive as a list of {msg, ...} objects; flatten to messages.
+          detail = Array.isArray(errorPayload.detail)
+            ? errorPayload.detail.map((d) => (d && d.msg) || JSON.stringify(d)).join("; ")
+            : String(errorPayload.detail);
+        }
       } catch (error) {
         detail = `HTTP ${resp.status}`;
       }
@@ -404,7 +429,10 @@ async function upgradeDigestWithGemma(data, requestId) {
       }),
       signal: controller.signal,
     });
-    if (!resp.ok) return;
+    if (!resp.ok) {
+      if (badge) badge.textContent = "Ready";
+      return;
+    }
     const gemmaData = await resp.json();
     if (requestId !== state.triageRequestId) return;
     const verifiedByGemma =
@@ -1052,9 +1080,18 @@ function renderWorkspace(data) {
 }
 
 function stopAllAudio() {
+  // Invalidate any in-flight TTS fetch so a late response can never start
+  // narrating over the intake screen after the user navigated away.
+  state.audioRequestId += 1;
+  state.audioFetchController?.abort();
+  state.audioFetchController = null;
   if (state.audioElement) {
     state.audioElement.pause();
     state.audioElement.currentTime = 0;
+  }
+  if (state.audioObjectUrl) {
+    URL.revokeObjectURL(state.audioObjectUrl);
+    state.audioObjectUrl = null;
   }
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
@@ -1101,6 +1138,12 @@ async function togglePlayDigestAudio() {
     $("directive-text").textContent.trim();
   if (!text) return;
 
+  const requestId = state.audioRequestId + 1;
+  state.audioRequestId = requestId;
+  const controller = new AbortController();
+  state.audioFetchController?.abort();
+  state.audioFetchController = controller;
+
   const heroLabel = $("hero-play-label");
   if (heroLabel) heroLabel.textContent = "Preparing audio…";
 
@@ -1109,10 +1152,14 @@ async function togglePlayDigestAudio() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),
+      signal: controller.signal,
     });
     if (!resp.ok) throw new Error(`TTS HTTP ${resp.status}`);
     const blob = await resp.blob();
+    if (state.audioRequestId !== requestId) return; // user navigated away mid-fetch
+    if (state.audioObjectUrl) URL.revokeObjectURL(state.audioObjectUrl);
     const url = URL.createObjectURL(blob);
+    state.audioObjectUrl = url;
     state.audioElement = new Audio(url);
     state.isPlayingAudio = true;
     updateAudioButtonsUI(true);
@@ -1122,6 +1169,7 @@ async function togglePlayDigestAudio() {
     };
     await state.audioElement.play();
   } catch (err) {
+    if (state.audioRequestId !== requestId) return; // stale request: stay silent
     console.warn("Using browser speech fallback:", err);
     speakViaBrowserFallback(text);
   }
@@ -1154,6 +1202,11 @@ async function toggleMicRecording() {
     };
     state.mediaRecorder.onstop = async () => {
       stream.getTracks().forEach((tr) => tr.stop());
+      if (state.audioChunks.length === 0) {
+        // Stopped before any audio arrived (e.g. user navigated away) — skip quietly.
+        micLabel.textContent = "Speak Topic";
+        return;
+      }
       const blob = new Blob(state.audioChunks, { type: "audio/webm" });
       const formData = new FormData();
       formData.append("file", blob, "voice_note.webm");
@@ -1308,6 +1361,13 @@ document.addEventListener("DOMContentLoaded", () => {
     urlsBox.addEventListener("input", updateDetectedUrlCounter);
   }
   $("input-intent")?.addEventListener("input", updateDetectedUrlCounter);
+  // Typing a topic and pressing Enter should behave like clicking the main button.
+  $("input-intent")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runTriage();
+    }
+  });
 
   $("btn-paste-clipboard")?.addEventListener("click", async () => {
     try {
@@ -1328,8 +1388,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $("btn-fill-live-urls")?.addEventListener("click", () => {
     if (urlsBox) {
-      urlsBox.value = SAMPLE_LIVE_URLS.join("\n");
+      const existing = urlsBox.value.trim();
+      const incoming = SAMPLE_LIVE_URLS.filter(
+        (u) => !existing.split(/\s+/).includes(u)
+      );
+      if (incoming.length === 0) {
+        showToast("Sample links are already in the box.", "info");
+        return;
+      }
+      urlsBox.value = existing ? `${existing}\n${incoming.join("\n")}` : incoming.join("\n");
       updateDetectedUrlCounter();
+      showToast(`Added ${incoming.length} sample link${incoming.length === 1 ? "" : "s"}.`, "success");
     }
   });
 
@@ -1452,7 +1521,9 @@ document.addEventListener("DOMContentLoaded", () => {
   $("btn-copy-digest")?.addEventListener("click", async (e) => {
     const txt = $("directive-text")?.textContent || "";
     const btn = e.currentTarget;
-    const prev = btn.innerHTML;
+    // Capture the pristine label only once per cycle so a double-click can't
+    // snapshot "Copied" and permanently destroy the SVG icon on restore.
+    if (!btn.dataset.labelHtml) btn.dataset.labelHtml = btn.innerHTML;
     const copied = await copyTextToClipboard(txt);
     btn.textContent = copied ? "Copied" : "Copy failed";
     showToast(
@@ -1460,7 +1531,7 @@ document.addEventListener("DOMContentLoaded", () => {
       copied ? "success" : "error"
     );
     setTimeout(() => {
-      btn.innerHTML = prev;
+      if (btn.dataset.labelHtml) btn.innerHTML = btn.dataset.labelHtml;
     }, 1400);
   });
 

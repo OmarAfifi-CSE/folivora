@@ -193,6 +193,14 @@ class TabPFNQuantileEngine:
                     p10, p50, p90 = 1.0, 2.0, 5.0
                     verdict = "SAFE_CLOSE"
                     reason = "Broken link (HTTP 404: Page Not Found — safe to close)"
+                elif bool(tab.get("is_login_walled")):
+                    # Uncertainty -> keep: the extractor saw a cookie-less login/error
+                    # shell, not the real page, so closing would violate the same
+                    # asymmetric-safety rule as the P90 guardrail. Maximum-uncertainty
+                    # quantiles; the human decides this one.
+                    p10, p50, p90 = 20.0, 50.0, 99.0
+                    verdict = "KEEP_EXTRACT"
+                    reason = "Login-walled — kept open because the server can't read this page's real content"
                 elif not tab_rated:
                     # User did NOT specify an interest -> Summarize All Mode (no rating, keep all valid tabs!)
                     verdict = "KEEP_EXTRACT"

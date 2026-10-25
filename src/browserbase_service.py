@@ -1891,6 +1891,44 @@ def extract_clean_urls_from_list(raw_urls: list[str] | None) -> list[str]:
     return deduped[:65]
 
 
+# Walls served to cookie-less fetchers: login screens, bot checks, error shells.
+# A tab matching these is labeled honestly and kept open downstream instead of
+# having its error shell "summarized" as if it were the real article.
+_LOGIN_WALL_TITLE_RE = re.compile(
+    r"^(error|attention required!?|access denied|just a moment|please wait|"
+    r"log ?in or sign up|sign in|login|checking your browser|are you a robot\?|"
+    r"enable javascript|sorry, something went wrong|too many requests)$",
+    re.IGNORECASE,
+)
+_LOGIN_WALL_BODY_PATTERNS = (
+    (re.compile(r"log ?in or sign up", re.I), "login screen"),
+    (re.compile(r"sign in to continue|please log in to continue|you must log in", re.I), "login screen"),
+    (re.compile(r"we.?ll get this fixed|get this fixed as soon as we can", re.I), "error shell"),
+    (re.compile(r"checking your browser before accessing|just a moment", re.I), "bot check"),
+    (re.compile(r"verify you are human|verify you.?re not a robot|confirm you.?re not a robot", re.I), "bot check"),
+    (re.compile(r"enable javascript and cookies", re.I), "bot check"),
+    (re.compile(r"attention required.{0,80}cloudflare", re.I | re.S), "bot check"),
+    (re.compile(r"request blocked|access to this page has been denied", re.I), "bot check"),
+)
+_LOGIN_WALL_MAX_BODY_WORDS = 320
+_LOGIN_WALL_MAX_TITLE_ONLY_WORDS = 140
+
+
+def _detect_login_wall(clean_title: str, raw_word_count: int, html: str) -> str | None:
+    """Return a wall label ('login screen', 'bot check', 'error shell') when the
+    fetched HTML looks like a cookie-less shell rather than the real page."""
+    if raw_word_count > _LOGIN_WALL_MAX_BODY_WORDS and raw_word_count > _LOGIN_WALL_MAX_TITLE_ONLY_WORDS:
+        return None
+    body_probe = (html or "").replace("\u2019", "'")
+    if raw_word_count <= _LOGIN_WALL_MAX_BODY_WORDS:
+        for pattern, label in _LOGIN_WALL_BODY_PATTERNS:
+            if pattern.search(body_probe):
+                return label
+    if raw_word_count <= _LOGIN_WALL_MAX_TITLE_ONLY_WORDS and _LOGIN_WALL_TITLE_RE.match(clean_title.strip()):
+        return "error shell"
+    return None
+
+
 def fast_http_extract_url(
     url: str,
     idx: int = 0,
@@ -1975,6 +2013,45 @@ def fast_http_extract_url(
             "snippet": "",
             "fact_numbers": ["404"],
             "is_broken_404": True,
+            "is_login_walled": False,
+        }
+
+    # Login/bot-wall detection: without session cookies, sites like Facebook,
+    # LinkedIn, or Cloudflare-challenged pages serve an error or sign-in shell
+    # instead of the article. Summarizing that shell would be worse than
+    # useless, so the tab is labeled honestly and kept open downstream.
+    raw_words = len(_strip_html_tags(html).split())
+    wall_label = _detect_login_wall(clean_title, raw_words, html)
+    if wall_label:
+        display_path = path_slug if path_slug != host else ""
+        wall_title = f"Login-walled: {host}" + (f"/{display_path[:45]}" if display_path else "")
+        return {
+            "id": f"user-tab-{idx + 1}",
+            "title": wall_title,
+            "url": url,
+            "domain": host,
+            "age_days": round(1.0 + idx * 0.9, 1),
+            "word_count": 80,
+            "code_block_count": 0,
+            "table_count": 0,
+            "heading_count": 1,
+            "link_density": 1.0,
+            "overview": (
+                f"{host} served the server its {wall_label} (fetches carry no login cookies), "
+                "so this tab's real content couldn't be read. Folivora keeps it open instead of guessing."
+            ),
+            "takeaways": [
+                f"Login-walled ({wall_label}) — the extractor sees {host}'s sign-in/error shell, "
+                "not the page you actually have open in your browser. Close or keep it yourself; no summary was invented."
+            ],
+            "synthesized_points": [],
+            "topics": ["Login Wall"],
+            "full_text": "",
+            "snippet": "",
+            "fact_numbers": [],
+            "is_broken_404": False,
+            "is_login_walled": True,
+            "wall_label": wall_label,
         }
 
     if not html:
@@ -1997,6 +2074,7 @@ def fast_http_extract_url(
             "snippet": "",
             "fact_numbers": ["1"],
             "is_broken_404": False,
+            "is_login_walled": False,
         }
 
     b_idx = html.find("crayons-article__body")
@@ -2079,6 +2157,7 @@ def fast_http_extract_url(
         "snippet": overview,
         "fact_numbers": nums,
         "is_broken_404": False,
+        "is_login_walled": False,
     }
 
 

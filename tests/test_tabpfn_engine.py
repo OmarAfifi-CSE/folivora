@@ -109,6 +109,30 @@ class TestTabPFNEngine(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.engine.evaluate_tab_pile([])
 
+    def test_login_walled_tab_is_kept_even_when_it_matches_nothing(self):
+        # A cookie-less fetch of e.g. facebook.com returns a login/error shell;
+        # the engine must keep the tab open (uncertainty -> keep) regardless of
+        # intent, never auto-close a page it could not actually read.
+        walled = dict(PRESET_TAB_PILES["postgres_docker_pile"]["tabs"][0])
+        walled.update(
+            {
+                "title": "Login-walled: facebook.com/watch",
+                "domain": "facebook.com",
+                "is_login_walled": True,
+                "intent_match_score": 0.0,
+                "match_explanation": "Strong match for 'flutter' — 0 relevant mentions across this page",
+            }
+        )
+        res = self.engine.evaluate_tab_pile([walled], rated=True)
+        self.assertEqual(res["total_tabs"], 1)
+        self.assertEqual(res["kept_count"], 1)
+        self.assertEqual(res["closed_count"], 0)
+        kept = res["kept_tabs"][0]
+        self.assertEqual(kept["verdict"], "KEEP_EXTRACT")
+        self.assertIn("Login-walled", kept["verdict_reason"])
+        # Maximum-uncertainty quantiles: the band says "could be anything".
+        self.assertEqual(kept["p90_score"], 99.0)
+
 
 if __name__ == "__main__":
     unittest.main()

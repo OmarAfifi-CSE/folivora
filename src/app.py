@@ -359,6 +359,8 @@ _KEPT_TAB_FIELDS = (
     "collection_preset_key",
     "collection_count",
     "is_broken_404",
+    "is_login_walled",
+    "wall_label",
     "match_explanation",
     "verdict_reason",
     "summary_source",

@@ -424,6 +424,53 @@ class TestBrowserbaseAndAudio(unittest.TestCase):
         mock_fast.assert_called_once()
         mock_release.assert_called_once_with("sess-456")
 
+    def test_facebook_error_shell_is_labeled_login_walled_not_summarized(self):
+        fb_html = (
+            "<html><head><title>Error</title></head><body>"
+            "<p>You must log in to continue.</p>"
+            "<p>We’ll get this fixed as soon as we can.</p>"
+            "</body></html>"
+        )
+        tab = fast_http_extract_url(
+            "https://www.facebook.com/watch",
+            1,
+            prefetched_html=fb_html,
+        )
+        self.assertTrue(tab["is_login_walled"])
+        self.assertEqual(tab["topics"], ["Login Wall"])
+        self.assertNotIn("is_broken_404", {k for k in tab if tab[k] is True})
+        # The error-shell prose must never leak into the takeaways.
+        joined = " ".join(tab["takeaways"]).lower()
+        self.assertNotIn("get this fixed", joined)
+
+    def test_normal_content_page_is_never_flagged_as_login_walled(self):
+        body_words = " ".join(f"word{i}" for i in range(400))
+        ok_html = (
+            "<html><head><title>A Genuine Long Article</title></head><body>"
+            f"<p>{body_words}</p></body></html>"
+        )
+        tab = fast_http_extract_url(
+            "https://blog.example.com/genuine",
+            1,
+            prefetched_html=ok_html,
+        )
+        self.assertFalse(tab["is_login_walled"])
+        self.assertGreater(tab["word_count"], 300)
+
+    def test_cloudflare_bot_check_shell_is_labeled_login_walled(self):
+        cf_html = (
+            "<html><head><title>Just a moment...</title></head><body>"
+            "<p>Checking your browser before accessing the site.</p>"
+            "</body></html>"
+        )
+        tab = fast_http_extract_url(
+            "https://protected.example.com/docs",
+            1,
+            prefetched_html=cf_html,
+        )
+        self.assertTrue(tab["is_login_walled"])
+        self.assertEqual(tab["wall_label"], "bot check")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -481,7 +481,7 @@ body.mode-single .slide.active {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-  .deck-topbar, .deck-progress-track {
+  .deck-topbar, .deck-progress-track, .deck-controls {
     display: none !important;
   }
   .deck-stage {

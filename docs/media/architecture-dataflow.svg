@@ -79,19 +79,19 @@
   <path d="M 888 210 L 888 232 L 660 232 L 660 250" fill="none" stroke="#1F5E43" stroke-width="2.2" marker-end="url(#arrowMoss)"/>
 
   <!-- ======================================================================
-       STAGE 2: FAST LANE (<150ms) — TABPFN QUANTILE TRIAGE
+       STAGE 2: FAST LANE (DETERMINISTIC, ZERO LLM) — TABPFN QUANTILE TRIAGE
        ====================================================================== -->
   <g filter="url(#cardShadow)">
     <rect x="120" y="254" width="960" height="142" rx="18" fill="#FFFFFF" stroke="#1F5E43" stroke-width="2"/>
     <rect x="120" y="254" width="960" height="36" rx="18" fill="url(#mossGrad)"/>
     <rect x="120" y="274" width="960" height="16" fill="url(#mossGrad)"/>
-    <text x="144" y="277" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#FFFFFF">STAGE 02 · INSTANT FAST LANE (POST /triage — &lt;150ms FIRST PAINT)</text>
+    <text x="144" y="277" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#FFFFFF">STAGE 02 · INSTANT FAST LANE (POST /triage — DETERMINISTIC, ZERO LLM)</text>
     <rect x="880" y="262" width="182" height="20" rx="10" fill="#FBF0DF"/>
     <text x="971" y="276" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#92400E">0.36% False-Close Rate</text>
 
     <!-- Inside Stage 2 Left -->
     <text x="144" y="314" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#14211B">Prior Labs TabPFN v2 Quantile Engine (src/tabpfn_engine.py)</text>
-    <text x="144" y="335" font-family="'Plus Jakarta Sans', sans-serif" font-size="12.5" fill="#4A5A52">• Predicts calibrated P10 / P50 / P90 utility quantiles across 7 DOM features on CPU (81.1% empirical band coverage)</text>
+    <text x="144" y="335" font-family="'Plus Jakarta Sans', sans-serif" font-size="12.5" fill="#4A5A52">• Predicts calibrated P10 / P50 / P90 utility quantiles across 7 features on CPU (77.9% empirical band coverage)</text>
     <text x="144" y="355" font-family="'Plus Jakarta Sans', sans-serif" font-size="12.5" fill="#4A5A52">• Enforces asymmetric safety guardrail: a tab is only set aside when even its optimistic P90 upper bound &lt; 45.0</text>
     <text x="144" y="377" font-family="'JetBrains Mono', monospace" font-size="11.5" font-weight="600" fill="#1B543B">Returns immediately: Sanitized Reading Cards (Topic Focus + Full Summary tabs) + Private TTL/LRU job_id</text>
 

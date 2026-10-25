@@ -44,8 +44,9 @@ def _sanitize_num(val: float, default: float = 0.0) -> float:
 
 class TabPFNQuantileEngine:
     """
-    Provides sub-second calibrated quantile predictions (`P10`, `P50`, `P90`)
-    using Prior Labs' TabPFN foundation model on CPU.
+    Provides calibrated quantile predictions (`P10`, `P50`, `P90`) using Prior
+    Labs' TabPFN foundation model on CPU (~1.3 s for a 14-tab pile on a laptop
+    CPU; preset results are cached upstream in `app.py` for repeat requests).
     """
 
     def __init__(self, context_rows: int = 200):

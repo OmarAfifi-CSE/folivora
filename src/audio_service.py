@@ -1,5 +1,5 @@
 """
-audio_service.py - Bidirectional ElevenLabs Voice Service (Scribe v2 STT + Flash v2.5 TTS)
+audio_service.py - Bidirectional ElevenLabs Voice Service (Scribe STT + Flash v2.5 TTS)
 
 1. Speech-to-Text (`transcribe_and_forget`): Sends spoken lazy filter instructions to
    ElevenLabs Scribe (`scribe_v1`), returns the transcribed text, and immediately calls

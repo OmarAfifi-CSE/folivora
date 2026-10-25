@@ -58,8 +58,8 @@
           </div>
           <div class="card card-cyan">
             <div class="metric-label">Fast-Lane Triage</div>
-            <div class="metric-big cyan">&lt;150ms</div>
-            <p>Instant deterministic cards upgraded in place by Gemma 4 &amp; Gemini Flash Lite.</p>
+            <div class="metric-big cyan">~1.3s</div>
+            <p>LLM-free deterministic cards on a laptop CPU; preset repeats served from cache in &lt;30ms.</p>
           </div>
           <div class="card card-emerald">
             <div class="metric-label">Fact-Gate Pass Rate</div>
@@ -196,10 +196,10 @@
           <span class="slide-num-badge">SLIDE 04 / 10</span>
         </div>
         <h2 class="slide-title">
-          Meet <span class="accent">Folivora</span>: Sub-150ms deterministic triage + grounded open-weight AI polish.
+          Meet <span class="accent">Folivora</span>: Deterministic LLM-free triage + grounded open-weight AI polish.
         </h2>
         <p class="slide-subtitle">
-          Folivora decouples instant structural triage from background LLM synthesis—rendering interactive dossiers in under 150ms while upgrading prose asynchronously behind strict mathematical verification gates.
+          Folivora decouples instant structural triage from background LLM synthesis—rendering interactive dossiers in ~1.3s warm (~30ms from the preset cache) while upgrading prose asynchronously behind strict mathematical verification gates.
         </p>
 
         <div class="pipeline-flow">
@@ -215,7 +215,7 @@
           </div>
           <div class="pipe-step">
             <div class="step-idx">STAGE 03 · FAST LANE</div>
-            <h4>⚡ &lt;150ms Instant Dossier</h4>
+            <h4>⚡ Instant Dossier (Zero LLM)</h4>
             <p>Immediately renders sanitized section-anchored takeaways, copyable code blocks, reading time saved, and keep/close verdicts.</p>
           </div>
           <div class="pipe-step">
@@ -226,7 +226,7 @@
           <div class="pipe-step">
             <div class="step-idx">STAGE 05 · VOICE &amp; TRACE</div>
             <h4>🎙️ ElevenLabs + Sentry</h4>
-            <p>Scribe v2 voice intent input (with immediate remote delete), Flash v2.5 spoken briefing, and scrubbed Sentry OpenTelemetry spans.</p>
+            <p>Scribe (<code>scribe_v1</code>) voice intent input (with immediate remote delete), Flash v2.5 spoken briefing, and scrubbed Sentry OpenTelemetry spans.</p>
           </div>
         </div>
 
@@ -266,10 +266,10 @@
           <div class="card card-emerald">
             <div class="metric-label">Demo Path 01</div>
             <h3>🏆 65-Tab DEV Hall of Fame Pile</h3>
-            <p>Triage all 65 featured DEV Community articles (600+ minutes of reading) in under 150ms. Filter by any topic (e.g., <code>Gemini</code>, <code>Rust</code>, <code>Docker</code>, <code>Flutter</code>) and watch TabPFN isolate the exact matching articles and jump straight to the matching H2/H3 section.</p>
+            <p>Triage all 65 featured DEV Community articles (600+ minutes of reading) in one deterministic LLM-free pass (~1.6s warm; repeat loads ~30ms from cache). Filter by any topic (e.g., <code>Gemini</code>, <code>Rust</code>, <code>Docker</code>, <code>Flutter</code>) and watch TabPFN isolate the exact matching articles and jump straight to the matching H2/H3 section.</p>
             <div class="tag-row">
               <span class="tag emerald">65 Real Articles</span>
-              <span class="tag">&lt;150ms Triage</span>
+              <span class="tag">LLM-Free Triage</span>
             </div>
           </div>
 
@@ -405,7 +405,7 @@
             <h3>🔐 Multi-Layer Privacy &amp; Isolation</h3>
             <ul class="clean-list">
               <li><strong>Private Ephemeral Job Store:</strong> Custom user URLs are isolated in a per-job TTL/LRU store (<code>15m</code> expiry) and never written to shared caches or serialized back in raw API responses.</li>
-              <li><strong>Transcribe-and-Forget Voice Privacy:</strong> Voice intents sent to ElevenLabs Scribe v2 trigger an immediate remote <code>DELETE /v1/speech-to-text/transcripts/{id}</code> in a <code>finally</code> block.</li>
+              <li><strong>Transcribe-and-Forget Voice Privacy:</strong> Voice intents sent to ElevenLabs Scribe (<code>scribe_v1</code>) trigger an immediate remote <code>DELETE /v1/speech-to-text/transcripts/{id}</code> in a <code>finally</code> block.</li>
               <li><strong>SSRF &amp; Network Hardening:</strong> Blocks RFC1918 private IPs, loopback, link-local metadata endpoints, and credentialed URLs on every redirect hop.</li>
             </ul>
           </div>
@@ -491,7 +491,7 @@
             <h3>🌱 Open-Source / Free</h3>
             <div class="metric-big" style="font-size:28px;margin:8px 0;">$0 / mo</div>
             <ul class="clean-list">
-              <li>Unlimited local deterministic tab triage (&lt;150ms)</li>
+              <li>Unlimited local deterministic tab triage (LLM-free)</li>
               <li>Chrome Extension tab hibernation &amp; 1-click undo</li>
               <li>Self-hosted Docker &amp; local Ollama support</li>
             </ul>

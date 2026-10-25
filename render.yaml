@@ -29,9 +29,9 @@ services:
       - key: SUMMARY_POLISH_CONCURRENCY
         value: "3"
       - key: SUMMARY_POLISH_TIMEOUT_S
-        value: "13.0"
-      - key: SUMMARY_POLISH_BATCH_BUDGET_S
         value: "20.0"
+      - key: SUMMARY_POLISH_BATCH_BUDGET_S
+        value: "36.0"
       - key: SUMMARY_PROMPT_VERSION
         value: tab-summary-v2
       - key: SUMMARY_CACHE_TTL_S

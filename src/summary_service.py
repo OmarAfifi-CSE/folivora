@@ -28,8 +28,11 @@ PROMPT_VERSION = os.getenv("SUMMARY_PROMPT_VERSION", "tab-summary-v2")
 VALIDATION_VERSION = "tab-summary-validation-v3"
 DEFAULT_MAX_TABS = 8
 DEFAULT_CONCURRENCY = 8
-DEFAULT_PER_TAB_TIMEOUT_S = 16.0
-DEFAULT_BATCH_BUDGET_S = 28.0
+# Measured remote Gemma lane latency is 9-23s under provider load (see .env.example);
+# a 16s per-tab deadline produced >10% deadline fallbacks, so the polish lane gets 20s.
+# The fast lane still paints deterministic cards instantly; polish only upgrades async.
+DEFAULT_PER_TAB_TIMEOUT_S = 20.0
+DEFAULT_BATCH_BUDGET_S = 36.0
 
 _STANDARD_BULLETS = 4
 _SPARSE_BULLETS = 3
@@ -1009,7 +1012,7 @@ class TabSummaryService:
         self.max_tabs = _env_int("SUMMARY_POLISH_LIMIT", legacy_limit, 1, 12)
         self.concurrency = _env_int("SUMMARY_POLISH_CONCURRENCY", DEFAULT_CONCURRENCY, 1, 8)
         self.per_tab_timeout_s = _env_float(
-            "SUMMARY_POLISH_TIMEOUT_S", DEFAULT_PER_TAB_TIMEOUT_S, 1.0, 20.0
+            "SUMMARY_POLISH_TIMEOUT_S", DEFAULT_PER_TAB_TIMEOUT_S, 1.0, 30.0
         )
         legacy_budget = _env_float(
             "SUMMARY_POLISH_BUDGET_S", DEFAULT_BATCH_BUDGET_S, 2.0, 60.0

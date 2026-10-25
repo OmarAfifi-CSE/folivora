@@ -18,6 +18,7 @@ Every generated draft is checked by `check_output()`:
 
 import os
 import re
+import threading
 import time
 import requests
 
@@ -76,6 +77,7 @@ class GemmaDigestService:
     GOOGLE_MODELS = ("gemma-4-26b-a4b-it", "gemma-4-31b-it")
     OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
     _TAB_LANE_COUNTER = 0
+    _TAB_LANE_LOCK = threading.Lock()
 
     def __init__(self, timeout_s: float | None = None):
         self.ollama_base_url = os.getenv("OLLAMA_BASE_URL", "").strip()
@@ -219,7 +221,7 @@ class GemmaDigestService:
         timeout_s: float | None = None,
     ) -> tuple[str | None, str, int, int]:
         """
-        Calls the configured Gemma provider (Ollama -> OpenRouter -> Google AI Studio)
+        Calls the configured Gemma provider (Ollama -> Google AI Studio -> OpenRouter)
         and returns `(text, model_used, input_tokens, output_tokens)`.
 
         A shared wall-clock deadline prevents a slow first provider from consuming the
@@ -432,8 +434,9 @@ class GemmaDigestService:
                 open_lanes.append(("openrouter_gemma", "google/gemma-3-12b-it"))
 
             if open_lanes:
-                idx = GemmaDigestService._TAB_LANE_COUNTER
-                GemmaDigestService._TAB_LANE_COUNTER = idx + 1
+                with GemmaDigestService._TAB_LANE_LOCK:
+                    idx = GemmaDigestService._TAB_LANE_COUNTER
+                    GemmaDigestService._TAB_LANE_COUNTER = idx + 1
                 lane_kind, lane_model = open_lanes[idx % len(open_lanes)]
                 req_timeout = max(1.0, min(deadline - time.monotonic() - 4.0, 11.0))
                 if lane_kind == "google_gemma":

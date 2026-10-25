@@ -23,11 +23,14 @@ SECRET_KEY_PATTERN = re.compile(
 )
 
 
-def scrub_dict_secrets(data: dict) -> dict:
+def scrub_dict_secrets(data):
     """
-    Recursively scrubs sensitive keys from a dictionary while preserving
-    OpenTelemetry token usage counters (`input_tokens`, `output_tokens`, `tokens_per_second`).
+    Recursively scrubs sensitive keys from a dict (descending into nested dicts
+    and lists of dicts) while preserving OpenTelemetry token usage counters
+    (`input_tokens`, `output_tokens`, `tokens_per_second`).
     """
+    if isinstance(data, list):
+        return [scrub_dict_secrets(item) for item in data]
     if not isinstance(data, dict):
         return data
     cleaned = {}
@@ -35,7 +38,7 @@ def scrub_dict_secrets(data: dict) -> dict:
         key_str = str(key)
         if SECRET_KEY_PATTERN.search(key_str):
             cleaned[key] = "[Redacted]"
-        elif isinstance(val, dict):
+        elif isinstance(val, (dict, list)):
             cleaned[key] = scrub_dict_secrets(val)
         elif isinstance(val, str) and ("wss://connect." in val and "signingKey=" in val):
             cleaned[key] = val.split("signingKey=")[0] + "signingKey=[Redacted]"
@@ -46,8 +49,9 @@ def scrub_dict_secrets(data: dict) -> dict:
 
 def before_send_scrubber(event: dict, hint: dict | None = None) -> dict:
     """
-    Sentry `before_send` hook: redacts secrets across `extra`, `contexts`, and `spans`
-    while keeping `gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens` visible.
+    Sentry `before_send` hook: redacts secrets across `extra`, `contexts`,
+    `breadcrumbs`, and `spans` (including lists of dicts) while keeping
+    `gen_ai.usage.input_tokens` and `gen_ai.usage.output_tokens` visible.
     """
     if not isinstance(event, dict):
         return event
@@ -55,6 +59,10 @@ def before_send_scrubber(event: dict, hint: dict | None = None) -> dict:
         event["extra"] = scrub_dict_secrets(event["extra"])
     if "contexts" in event and isinstance(event["contexts"], dict):
         event["contexts"] = scrub_dict_secrets(event["contexts"])
+    if "breadcrumbs" in event and isinstance(event["breadcrumbs"], dict):
+        crumbs = event["breadcrumbs"].get("values")
+        if isinstance(crumbs, list):
+            event["breadcrumbs"]["values"] = scrub_dict_secrets(crumbs)
     if "spans" in event and isinstance(event["spans"], list):
         for span in event["spans"]:
             if isinstance(span, dict) and isinstance(span.get("data"), dict):

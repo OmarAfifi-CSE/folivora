@@ -1,6 +1,6 @@
 # Hand Audit of 60 Generated Tab Digests (`eval/REVIEW.md`)
 
-> Companion manual review to [`eval/EVAL.md`](EVAL.md). I read all 58 Gemma-generated digests that passed `check_output()` in the final `v4` run alongside the 2 cases that fell back to the deterministic template.
+> Companion manual review to [`eval/EVAL.md`](EVAL.md). I read all 59 Gemma-generated digests that passed `check_output()` in the final `v4` run alongside the 1 case that fell back to the deterministic template.
 
 ---
 

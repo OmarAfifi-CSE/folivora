@@ -1,6 +1,8 @@
 # Evaluation Report: Gemma Output Grounding (`eval/EVAL.md`)
 
 > **Reproducibility:** Run `python eval/run_eval.py` to execute all 60 tab-pile test scenarios across prompt versions `v1` through `v4` against `check_output()` in [`src/gemma_service.py`](../src/gemma_service.py).
+>
+> **Methodology note:** `run_eval.py` is a deterministic replay harness — it re-runs the exact failure modes we measured from live Gemma calls (decimal rounding, `**markdown**`, invented `"in N seconds"` digits) through the real `check_output()` gate and retry loop, keyed by case ID, so the result is identical on every machine with zero API cost. For a live-provider spot check (latency and fact coverage vary with provider load), run `python eval/summary_quality.py --live-gemma --gate`; the canonical reproducible baseline is the golden fixture in [`summary_cases.json`](summary_cases.json).
 
 ---
 

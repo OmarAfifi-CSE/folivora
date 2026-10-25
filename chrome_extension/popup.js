@@ -33,14 +33,16 @@ async function refreshUndoButton() {
   }
 }
 
-document.getElementById("btn-open-dashboard").addEventListener("click", async () => {
+async function openDashboard() {
   await scanCurrentWindowTabs();
   const serverUrl = document.getElementById("server-url").value.replace(/\/$/, "");
   const intent = document.getElementById("intent-input").value.trim();
   const urlsParam = encodeURIComponent(detectedTabs.map((t) => t.url).join("\n"));
   const intentParam = intent ? `&intent=${encodeURIComponent(intent)}` : "";
   chrome.tabs.create({ url: `${serverUrl}/?urls=${urlsParam}${intentParam}` });
-});
+}
+
+document.getElementById("btn-open-dashboard").addEventListener("click", openDashboard);
 
 document.getElementById("btn-quick-summary").addEventListener("click", async (event) => {
   const btn = event.currentTarget;
@@ -107,29 +109,49 @@ async function runQuickSummary() {
       String(s ?? "").replace(/[&<>"']/g, (c) => (
         { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
       ));
+    const trunc = (s, n) => {
+      const str = String(s ?? "");
+      return str.length > n ? `${str.slice(0, n - 1).trimEnd()}\u2026` : str;
+    };
     const kept = Array.isArray(data.kept_tabs) ? data.kept_tabs : [];
     const closed = Array.isArray(data.closed_tabs) ? data.closed_tabs : [];
     const walls = kept.filter((t) => t && t.is_login_walled);
-    const lines = [];
-    lines.push(`<div class="digest-line">${esc(data.spoken_digest || "Triage complete.")}</div>`);
-    lines.push(
+    const rated = Boolean(data.rated); // % badges only exist when a topic was given
+    const parts = [];
+    parts.push('<div class="result-kicker">Triage result</div>');
+    parts.push(
       `<div class="stat-line">${esc(String(kept.length))} kept &middot; ${esc(String(closed.length))} set aside &middot; ~${esc(String(data.minutes_saved ?? 0))} min saved</div>`
     );
+    parts.push('<div class="result-divider"></div>');
     for (const t of kept.slice(0, 3)) {
       if (t.is_login_walled) {
-        lines.push(`<div class="mini-line">&#128274; Login-walled: ${esc(t.domain || "?")} — kept open (server can't read it)</div>`);
+        parts.push(
+          `<div class="tab-row"><span class="tab-title">&#128274; ${esc(t.domain || "?")}</span>` +
+          `<span class="tab-meta">${esc(t.wall_label || "login-walled")} &middot; kept open</span></div>`
+        );
       } else {
-        lines.push(`<div class="mini-line">&#9733; ${esc(String(t.title || "").slice(0, 62))}${t.p50_score ? ` (${esc(String(t.p50_score))}%)` : ""}</div>`);
+        const meta = [`~${esc(String(t.full_read_min ?? "?"))} min read`];
+        if (rated && t.p50_score) meta.push(`${esc(String(t.p50_score))}% match`);
+        parts.push(
+          `<div class="tab-row"><span class="tab-title">&#9733; ${esc(trunc(t.title, 56))}</span>` +
+          `<span class="tab-meta">${esc(meta.join(" &middot; "))}</span></div>`
+        );
       }
     }
     if (kept.length > 3) {
-      lines.push(`<div class="mini-line">&hellip; +${esc(String(kept.length - 3))} more</div>`);
+      parts.push(`<div class="tab-row tab-more">+${esc(String(kept.length - 3))} more in the full digest</div>`);
     }
     if (walls.length > 0) {
-      lines.push(`<div class="mini-note">Login-walled tabs stay open — fetches carry no cookies, so their real content can't be inspected.</div>`);
+      parts.push(
+        `<div class="mini-note">&#128274; ${esc(String(walls.length))} walled tab${walls.length === 1 ? "" : "s"} kept open — fetches carry no cookies, so the real content can't be inspected.</div>`
+      );
     }
-    lines.push(`<div class="mini-note">Open Full Reading Digest above for every section-anchored takeaway.</div>`);
-    resBox.innerHTML = lines.join("");
+    if (!rated) {
+      parts.push('<div class="mini-note">Tip: type a topic above to score and filter these tabs.</div>');
+    }
+    parts.push('<button type="button" class="btn btn-primary inline-open" id="btn-inline-open-digest">Open Full Reading Digest &rarr;</button>');
+    resBox.innerHTML = parts.join("");
+    document.getElementById("btn-inline-open-digest")?.addEventListener("click", openDashboard);
 
     const closedUrls = new Set(
       (data.closed_tabs || []).map((item) => normalizeUrl(item.url))

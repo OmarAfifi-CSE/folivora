@@ -23,36 +23,13 @@
     }
     .server-input:focus { outline: 2px solid rgba(31, 94, 67, 0.45); border-color: #1F5E43; }
     .btn {
-      width: 100%; padding: 10px 13px; border-radius: 10px; border: none;
-      font-weight: 700; font-size: 12.5px; cursor: pointer; margin-bottom: 7px;
+      width: 100%; padding: 11px 13px; border-radius: 10px; border: none;
+      font-weight: 700; font-size: 13px; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 7px;
     }
     .btn-primary { background: #1F5E43; color: #FFFFFF; }
     .btn-primary:hover { background: #1B543B; }
-    .btn-secondary { background: #FFFFFF; color: #14211B; border: 1px solid rgba(20, 33, 27, 0.16); }
-    .btn-secondary:hover { border-color: #1F5E43; color: #1B543B; }
-    .btn-warn { background: #FFF1F2; color: #BE123C; border: 1px solid #FECDD3; }
-    .btn-warn:hover { background: #FFE4E6; }
-    .btn-undo { background: #F0F7F3; color: #1B543B; border: 1px solid #DCECE4; }
-    .status {
-      font-size: 12px; color: #24332C; margin-top: 8px; line-height: 1.5;
-      background: #FFFFFF; border: 1px solid rgba(20, 33, 27, 0.12); border-radius: 10px; padding: 11px;
-    }
-    .digest-line { font-weight: 700; margin-bottom: 6px; }
-    .result-kicker {
-      font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #1B543B; margin-bottom: 4px;
-    }
-    .stat-line { font-size: 11.5px; color: #14211B; font-weight: 700; }
-    .result-divider { height: 1px; background: rgba(20, 33, 27, 0.12); margin: 8px 0; }
-    .tab-row { display: flex; flex-direction: column; margin-bottom: 6px; }
-    .tab-title { font-size: 12px; font-weight: 600; color: #14211B; line-height: 1.35; }
-    .tab-meta { font-size: 10.5px; color: #6B7A71; margin-top: 1px; }
-    .tab-more { font-size: 11px; color: #4A5A52; font-style: italic; }
-    .inline-open { margin-top: 8px; }
-    .mini-note { font-size: 10.5px; color: #6B7A71; margin-top: 6px; }
-    .cleanup-actions { margin-top: 8px; }
-    .hidden { display: none !important; }
+    .hint { font-size: 10.5px; color: #6B7A71; margin-top: 9px; text-align: center; line-height: 1.45; }
   </style>
 </head>
 <body>
@@ -60,7 +37,7 @@
     <span class="brand">Folivora</span>
     <span class="badge" id="tab-count-badge">Scanning…</span>
   </div>
-  <p class="desc">Summarize all open tabs in this window, filter by what you need right now, and put unused tabs to sleep in one click.</p>
+  <p class="desc">Send every open tab in this window to your Folivora Reading Digest — the full triage, section-anchored takeaways, spoken brief, print and exports.</p>
 
   <label class="field-label" for="intent-input">Looking for something specific? (Optional)</label>
   <input id="intent-input" class="server-input" type="text" placeholder="e.g. Japan trip, sleep, laptops, Web Dev (or leave blank)">
@@ -72,24 +49,7 @@
     Open Full Reading Digest
   </button>
 
-  <button id="btn-quick-summary" class="btn btn-secondary">
-    Quick Summary &amp; Tab Cleanup
-  </button>
-
-  <div id="cleanup-box" class="cleanup-actions hidden">
-    <button id="btn-hibernate-closed" class="btn btn-secondary">
-      Put Unrelated Tabs to Sleep (Save Memory)
-    </button>
-    <button id="btn-close-unrelated" class="btn btn-warn">
-      Close Unrelated Tabs (With Undo)
-    </button>
-  </div>
-
-  <button id="btn-undo-close" class="btn btn-undo hidden">
-    Restore Last Closed Tabs
-  </button>
-
-  <div id="result-box" class="status hidden"></div>
+  <p class="hint">Your tabs open as a pre-filled digest on the server —<br>nothing is closed or changed in this window.</p>
 
   <script src="popup.js"></script>
 </body>

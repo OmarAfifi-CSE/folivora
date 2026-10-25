@@ -98,7 +98,7 @@ People don't keep 40 browser tabs open for three weeks to read 5,000-word articl
 | **Summarize Everything at Once (Mode A)** | Paste your open links or click **Summarize My Open Tabs** with zero prompt needed. Get a clean 25-second overview and section-anchored takeaways for every tab. | **Zero-Prompt Mode (`rated=False`):** Every readable tab is kept, summarized by section (`Heading — Insight`), and read aloud in 15 seconds via **ElevenLabs Charlie**. |
 | **Everyday Life & Travel Triage (Mode B)** | Planning a trip, comparing laptops, or prepping meals across 15 open tabs? Pick a topic chip like **Travel**, **Health & Sleep**, **Food & Recipes**, or **Shopping**. | **Semantic Topic Expansion:** Matches domain concepts (e.g., `"Japan Travel"` ➔ *Tokyo, Kyoto, Shinkansen, Suica*), ranks cards under **Worth Your Time**, and moves unrelated pages to **Set Aside**. |
 | **Deep Engineering & 65 DEV Articles** | Load the built-in **65 DEV Article Library** (`600+` min read) or your own docs window and filter by **Web Dev**, **Databases**, **Security**, or **AI & Tech**. | **Segmented Card Tabs:** Toggle any card between **`Focused on "<Topic>"`** (targeted section synthesis + mention count) and **`Full Summary`** (complete article digest). |
-| **1-Click Window Cleanup & Sleep** | Install the Manifest V3 Chrome Extension (`/download-extension.zip`) to scan your live browser window without copy-pasting URLs. | **Zero-RAM Tab Hibernation:** Put unrelated tabs to sleep via `chrome.tabs.discard()` (`0 MB` RAM while keeping them in your tab bar) or close them with a **1-Click Undo snapshot**. |
+| **1-Click Window Scan** | Install the Manifest V3 Chrome Extension (`/download-extension.zip`) to scan your live browser window without copy-pasting URLs. | **One-Click Digest Launch:** The popup reads your window's open tabs (optionally with a typed topic) and opens the full Reading Digest with everything pre-filled — triage, takeaways, print, and exports. Nothing in your window is closed or modified. |
 
 ---
 
@@ -384,7 +384,7 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 | **Voice I/O** | [`src/audio_service.py`](src/audio_service.py) | **ElevenLabs Scribe (`scribe_v1`)** (`transcribe_and_forget()` with immediate remote transcript deletion) + **ElevenLabs Flash v2.5** (`Charlie` voice TTS). |
 | **Observability & Scrubbing** | [`src/telemetry.py`](src/telemetry.py) | **Sentry SDK + OpenTelemetry** `gen_ai.request` spans and recursive `before_send` credential scrubber (`(?<!put_)token(?!s)`). |
 | **Frontend Workspace** | [`src/static/`](src/static/) | Botanical Reading Room design system (`Newsreader` + `Plus Jakarta Sans`), responsive from `320px` to `1440px+` (44px+ touch targets on mobile & coarse pointers), segmented card tabs, live filter bar, `@media print` sheet, and Markdown/Bookmark exports. |
-| **Browser Extension** | [`chrome_extension/`](chrome_extension/) | Manifest V3 popup packaged dynamically at `/download-extension.zip` with 1-click tab hibernation (`chrome.tabs.discard()`) and Undo snapshot restore. |
+| **Browser Extension** | [`chrome_extension/`](chrome_extension/) | Manifest V3 popup packaged dynamically at `/download-extension.zip` — scans the live window and launches the full Reading Digest pre-filled (single `tabs` permission; nothing is closed or modified). |
 
 ---
 

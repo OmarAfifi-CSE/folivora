@@ -42,27 +42,41 @@ document.getElementById("btn-open-dashboard").addEventListener("click", async ()
   chrome.tabs.create({ url: `${serverUrl}/?urls=${urlsParam}${intentParam}` });
 });
 
-document.getElementById("btn-quick-summary").addEventListener("click", async () => {
-  await scanCurrentWindowTabs();
-  const resBox = document.getElementById("result-box");
-  const cleanupBox = document.getElementById("cleanup-box");
-  const serverUrl = document.getElementById("server-url").value.replace(/\/$/, "");
-  const intent = document.getElementById("intent-input").value.trim();
-
-  cleanupBox.classList.add("hidden");
-  pendingCloseTabIds = [];
-  pendingCloseUrls = [];
-
-  if (detectedTabs.length === 0) {
-    resBox.textContent = "No external http/https tabs open in this window.";
-    resBox.classList.remove("hidden");
-    return;
-  }
-
-  resBox.textContent = `Summarizing ${detectedTabs.length} open tabs…`;
-  resBox.classList.remove("hidden");
-
+document.getElementById("btn-quick-summary").addEventListener("click", async (event) => {
+  const btn = event.currentTarget;
+  if (btn.disabled) return; // never fire duplicate /triage POSTs on double-click
+  btn.disabled = true;
   try {
+    await runQuickSummary();
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+async function runQuickSummary() {
+  const runBtn = document.getElementById("btn-quick-summary");
+  const origLabel = runBtn.textContent;
+  runBtn.textContent = "Working…";
+  try {
+    await scanCurrentWindowTabs();
+    const resBox = document.getElementById("result-box");
+    const cleanupBox = document.getElementById("cleanup-box");
+    const serverUrl = document.getElementById("server-url").value.replace(/\/$/, "");
+    const intent = document.getElementById("intent-input").value.trim();
+
+    cleanupBox.classList.add("hidden");
+    pendingCloseTabIds = [];
+    pendingCloseUrls = [];
+
+    if (detectedTabs.length === 0) {
+      resBox.textContent = "No external http/https tabs open in this window.";
+      resBox.classList.remove("hidden");
+      return;
+    }
+
+    resBox.textContent = `Summarizing ${detectedTabs.length} open tabs…`;
+    resBox.classList.remove("hidden");
+
     const resp = await fetch(`${serverUrl}/triage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -77,7 +91,12 @@ document.getElementById("btn-quick-summary").addEventListener("click", async () 
       let detail = `HTTP ${resp.status}`;
       try {
         const errorPayload = await resp.json();
-        if (errorPayload && errorPayload.detail) detail = String(errorPayload.detail);
+        if (errorPayload && errorPayload.detail) {
+          // FastAPI 422s arrive as a list of {msg, ...} objects; flatten to messages.
+          detail = Array.isArray(errorPayload.detail)
+            ? errorPayload.detail.map((d) => (d && d.msg) || JSON.stringify(d)).join("; ")
+            : String(errorPayload.detail);
+        }
       } catch (error) {
         detail = `HTTP ${resp.status}`;
       }
@@ -102,9 +121,13 @@ document.getElementById("btn-quick-summary").addEventListener("click", async () 
       cleanupBox.classList.remove("hidden");
     }
   } catch (e) {
+    const resBox = document.getElementById("result-box");
     resBox.textContent = `Could not analyze these tabs: ${e.message}`;
+    resBox.classList.remove("hidden");
+  } finally {
+    runBtn.textContent = origLabel;
   }
-});
+}
 
 document.getElementById("btn-hibernate-closed").addEventListener("click", async () => {
   const resBox = document.getElementById("result-box");
@@ -124,11 +147,42 @@ document.getElementById("btn-close-unrelated").addEventListener("click", async (
   const resBox = document.getElementById("result-box");
   const cleanupBox = document.getElementById("cleanup-box");
   if (pendingCloseTabIds.length === 0) return;
-  if (chrome.storage && chrome.storage.local) {
-    await chrome.storage.local.set({ lastClosedUrls: pendingCloseUrls });
+  // Filter to tabs that still exist; a tab closed manually between the summary
+  // and this click would otherwise reject the whole chrome.tabs.remove batch and
+  // leave a Restore button pointing at tabs that were never closed.
+  const lookups = await Promise.allSettled(pendingCloseTabIds.map((id) => chrome.tabs.get(id)));
+  const targets = pendingCloseTabIds.filter((_, i) => lookups[i].status === "fulfilled");
+  if (targets.length === 0) {
+    pendingCloseTabIds = [];
+    pendingCloseUrls = [];
+    cleanupBox.classList.add("hidden");
+    resBox.textContent = "Those tabs were already closed.";
+    resBox.classList.remove("hidden");
+    return;
   }
-  await chrome.tabs.remove(pendingCloseTabIds);
-  const closedCount = pendingCloseTabIds.length;
+  let closedIds = [];
+  try {
+    await chrome.tabs.remove(targets);
+    closedIds = targets;
+  } catch (e) {
+    // Close one-by-one so a single pinned/locked tab doesn't abort the batch.
+    for (const tabId of targets) {
+      try {
+        await chrome.tabs.remove(tabId);
+        closedIds.push(tabId);
+      } catch (_) {
+        // skip
+      }
+    }
+  }
+  // Snapshot only the tabs that were actually closed, so the Undo button can
+  // never restore a tab that is still open.
+  const closedIdSet = new Set(closedIds);
+  const closedUrls = pendingCloseUrls.filter((_, i) => closedIdSet.has(pendingCloseTabIds[i]));
+  if (chrome.storage && chrome.storage.local && closedUrls.length > 0) {
+    await chrome.storage.local.set({ lastClosedUrls: closedUrls });
+  }
+  const closedCount = closedIds.length;
   pendingCloseTabIds = [];
   pendingCloseUrls = [];
   cleanupBox.classList.add("hidden");

@@ -4,9 +4,21 @@
   "version": "1.0.0",
   "description": "Summarizes every open tab in your browser window with section-anchored takeaways and a spoken overview.",
   "permissions": ["tabs", "storage"],
-  "host_permissions": ["http://localhost:8000/*", "https://*.onrender.com/*", "https://*.tech/*"],
+  "host_permissions": ["http://localhost:8000/*", "https://folivora.tech/*", "https://*.onrender.com/*"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "action": {
     "default_title": "Folivora — Summarize & Triage My Tabs",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   }
 }

@@ -471,6 +471,41 @@ class TestBrowserbaseAndAudio(unittest.TestCase):
         self.assertTrue(tab["is_login_walled"])
         self.assertEqual(tab["wall_label"], "bot check")
 
+    def test_youtube_consent_wall_is_labeled_not_summarized(self):
+        # Cookie-less fetches of youtube.com receive Google's "Before you
+        # continue to YouTube" consent shell; it must never be summarized
+        # as if it were the video's page.
+        yt_html = (
+            "<html><head><title>Before you continue to YouTube</title></head><body>"
+            "<p>Our systems have detected unusual traffic from your computer network.</p>"
+            "</body></html>"
+        )
+        tab = fast_http_extract_url(
+            "https://www.youtube.com/watch",
+            1,
+            prefetched_html=yt_html,
+        )
+        self.assertTrue(tab["is_login_walled"])
+        self.assertIn(tab["wall_label"], ("consent wall", "bot check"))
+
+    def test_javascript_shell_page_is_labeled_unreadable(self):
+        # YouTube video pages served to a cookie-less, script-less fetcher can
+        # arrive as a bare JS shell with no wall phrases at all — raw text under
+        # the content floor must still be caught instead of "summarized".
+        shell_html = (
+            "<html><head><title>YouTube</title></head><body>"
+            "<div id=app></div><noscript>Enable JavaScript</noscript>"
+            "</body></html>"
+        )
+        tab = fast_http_extract_url(
+            "https://www.youtube.com/watch",
+            1,
+            prefetched_html=shell_html,
+        )
+        self.assertTrue(tab["is_login_walled"])
+        self.assertEqual(tab["wall_label"], "empty shell")
+        self.assertTrue(tab["title"].startswith("Unreadable page:"))
+
 
 if __name__ == "__main__":
     unittest.main()

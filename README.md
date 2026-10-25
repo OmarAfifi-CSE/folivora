@@ -23,7 +23,7 @@
 
 <p align="center">
   <!-- Tier 2: Verification & Empirical Proof -->
-  <a href="tests/"><img src="https://img.shields.io/badge/Tests-90%2F90_Passing-16A34A?style=flat-square" alt="Tests 90/90 Passing" /></a>
+  <a href="tests/"><img src="https://img.shields.io/badge/Tests-92%2F92_Passing-16A34A?style=flat-square" alt="Tests 92/92 Passing" /></a>
   <a href="eval/EVAL.md"><img src="https://img.shields.io/badge/Gemma_Digest_Eval-59%2F60_(98.3%25)-15803D?style=flat-square" alt="Digest Eval 59/60" /></a>
   <a href="eval/summary_quality.py"><img src="https://img.shields.io/badge/Summary_Golden_Gates-11%2F11_Passing_(20_Cases)-0D9488?style=flat-square" alt="Golden Summary Gates" /></a>
   <a href="eval/redteam_eval.py"><img src="https://img.shields.io/badge/Red_Team_ASR-0.0%25_(24%2F24_Blocked)-DC2626?style=flat-square" alt="Red Team 0.0% ASR" /></a>
@@ -398,7 +398,7 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 # 1. Install dependencies
 pip install -r src/requirements.txt
 
-# 2. Run all 90 automated unit, integration & red-team tests
+# 2. Run all 92 automated unit, integration & red-team tests
 python run_local.py --test
 
 # 3. Run the 20-case tab-summary golden harness (all 11 gates)

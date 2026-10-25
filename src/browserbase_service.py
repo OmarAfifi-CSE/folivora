@@ -1873,7 +1873,7 @@ def _cdp_fetch_rendered_html(ws_url: str, url: str) -> str:
 
 def _cdp_extract_url(url: str, idx: int, ws_url: str) -> dict:
     html = _cdp_fetch_rendered_html(ws_url, url)
-    return fast_http_extract_url(url, idx, prefetched_html=html, prefetched_status=200)
+    return fast_http_extract_url(url, idx, prefetched_html=html, prefetched_status=200, rendered=True)
 
 
 def extract_clean_urls_from_list(raw_urls: list[str] | None) -> list[str]:
@@ -1904,6 +1904,8 @@ _LOGIN_WALL_BODY_PATTERNS = (
     (re.compile(r"log ?in or sign up", re.I), "login screen"),
     (re.compile(r"sign in to continue|please log in to continue|you must log in", re.I), "login screen"),
     (re.compile(r"we.?ll get this fixed|get this fixed as soon as we can", re.I), "error shell"),
+    (re.compile(r"before you continue to (youtube|google)", re.I), "consent wall"),
+    (re.compile(r"unusual traffic from your computer|our systems have detected unusual traffic", re.I), "bot check"),
     (re.compile(r"checking your browser before accessing|just a moment", re.I), "bot check"),
     (re.compile(r"verify you are human|verify you.?re not a robot|confirm you.?re not a robot", re.I), "bot check"),
     (re.compile(r"enable javascript and cookies", re.I), "bot check"),
@@ -1912,15 +1914,27 @@ _LOGIN_WALL_BODY_PATTERNS = (
 )
 _LOGIN_WALL_MAX_BODY_WORDS = 320
 _LOGIN_WALL_MAX_TITLE_ONLY_WORDS = 140
+# A cookie-less, script-less fetch that yields less raw text than this is a
+# JavaScript/empty shell (e.g. YouTube's video pages), never a real article.
+_SHELL_MIN_CONTENT_WORDS = 120
 
 
-def _detect_login_wall(clean_title: str, raw_word_count: int, html: str) -> str | None:
-    """Return a wall label ('login screen', 'bot check', 'error shell') when the
-    fetched HTML looks like a cookie-less shell rather than the real page."""
-    if raw_word_count > _LOGIN_WALL_MAX_BODY_WORDS and raw_word_count > _LOGIN_WALL_MAX_TITLE_ONLY_WORDS:
-        return None
+def _detect_login_wall(
+    clean_title: str, raw_word_count: int, html: str, rendered: bool = False
+) -> str | None:
+    """Return a wall label ('login screen', 'bot check', 'consent wall',
+    'error shell', 'empty shell') when the fetched HTML looks like a
+    cookie-less shell rather than the real page. `rendered=True` means the HTML
+    comes from a real Chromium CDP session (JavaScript already executed), so the
+    empty-shell floor does not apply — only explicit wall phrases do."""
     body_probe = (html or "").replace("\u2019", "'")
-    if raw_word_count <= _LOGIN_WALL_MAX_BODY_WORDS:
+    if raw_word_count < _SHELL_MIN_CONTENT_WORDS:
+        for pattern, label in _LOGIN_WALL_BODY_PATTERNS:
+            if pattern.search(body_probe):
+                return label
+        if not rendered:
+            return "empty shell"
+    elif raw_word_count <= _LOGIN_WALL_MAX_BODY_WORDS:
         for pattern, label in _LOGIN_WALL_BODY_PATTERNS:
             if pattern.search(body_probe):
                 return label
@@ -1934,6 +1948,7 @@ def fast_http_extract_url(
     idx: int = 0,
     prefetched_html: str | None = None,
     prefetched_status: int = 200,
+    rendered: bool = False,
 ) -> dict:
     _load_hof_catalog()
     norm_u = (url or "").strip().rstrip("/")
@@ -2021,10 +2036,11 @@ def fast_http_extract_url(
     # instead of the article. Summarizing that shell would be worse than
     # useless, so the tab is labeled honestly and kept open downstream.
     raw_words = len(_strip_html_tags(html).split())
-    wall_label = _detect_login_wall(clean_title, raw_words, html)
+    wall_label = _detect_login_wall(clean_title, raw_words, html, rendered=rendered)
     if wall_label:
         display_path = path_slug if path_slug != host else ""
-        wall_title = f"Login-walled: {host}" + (f"/{display_path[:45]}" if display_path else "")
+        prefix = "Unreadable page" if wall_label == "empty shell" else "Login-walled"
+        wall_title = f"{prefix}: {host}" + (f"/{display_path[:45]}" if display_path else "")
         return {
             "id": f"user-tab-{idx + 1}",
             "title": wall_title,
@@ -2037,11 +2053,11 @@ def fast_http_extract_url(
             "heading_count": 1,
             "link_density": 1.0,
             "overview": (
-                f"{host} served the server its {wall_label} (fetches carry no login cookies), "
+                f"{host} served the server its {wall_label} (cookie-less, script-less fetch), "
                 "so this tab's real content couldn't be read. Folivora keeps it open instead of guessing."
             ),
             "takeaways": [
-                f"Login-walled ({wall_label}) — the extractor sees {host}'s sign-in/error shell, "
+                f"Unreadable ({wall_label}) — the extractor sees {host}'s wall or JavaScript shell, "
                 "not the page you actually have open in your browser. Close or keep it yourself; no summary was invented."
             ],
             "synthesized_points": [],

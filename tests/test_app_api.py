@@ -477,6 +477,80 @@ class TestAppAPI(unittest.TestCase):
         self.assertNotIn("all_paragraphs", payload["results"]["user-tab-1"])
         self.assertEqual(payload["results"]["user-tab-1"]["polish_status"], "pending")
 
+    def test_triage_preset_cache_replays_identical_payload(self):
+        self._use_fake_polish()
+        with app_module._triage_cache_lock:
+            app_module._triage_cache.clear()
+        payload = {
+            "preset_key": "postgres_docker_pile",
+            "user_intent": "Japan Travel",
+            "verify_live_browserbase": False,
+            "include_gemma": False,
+        }
+        first = self.client.post("/triage", json=payload).json()
+        second = self.client.post("/triage", json=payload).json()
+        self.assertEqual(first["cache"], "miss")
+        self.assertEqual(second["cache"], "hit")
+        # The cached replay must be byte-equivalent apart from timing/cache markers.
+        diff = {
+            k
+            for k in first
+            if k not in {"cache", "total_pipeline_ms"} and first[k] != second.get(k)
+        }
+        self.assertEqual(diff, set())
+        self.assertEqual(second["kept_count"], first["kept_count"])
+        self.assertEqual(second["minutes_saved"], first["minutes_saved"])
+        # A different intent must not be served from the same cache entry.
+        other = self.client.post(
+            "/triage", json={**payload, "user_intent": "Laptop shopping"}
+        ).json()
+        self.assertEqual(other["cache"], "miss")
+
+    def test_triage_custom_urls_are_never_cached(self):
+        self._use_fake_polish()
+        with app_module._triage_cache_lock:
+            app_module._triage_cache.clear()
+        payload = {
+            "preset_key": "postgres_docker_pile",
+            "custom_urls": ["https://dev.to/omarafifi/my-phone-broke-and-gemini-fixed-it-329l"],
+            "user_intent": "Gemini",
+            "verify_live_browserbase": False,
+            "include_gemma": False,
+        }
+        first = self.client.post("/triage", json=payload).json()
+        second = self.client.post("/triage", json=payload).json()
+        self.assertEqual(first["cache"], "miss")
+        self.assertEqual(second["cache"], "miss")
+        with app_module._triage_cache_lock:
+            self.assertEqual(len(app_module._triage_cache), 0)
+
+    def test_polish_works_with_job_id_replayed_from_triage_cache(self):
+        fake = self._use_fake_polish()
+        with app_module._triage_cache_lock:
+            app_module._triage_cache.clear()
+        payload = {
+            "preset_key": "postgres_docker_pile",
+            "user_intent": "Japan Travel",
+            "verify_live_browserbase": False,
+            "include_gemma": False,
+        }
+        first = self.client.post("/triage", json=payload).json()
+        second = self.client.post("/triage", json=payload).json()
+        self.assertEqual(second["cache"], "hit")
+        self.assertEqual(second["job_id"], first["job_id"])
+        # The replayed job_id must still resolve against the job store so the
+        # background polish lane keeps working for cache-served responses.
+        polished = self.client.post(
+            "/polish-tabs",
+            json={"job_id": second["job_id"], "tab_ids": second["polish_targets"]},
+        )
+        self.assertEqual(polished.status_code, 200)
+        results = polished.json()["results"]
+        self.assertGreaterEqual(len(results), 1)
+        for tab_id in second["polish_targets"]:
+            self.assertEqual(results[tab_id]["polish_status"], "polished")
+        self.assertGreaterEqual(fake.calls, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

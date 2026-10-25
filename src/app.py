@@ -9,7 +9,7 @@ Integrates:
 1. Browserbase Cloud Chromium CDP Inspection (`src/browserbase_service.py`)
 2. Prior Labs TabPFN Calibrated Quantile Engine (`src/tabpfn_engine.py`)
 3. Google Gemma 3/4 Digest Synthesizer + `check_output()` 1-Retry Fact Gate (`src/gemma_service.py`)
-4. ElevenLabs Scribe v2 STT (with immediate privacy deletion) + Flash v2.5 TTS (`src/audio_service.py`)
+4. ElevenLabs Scribe STT (`scribe_v1`, with immediate privacy deletion) + Flash v2.5 TTS (`src/audio_service.py`)
 5. Sentry OpenTelemetry GenAI Agent Tracing (`src/telemetry.py`)
 """
 
@@ -150,11 +150,44 @@ class SlidingWindowRateLimiter:
 
 rate_limiter = SlidingWindowRateLimiter(_RATE_LIMITS)
 
+# Deterministic preset triages (built-in sample windows + 65 DEV Article Library)
+# are expensive on first hit (TabPFN CPU quantile inference over the pile) yet
+# perfectly stable, so identical (preset, intent) requests are served from a
+# short TTL cache. Custom URL piles are NEVER cached (privacy + freshness).
+_TRIAGE_CACHE_MAX = 32
+_TRIAGE_CACHE_TTL_S = 600.0
+_triage_cache: dict[tuple[str, str, int], tuple[float, dict]] = {}
+_triage_cache_lock = threading.Lock()
+
+
+def _triage_cache_get(key: tuple[str, str, int]) -> dict | None:
+    now = time.time()
+    with _triage_cache_lock:
+        entry = _triage_cache.get(key)
+        if not entry:
+            return None
+        stored_at, payload = entry
+        if now - stored_at > _TRIAGE_CACHE_TTL_S:
+            _triage_cache.pop(key, None)
+            return None
+        return payload
+
+
+def _triage_cache_put(key: tuple[str, str, int], payload: dict) -> None:
+    with _triage_cache_lock:
+        if len(_triage_cache) >= _TRIAGE_CACHE_MAX:
+            oldest = min(_triage_cache, key=lambda k: _triage_cache[k][0])
+            _triage_cache.pop(oldest, None)
+        _triage_cache[key] = (time.time(), payload)
+
 
 def _rate_limit_identity(request: Request) -> str:
-    forwarded = request.headers.get("x-forwarded-for", "").split(",", 1)[0].strip()
-    if forwarded:
-        return forwarded[:128]
+    # Behind exactly one trusted reverse proxy (Render), the LAST X-Forwarded-For
+    # entry is the real client IP appended by that proxy; earlier entries are
+    # client-controlled and spoofable, so never trust the first one.
+    forwarded_raw = request.headers.get("x-forwarded-for", "").strip()
+    if forwarded_raw:
+        return forwarded_raw.split(",")[-1].strip()[:128]
     return (request.client.host if request.client else "unknown")[:128]
 
 
@@ -389,6 +422,26 @@ def triage_tabs(req: TriageRequest):
     if not req.custom_urls and req.preset_key not in PRESET_TAB_PILES:
         raise HTTPException(status_code=400, detail=f"Unknown preset: {req.preset_key}")
 
+    cacheable = (
+        not req.custom_urls
+        and not req.verify_live_browserbase
+        and req.preset_key in PRESET_TAB_PILES
+        and not req.include_gemma
+    )
+    cache_key = (
+        req.preset_key,
+        req.user_intent.strip().lower(),
+        summary_service.max_tabs,
+    ) if cacheable else None
+    if cache_key is not None:
+        cached = _triage_cache_get(cache_key)
+        if cached is not None:
+            hit_start = time.perf_counter()
+            replay = dict(cached)
+            replay["cache"] = "hit"
+            replay["total_pipeline_ms"] = round((time.perf_counter() - hit_start) * 1000.0, 2)
+            return replay
+
     t0 = time.perf_counter()
     trace_collector: list[dict] = []
 
@@ -470,8 +523,9 @@ def triage_tabs(req: TriageRequest):
 
     total_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
-    return {
+    response = {
         "status": "success",
+        "cache": "miss",
         "mode": ml_result["mode"],
         "rated": is_rated,
         "preset_key": bb_result["preset_key"],
@@ -501,6 +555,9 @@ def triage_tabs(req: TriageRequest):
         "all_tabs": [_client_tab(tab, _ALL_TAB_FIELDS) for tab in ml_result["all_tabs"]],
         "sentry_spans": trace_collector,
     }
+    if cache_key is not None:
+        _triage_cache_put(cache_key, response)
+    return response
 
 
 @app.post("/digest")
@@ -692,6 +749,8 @@ def download_chrome_extension(request: Request):
         headers={
             "Content-Disposition": 'attachment; filename="folivora-chrome-extension.zip"',
             "Cache-Control": "no-store",
+            # Skip GZip middleware for the already-deflated archive.
+            "Content-Encoding": "identity",
         },
     )
 

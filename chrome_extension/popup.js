@@ -103,7 +103,33 @@ async function runQuickSummary() {
       throw new Error(detail);
     }
     const data = await resp.json();
-    resBox.textContent = data.spoken_digest || "Triage complete.";
+    const esc = (s) =>
+      String(s ?? "").replace(/[&<>"']/g, (c) => (
+        { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+      ));
+    const kept = Array.isArray(data.kept_tabs) ? data.kept_tabs : [];
+    const closed = Array.isArray(data.closed_tabs) ? data.closed_tabs : [];
+    const walls = kept.filter((t) => t && t.is_login_walled);
+    const lines = [];
+    lines.push(`<div class="digest-line">${esc(data.spoken_digest || "Triage complete.")}</div>`);
+    lines.push(
+      `<div class="stat-line">${esc(String(kept.length))} kept &middot; ${esc(String(closed.length))} set aside &middot; ~${esc(String(data.minutes_saved ?? 0))} min saved</div>`
+    );
+    for (const t of kept.slice(0, 3)) {
+      if (t.is_login_walled) {
+        lines.push(`<div class="mini-line">&#128274; Login-walled: ${esc(t.domain || "?")} — kept open (server can't read it)</div>`);
+      } else {
+        lines.push(`<div class="mini-line">&#9733; ${esc(String(t.title || "").slice(0, 62))}${t.p50_score ? ` (${esc(String(t.p50_score))}%)` : ""}</div>`);
+      }
+    }
+    if (kept.length > 3) {
+      lines.push(`<div class="mini-line">&hellip; +${esc(String(kept.length - 3))} more</div>`);
+    }
+    if (walls.length > 0) {
+      lines.push(`<div class="mini-note">Login-walled tabs stay open — fetches carry no cookies, so their real content can't be inspected.</div>`);
+    }
+    lines.push(`<div class="mini-note">Open Full Reading Digest above for every section-anchored takeaway.</div>`);
+    resBox.innerHTML = lines.join("");
 
     const closedUrls = new Set(
       (data.closed_tabs || []).map((item) => normalizeUrl(item.url))

@@ -3,11 +3,16 @@ services:
     name: folivora
     runtime: docker
     region: frankfurt
-    plan: standard
+    # Free tier: spins down after 15 min of inactivity (first request takes
+    # ~a minute to wake) and 512 MB RAM — too small for CPU PyTorch/TabPFN,
+    # so the slim image runs the HistGradientBoosting quantile fallback.
+    plan: free
     healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
         value: production
+      - key: FOLIVORA_ML_MODE
+        value: fallback
       - key: RATE_LIMIT_ENABLED
         value: "1"
       - key: OMP_NUM_THREADS

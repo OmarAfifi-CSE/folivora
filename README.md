@@ -52,6 +52,9 @@
 
 ### *"Code owns the numbers. TabPFN predicts the utility distribution. Gemma and Gemini write the prose behind strict evidence gates. Sentry traces every token."*
 
+> [!NOTE]
+> **🔎 Live demo status (free tier):** The live app runs on a **Render free instance** — it **sleeps after 15 minutes of inactivity**, so the first page load can take up to a minute to wake up. The free instance also runs the **`HistGradientBoosting` quantile fallback** instead of TabPFN (512 MB RAM can't hold CPU PyTorch); every TabPFN number in this README is reproducible locally with the full install below.
+
 <p>
   <b>Folivora</b> (Latin: both the biological suborder for tree sloths and <code>folium + vorare</code>, literally <b>"the page/folio devourer"</b>) is an open-source, evidence-first browser tab triage and section-anchored reading digest engine.<br/>
   <i>Designed as a calm editorial reading room for everyone—from travelers and shoppers to software engineers—powered under the hood by Browserbase Cloud Chromium (CDP), Prior Labs TabPFN calibrated quantiles, Multi-Lane Open-Weight Google Gemma 4 &amp; Gemma 3, ElevenLabs Scribe &amp; Flash v2.5, and Sentry OpenTelemetry Agent Tracing.</i>
@@ -395,8 +398,11 @@ Because every web page inspected by a browser agent is untrusted input, [`eval/r
 - **Optional API Keys (`.env`):** Copy [`.env.example`](.env.example) to `.env`. Folivora runs out of the box with deterministic fallbacks if external keys are omitted, and unlocks live cloud browser, voice, and AI polish when configured.
 
 ```bash
-# 1. Install dependencies
+# 1. Install dependencies — pick ONE of the two modes:
+#    Lite  (same engine as the free live demo: API + HistGB quantile fallback):
 pip install -r src/requirements.txt
+#    Full  (adds Prior Labs TabPFN v2 + CPU PyTorch, ~1.5 GB extra):
+pip install -r src/requirements.txt -r src/requirements-ml.txt
 
 # 2. Run all 92 automated unit, integration & red-team tests
 python run_local.py --test
@@ -411,6 +417,7 @@ python eval/redteam_eval.py --gate
 python eval/summary_quality.py --live-gemma --gate --json-out eval/summary_eval.json
 
 # 6. Reproduce the 3,600-row TabPFN backtest, ablation & false-close study
+#    (requires the Full install above — it imports the live TabPFN regressor)
 python benchmarks/ablate.py
 
 # 7. Reproduce the 60-case Gemma digest validator evaluation

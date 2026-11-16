@@ -13,15 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install compact CPU PyTorch first
-RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch==2.14.1
-
-# Install Folivora dependencies
+# Install Folivora dependencies (slim: no torch/TabPFN — the image runs the
+# HistGradientBoosting quantile fallback, see src/tabpfn_engine.py).
+# To ship the full TabPFN engine instead, add src/requirements-ml.txt here,
+# drop FOLIVORA_ML_MODE below, and restore the CPU PyTorch pre-install step.
 COPY src/requirements.txt /app/src/requirements.txt
 RUN pip install --no-cache-dir -r /app/src/requirements.txt
 
-# Pre-bake open-weight TabPFN v2 foundation weights into Docker image layer during build
-RUN python -c "from tabpfn import TabPFNRegressor; from tabpfn.constants import ModelVersion; import numpy as np; reg = TabPFNRegressor.create_default_for_version(ModelVersion.V2, device='cpu', n_estimators=4); reg.fit(np.zeros((24, 7), dtype=np.float32), np.zeros(24, dtype=np.float32))"
+ENV FOLIVORA_ML_MODE=fallback
 
 # Copy dataset, benchmarks, evaluation reports, browser extension, and application source
 COPY data/ /app/data/

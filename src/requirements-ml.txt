@@ -1,0 +1,6 @@
+# Full local engine extras: Prior Labs TabPFN (pulls CPU PyTorch, ~1.5 GB).
+# The deployed free-tier image intentionally omits these and runs the
+# HistGradientBoosting quantile fallback (see src/tabpfn_engine.py).
+# Install together with the base file:
+#   pip install -r src/requirements.txt -r src/requirements-ml.txt
+tabpfn>=2.0.0
